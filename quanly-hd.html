@@ -24,7 +24,6 @@
         .total-box { background: #f8f9fa; border-radius: 8px; padding: 15px; border: 1px solid #e9ecef; }
         .money-input { font-weight: bold; color: #e74c3c; font-size: 1.1rem; }
         
-        /* CSS Bộ lọc Chuyên nghiệp */
         .filter-row { background-color: #ffffff; padding: 20px; border-radius: 10px; border: 1px solid #e1e4e8; margin-bottom: 20px; box-shadow: 0 2px 10px rgba(0,0,0,0.02); }
         .filter-title { font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px; color: var(--secondary); font-weight: 700; margin-bottom: 15px; }
         .count-badge { background-color: #e8f4fd; color: #0056b3; padding: 5px 12px; border-radius: 20px; font-weight: bold; font-size: 0.85rem; }
@@ -36,17 +35,28 @@
         /* ========================================= */
         @media print {
             #loginScreen, #mainApp { display: none !important; }
-            #print-area { display: block !important; width: 100%; font-family: Arial, Helvetica, sans-serif; color: #000; }
-            @page { size: A4 portrait; margin: 10mm 15mm; }
             
-            .p-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; border-bottom: 1px solid transparent; padding-bottom: 10px; }
+            /* Margin 0 giúp XOÁ SẠCH link web và tiêu đề mặc định của trình duyệt */
+            @page { size: A4 portrait; margin: 0; }
+            
+            #print-area { 
+                display: block !important; 
+                width: 100%; 
+                font-family: Arial, Helvetica, sans-serif; 
+                color: #000; 
+                padding: 15mm 15mm; /* Đẩy nội dung vào lại thay cho margin */
+                box-sizing: border-box;
+            }
+            
+            .p-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; border-bottom: 1px solid transparent; padding-bottom: 5px; }
             .p-title-box { text-align: left; }
             .p-title-text { font-size: 26px; font-weight: bold; margin-bottom: 5px; letter-spacing: 0.5px; }
             .p-date-text { font-size: 15px; font-family: "Times New Roman", Times, serif; }
+            
             .p-logo-box { text-align: center; }
-            .logo-al { font-family: 'Brush Script MT', 'Lucida Handwriting', cursive; font-size: 45px; line-height: 1; margin-bottom: 2px; }
-            .logo-name { font-size: 13px; letter-spacing: 2px; font-family: "Times New Roman", Times, serif; margin-bottom: 2px; }
-            .logo-sub { font-size: 9px; letter-spacing: 1px; font-weight: bold; }
+            /* Căn chỉnh lại font chữ Logo theo yêu cầu mới */
+            .logo-name { font-size: 17px; letter-spacing: 3px; font-family: "Times New Roman", Times, serif; margin-bottom: 3px; font-weight: bold; }
+            .logo-sub { font-size: 11px; letter-spacing: 1px; font-weight: bold; font-family: Arial, sans-serif; }
 
             .p-info { margin-bottom: 15px; font-size: 15px; line-height: 1.7; font-family: "Times New Roman", Times, serif;}
             .r-flex { display: flex; justify-content: space-between; margin-bottom: 4px; }
@@ -68,7 +78,7 @@
 
             .p-footer { display: flex; justify-content: space-between; font-size: 14px; text-align: center; font-family: "Times New Roman", Times, serif; }
             .p-sign-box { width: 45%; }
-            .p-sign-title { font-weight: bold; font-family: Arial, sans-serif; font-size: 15px; margin-bottom: 60px; }
+            .p-sign-title { font-weight: bold; font-family: Arial, sans-serif; font-size: 15px; margin-bottom: 50px; }
             .p-footer-info { margin-top: 15px; line-height: 1.5; }
         }
     </style>
@@ -117,10 +127,10 @@
                     
                     <h5 class="border-bottom pb-2 mt-3 mb-3 fw-bold" style="color: var(--accent);">II. Thời gian dịch vụ</h5>
                     <div class="row">
-                        <div class="col-md-3 mb-3"><label class="form-label">Ngày Lễ</label><input type="text" id="ngayLe" class="form-control" placeholder="VD: 20/09"></div>
+                        <div class="col-md-3 mb-3"><label class="form-label">Ngày Lễ</label><input type="date" id="ngayLe" class="form-control"></div>
                         <div class="col-md-3 mb-3"><label class="form-label">Giờ Có Mặt / Thời gian lễ</label><input type="text" id="gioCoMat" class="form-control" placeholder="VD: 9h sáng"></div>
-                        <div class="col-md-3 mb-3"><label class="form-label">Ngày Lấy Đồ</label><input type="text" id="ngayLay" class="form-control" placeholder="VD: 18/09"></div>
-                        <div class="col-md-3 mb-3"><label class="form-label">Ngày Trả Đồ</label><input type="text" id="ngayTra" class="form-control" placeholder="VD: 21/09"></div>
+                        <div class="col-md-3 mb-3"><label class="form-label">Ngày Lấy Đồ</label><input type="date" id="ngayLay" class="form-control"></div>
+                        <div class="col-md-3 mb-3"><label class="form-label">Ngày Trả Đồ</label><input type="date" id="ngayTra" class="form-control"></div>
                     </div>
 
                     <h5 class="border-bottom pb-2 mt-3 mb-3 fw-bold" style="color: var(--accent);">III. Chi tiết Sản phẩm / Dịch vụ</h5>
@@ -171,7 +181,6 @@
         <!-- TAB 2: HỒ SƠ & TRA CỨU -->
         <div class="tab-pane fade" id="tab-list">
             
-            <!-- BỘ LỌC ĐA ĐIỀU KIỆN (CHUYÊN NGHIỆP) -->
             <div class="filter-row">
                 <div class="d-flex justify-content-between align-items-center mb-3">
                     <div class="filter-title mb-0">⚙️ BỘ LỌC DỮ LIỆU</div>
@@ -179,7 +188,6 @@
                 </div>
                 
                 <div class="row g-3">
-                    <!-- Khối 1: Từ khóa -->
                     <div class="col-md-2">
                         <label class="form-label small">Trường tìm kiếm</label>
                         <select id="filterField" class="form-select" onchange="applyFilters()">
@@ -193,8 +201,6 @@
                         <label class="form-label small">Từ khóa</label>
                         <input type="text" id="searchBox" class="form-control" placeholder="Nhập từ khóa..." onkeyup="applyFilters()">
                     </div>
-                    
-                    <!-- Khối 2: Sản phẩm -->
                     <div class="col-md-2">
                         <label class="form-label small">Loại Sản phẩm</label>
                         <select id="filterProduct" class="form-select" onchange="applyFilters()">
@@ -204,8 +210,6 @@
                             <option value="khác">Sản phẩm khác</option>
                         </select>
                     </div>
-
-                    <!-- Khối 3: Ngày tháng (Gộp chung) -->
                     <div class="col-md-2">
                         <label class="form-label small">Lọc theo Thời gian</label>
                         <select id="filterDateType" class="form-select" onchange="applyFilters()">
@@ -220,16 +224,14 @@
                     </div>
                 </div>
                 
-                <!-- Nút thao tác -->
                 <div class="d-flex justify-content-end gap-2 mt-3 pt-3 border-top">
                     <button class="btn btn-light border px-4" onclick="resetFilters()">↺ Làm mới</button>
-                    <button class="btn btn-primary px-4 fw-bold" onclick="loadAllContracts()">⬇ Tải lại Data Mới Nhất</button>
+                    <button class="btn btn-primary px-4 fw-bold" onclick="loadAllContracts()">⬇ Tải lại Data</button>
                 </div>
             </div>
 
             <div class="card-box border-0 shadow-sm pt-2">
                 <div id="loadingText" class="text-center py-4 text-primary fw-bold hidden fs-5"><div class="spinner-border spinner-border-sm me-2"></div> Đang kết nối máy chủ...</div>
-                
                 <div class="table-responsive">
                     <table class="table table-hover align-middle border">
                         <thead class="table-dark">
@@ -256,8 +258,8 @@
             <div class="p-date-text">Hôm nay, ngày <span id="p-d"></span> tháng <span id="p-m"></span> năm <span id="p-y"></span></div>
         </div>
         <div class="p-logo-box">
-            <div class="logo-al">al</div>
-            <div class="logo-name">ALEYNA WEDDING</div>
+            <!-- Đổi Logo theo yêu cầu -->
+            <div class="logo-name">A L E Y N A &nbsp; W E D D I N G</div>
             <div class="logo-sub">ÁO DÀI & NHÂN SỰ</div>
         </div>
     </div>
@@ -371,6 +373,7 @@
     function parseCurrency(str) { return parseInt(str.toString().replace(/\./g, '').replace(/,/g, '')) || 0; }
     function formatCurrencyInput(input) { let val = parseCurrency(input.value); input.value = val === 0 ? "0" : formatCurrency(val); }
 
+    // HÀM CHUYỂN ĐỔI NGÀY THÁNG ĐỂ HIỂN THỊ
     function formatDateView(isoString) {
         if (!isoString) return "";
         let d = new Date(isoString);
@@ -429,7 +432,6 @@
         document.getElementById("loadingText").classList.add("hidden");
     }
 
-    // HÀM LỌC CHUYÊN NGHIỆP (ĐÃ CHUẨN HÓA MÚI GIỜ)
     function applyFilters() {
         const textStr = document.getElementById("searchBox").value.toLowerCase().trim();
         const field = document.getElementById("filterField").value; 
@@ -438,35 +440,28 @@
         const filterDate = document.getElementById("filterDate").value;
         
         let filtered = globalContracts.filter(r => {
-            // 1. Text
             let matchText = true;
             if (textStr !== "") { 
                 if (field === "all") { matchText = (r.MaHD||"").toLowerCase().includes(textStr) || (r.TenKhachHang||"").toLowerCase().includes(textStr) || (r.SoDienThoai||"").includes(textStr) || (r.ChiTietDichVu||"").toLowerCase().includes(textStr); } 
                 else { matchText = (r[field]||"").toString().toLowerCase().includes(textStr); } 
             }
             
-            // 2. Sản phẩm
             let matchProduct = true;
             if (product !== "all") { 
                 if(product === "khác") { matchProduct = !(r.ChiTietDichVu||"").toLowerCase().includes("nhân sự") && !(r.ChiTietDichVu||"").toLowerCase().includes("áo dài"); } 
                 else { matchProduct = (r.ChiTietDichVu||"").toLowerCase().includes(product); } 
             }
             
-            // 3. Thời gian đích danh (Exact Match)
             let matchDate = true;
             if (filterDate) { 
                 if (!r[dateType]) {
                     matchDate = false; 
                 } else { 
-                    // Chuyển r[dateType] thành YYYY-MM-DD để so sánh thẳng với filterDate (vd: "2026-08-11")
                     let rDate = new Date(r[dateType]);
                     if(!isNaN(rDate.getTime())) {
                         let rDateStr = `${rDate.getFullYear()}-${String(rDate.getMonth()+1).padStart(2,'0')}-${String(rDate.getDate()).padStart(2,'0')}`;
                         if (rDateStr !== filterDate) matchDate = false;
-                    } else {
-                        // Trường hợp nhập chữ thay vì chọn lịch
-                        matchDate = false;
-                    }
+                    } else { matchDate = false; }
                 } 
             }
             return matchText && matchProduct && matchDate;
@@ -519,9 +514,10 @@
         document.getElementById("p-thoigianle").innerText = ""; 
         document.getElementById("p-giocomat").innerText = r.GioCoMat || "";
         
-        document.getElementById("p-ngayle").innerText = r.NgayLe || "";
-        document.getElementById("p-ngaylay").innerText = r.NgayLay || "";
-        document.getElementById("p-ngaytra").innerText = r.NgayTra || "";
+        // CẬP NHẬT: Đã gán định dạng lại chuẩn Ngày Tháng Năm Việt Nam
+        document.getElementById("p-ngayle").innerText = formatDateView(r.NgayLe);
+        document.getElementById("p-ngaylay").innerText = formatDateView(r.NgayLay);
+        document.getElementById("p-ngaytra").innerText = formatDateView(r.NgayTra);
 
         let gc = (r.GhiChu && r.GhiChu !== "undefined") ? r.GhiChu : "";
         if (gc.length > 50) { document.getElementById("p-ghichu1").innerText = gc.substring(0, 50); document.getElementById("p-ghichu2").innerText = gc.substring(50); } 
