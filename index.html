@@ -29,7 +29,7 @@
         }
 
         /* =========================================
-           HIỆU ỨNG SLIDESHOW ẢNH NỀN
+           HIỆU ỨNG SLIDESHOW 10 ẢNH NỀN
            ========================================= */
         .bg-slideshow {
             position: fixed;
@@ -44,7 +44,8 @@
             background-size: cover;
             background-position: center;
             opacity: 0;
-            animation: fadeZoom 25s infinite; 
+            /* 10 ảnh x 5s/ảnh = 50s tổng chu kỳ */
+            animation: fadeZoom 50s infinite; 
         }
 
         .slide-1 { background-image: url('bg1.jpg'); animation-delay: 0s; }
@@ -52,36 +53,41 @@
         .slide-3 { background-image: url('bg3.jpg'); animation-delay: 10s; }
         .slide-4 { background-image: url('bg4.jpg'); animation-delay: 15s; }
         .slide-5 { background-image: url('bg5.jpg'); animation-delay: 20s; }
+        .slide-6 { background-image: url('bg6.jpg'); animation-delay: 25s; }
+        .slide-7 { background-image: url('bg7.jpg'); animation-delay: 30s; }
+        .slide-8 { background-image: url('bg8.jpg'); animation-delay: 35s; }
+        .slide-9 { background-image: url('bg9.jpg'); animation-delay: 40s; }
+        .slide-10 { background-image: url('bg10.jpg'); animation-delay: 45s; }
 
         @keyframes fadeZoom {
             0% { opacity: 0; transform: scale(1); }
-            5% { opacity: 1; }
-            20% { opacity: 1; transform: scale(1.05); } 
-            25% { opacity: 0; }
+            2% { opacity: 1; }
+            8% { opacity: 1; transform: scale(1.05); } 
+            10% { opacity: 0; }
             100% { opacity: 0; }
         }
 
         .bg-overlay {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0, 0, 0, 0.25); /* Lớp phủ đen mỏng làm nổi vòng quay */
+            background: rgba(0, 0, 0, 0.25); 
             z-index: 0;
         }
 
         /* =========================================
-           KHỐI NỘI DUNG (HIỆU ỨNG KÍNH MỜ - GLASSMORPHISM)
+           KHỐI NỘI DUNG (HIỆU ỨNG KÍNH MỜ TRONG SUỐT HƠN)
            ========================================= */
         .main-wrapper {
-            background-color: rgba(255, 255, 255, 0.05); /* Giảm từ 0.2 xuống 0.05 để trong suốt hơn */
-            backdrop-filter: blur(1px); /* Giảm độ nhòe kính từ 15px xuống 5px */
+            background-color: rgba(255, 255, 255, 0.05); /* Đã giảm độ đục để nhìn rõ nền */
+            backdrop-filter: blur(5px); /* Đã giảm độ nhòe kính */
             -webkit-backdrop-filter: blur(5px);
-            border: 1px solid rgba(255, 255, 255, 0.3); /* Viền mờ đi một chút */
+            border: 1px solid rgba(255, 255, 255, 0.3); 
             box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
             border-radius: 24px;
             padding: 40px 30px;
             margin: 40px 20px;
             width: 100%;
-            max-width: 500px; /* Tăng kích thước khung để chứa vòng quay to hơn */
+            max-width: 500px; 
             z-index: 1;
             display: flex;
             flex-direction: column;
@@ -96,7 +102,7 @@
         .header h1 {
             font-family: 'Playfair Display', serif;
             color: #fff;
-            text-shadow: 2px 2px 5px rgba(0,0,0,0.4); /* Đổ bóng chữ để nổi trên nền trong suốt */
+            text-shadow: 2px 2px 5px rgba(0,0,0,0.4); 
             font-size: 34px;
             margin: 0 0 5px 0;
         }
@@ -110,13 +116,13 @@
         }
 
         /* =========================================
-           VÒNG QUAY ĐƯỢC PHÓNG TO
+           VÒNG QUAY (+10% KÍCH THƯỚC)
            ========================================= */
         .wheel-container {
             position: relative;
-            width: 400px; /* Vòng quay to hơn */
-            height: 400px;
-            max-width: 90vw; /* Đảm bảo không bị tràn trên điện thoại */
+            width: 440px; /* Tăng 10% từ 400px lên 440px */
+            height: 440px;
+            max-width: 90vw; 
             max-height: 90vw;
             margin: 10px auto 35px;
         }
@@ -130,7 +136,7 @@
             height: 0; 
             border-left: 18px solid transparent;
             border-right: 18px solid transparent;
-            border-top: 35px solid #FF1493; /* Mũi tên đỏ hồng rực rỡ */
+            border-top: 35px solid #FF1493; 
             z-index: 10;
             filter: drop-shadow(0 4px 5px rgba(0,0,0,0.4));
         }
@@ -138,9 +144,9 @@
         canvas {
             border-radius: 50%;
             box-shadow: 0 0 25px rgba(0, 0, 0, 0.3);
-            border: 6px solid rgba(255, 255, 255, 0.8);
             width: 100%;
             height: 100%;
+            transition: transform 4.5s cubic-bezier(0.17, 0.67, 0.12, 0.99);
         }
 
         /* =========================================
@@ -200,7 +206,7 @@
         }
 
         .rules-box {
-            background-color: rgba(255, 255, 255, 0.4); /* Nền mờ cho phần thể lệ */
+            background-color: rgba(255, 255, 255, 0.4); 
             border: 1px solid rgba(255, 255, 255, 0.5);
             padding: 20px;
             border-radius: 12px;
@@ -228,17 +234,22 @@
 </head>
 <body>
 
-    <!-- KHU VỰC ẢNH NỀN SLIDESHOW -->
+    <!-- KHU VỰC 10 ẢNH NỀN SLIDESHOW -->
     <div class="bg-slideshow">
         <div class="bg-slide slide-1"></div>
         <div class="bg-slide slide-2"></div>
         <div class="bg-slide slide-3"></div>
         <div class="bg-slide slide-4"></div>
         <div class="bg-slide slide-5"></div>
+        <div class="bg-slide slide-6"></div>
+        <div class="bg-slide slide-7"></div>
+        <div class="bg-slide slide-8"></div>
+        <div class="bg-slide slide-9"></div>
+        <div class="bg-slide slide-10"></div>
     </div>
     <div class="bg-overlay"></div> 
 
-    <!-- KHU VỰC NỘI DUNG KÍNH MỜ -->
+    <!-- KHU VỰC NỘI DUNG -->
     <div class="main-wrapper">
         <div class="header">
             <h1>Aleyna Wedding</h1>
@@ -247,7 +258,8 @@
 
         <div class="wheel-container">
             <div class="pointer"></div>
-            <canvas id="wheelCanvas" width="500" height="500"></canvas>
+            <!-- Canvas to hơn (540px) để có không gian cho ô quà nổi lên khi hover -->
+            <canvas id="wheelCanvas" width="540" height="540"></canvas>
         </div>
 
         <div class="form-container">
@@ -267,10 +279,9 @@
     </div>
 
     <script>
-        // === Thay link API Google Script của bạn vào đây ===
+        // === DÁN LINK API CỦA BẠN VÀO ĐÂY ===
         const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxVILftDIjiuqkLuhZyjJVvSC22Q8O7djkUp41GfwJKa9HB4Wf0yEFpCZy1ZU8sJYVW/exec'; 
         
-        // Thiết lập 8 tùy chọn và gán Tên Ảnh (1.jpg đến 8.jpg) vào từng tùy chọn
         const prizes = [
             { text: "Phụ kiện quạt", fullText: "Phụ kiện quạt", img: "1.jpg", weight: 5 },
             { text: "Voucher 50k", fullText: "Voucher 50k", img: "2.jpg", weight: 10 },
@@ -285,8 +296,13 @@
         const canvas = document.getElementById("wheelCanvas");
         const ctx = canvas.getContext("2d");
         const arc = Math.PI / (prizes.length / 2);
+        const CX = 270; // Tọa độ trung tâm mới (540/2)
+        const CY = 270;
 
-        // Tải toàn bộ 8 hình ảnh trước khi vẽ vòng quay
+        let hoveredIndex = -1;
+        let hasSpun = false; // Trạng thái khóa tương tác khi đang quay/đã quay
+
+        // Tải hình ảnh
         let loadedImages = 0;
         prizes.forEach(prize => {
             prize.imgObj = new Image();
@@ -297,69 +313,134 @@
             };
             prize.imgObj.onerror = () => {
                 loadedImages++;
-                // Lỗi không tìm thấy ảnh thì vẫn vẽ để web không bị đơ
                 if (loadedImages === prizes.length) drawWheel(); 
             };
         });
         
-        // Hàm vẽ vòng quay với nền là Ảnh
+        // HÀM VẼ VÒNG QUAY (Có xử lý hiệu ứng Nổi bọt - Hover)
         function drawWheel() {
-            ctx.clearRect(0, 0, 500, 500);
+            ctx.clearRect(0, 0, 540, 540);
             
+            // Vẽ vòng nền (các ô bình thường)
             for (let i = 0; i < prizes.length; i++) {
-                const angle = i * arc;
-                
-                // 1. Cắt khung canvas thành hình 1 ô cánh quạt
-                ctx.save();
-                ctx.beginPath();
-                ctx.moveTo(250, 250);
-                ctx.arc(250, 250, 250, angle, angle + arc, false);
-                ctx.closePath();
-                ctx.clip(); // Lệnh này giúp ảnh không bị lem sang ô khác
-                
-                // 2. Chèn ảnh nền vào ô đã cắt
-                if (prizes[i].imgObj && prizes[i].imgObj.complete && prizes[i].imgObj.naturalWidth > 0) {
-                    ctx.translate(250, 250);
-                    ctx.rotate(angle + arc / 2);
-                    // Kéo giãn ảnh ra để phủ kín toàn bộ ô
-                    ctx.drawImage(prizes[i].imgObj, 0, -150, 250, 300);
-                } else {
-                    // Nếu lỗi mất file ảnh, tự động đổ màu hồng dự phòng
-                    ctx.fillStyle = i % 2 === 0 ? "#FFB6C1" : "#FFF0F5";
-                    ctx.fill();
-                }
-                ctx.restore();
-
-                // 3. Vẽ viền trắng phân cách các ô
-                ctx.save();
-                ctx.beginPath();
-                ctx.moveTo(250, 250);
-                ctx.arc(250, 250, 250, angle, angle + arc, false);
-                ctx.lineWidth = 4;
-                ctx.strokeStyle = "#FFFFFF";
-                ctx.stroke();
-                ctx.restore();
-                
-                // 4. Vẽ Chữ lên trên cùng (Có viền trắng để nổi bật trên mọi loại ảnh nền)
-                ctx.save();
-                ctx.translate(250 + Math.cos(angle + arc / 2) * 165, 250 + Math.sin(angle + arc / 2) * 165);
-                ctx.rotate(angle + arc / 2);
-                
-                ctx.font = "bold 23px Quicksand";
-                ctx.textAlign = "center";
-                
-                // Viền ngoài màu trắng
-                ctx.lineWidth = 4;
-                ctx.strokeStyle = "#FFFFFF";
-                ctx.strokeText(prizes[i].text, 0, 8);
-                
-                // Lõi chữ màu đen
-                ctx.fillStyle = "#222222";
-                ctx.fillText(prizes[i].text, 0, 8);
-                ctx.restore();
+                drawSlice(i, false);
+            }
+            // Vẽ đè ô đang được Hover lên trên cùng (để nó to hơn và đè lên các ô bên cạnh)
+            if (hoveredIndex !== -1 && !hasSpun) {
+                drawSlice(hoveredIndex, true);
             }
         }
 
+        function drawSlice(i, isHovered) {
+            const angle = i * arc;
+            const radius = isHovered ? 265 : 250; // Ô bình thường 250, ô hover phóng lên 265
+            
+            ctx.save();
+            ctx.beginPath();
+            ctx.moveTo(CX, CY);
+            ctx.arc(CX, CY, radius, angle, angle + arc, false);
+            ctx.closePath();
+            ctx.clip();
+            
+            if (prizes[i].imgObj && prizes[i].imgObj.complete && prizes[i].imgObj.naturalWidth > 0) {
+                ctx.translate(CX, CY);
+                ctx.rotate(angle + arc / 2);
+                ctx.drawImage(prizes[i].imgObj, 0, -radius * 0.6, radius, radius * 1.2);
+            } else {
+                ctx.fillStyle = i % 2 === 0 ? "#FFB6C1" : "#FFF0F5";
+                ctx.fill();
+            }
+            ctx.restore();
+
+            // Vẽ viền
+            ctx.save();
+            ctx.beginPath();
+            ctx.moveTo(CX, CY);
+            ctx.arc(CX, CY, radius, angle, angle + arc, false);
+            ctx.lineWidth = isHovered ? 8 : 6;
+            ctx.strokeStyle = isHovered ? "#FF1493" : "rgba(255, 255, 255, 0.8)"; // Viền hồng rực rỡ khi hover
+            ctx.stroke();
+            ctx.restore();
+            
+            // Vẽ Chữ
+            ctx.save();
+            const textRadius = isHovered ? 180 : 165; // Đẩy chữ ra ngoài một chút khi ô phình to
+            ctx.translate(CX + Math.cos(angle + arc / 2) * textRadius, CY + Math.sin(angle + arc / 2) * textRadius);
+            ctx.rotate(angle + arc / 2);
+            ctx.font = "bold 23px Quicksand";
+            ctx.textAlign = "center";
+            ctx.lineWidth = 4;
+            ctx.strokeStyle = "#FFFFFF";
+            ctx.strokeText(prizes[i].text, 0, 8);
+            ctx.fillStyle = "#222222";
+            ctx.fillText(prizes[i].text, 0, 8);
+            ctx.restore();
+        }
+
+        // =========================================
+        // XỬ LÝ CHUỘT (HOVER & CLICK ĐỂ XEM QUÀ)
+        // =========================================
+        canvas.addEventListener('mousemove', (e) => {
+            if (hasSpun) return; // Không cho tương tác nếu đã quay
+            
+            const rect = canvas.getBoundingClientRect();
+            const scaleX = canvas.width / canvas.clientWidth;
+            const scaleY = canvas.height / canvas.clientHeight;
+            
+            // Lấy tọa độ chuột chính xác trên canvas
+            const x = (e.clientX - rect.left) * scaleX;
+            const y = (e.clientY - rect.top) * scaleY;
+            
+            const dx = x - CX;
+            const dy = y - CY;
+            const dist = Math.sqrt(dx*dx + dy*dy);
+            
+            if (dist <= 250) {
+                let angle = Math.atan2(dy, dx);
+                if (angle < 0) angle += 2 * Math.PI;
+                let index = Math.floor(angle / arc);
+                
+                if (hoveredIndex !== index) {
+                    hoveredIndex = index;
+                    canvas.style.cursor = 'pointer';
+                    drawWheel(); // Vẽ lại vòng quay
+                }
+            } else {
+                if (hoveredIndex !== -1) {
+                    hoveredIndex = -1;
+                    canvas.style.cursor = 'default';
+                    drawWheel();
+                }
+            }
+        });
+
+        canvas.addEventListener('mouseleave', () => {
+            if (hasSpun) return;
+            hoveredIndex = -1;
+            canvas.style.cursor = 'default';
+            drawWheel();
+        });
+
+        canvas.addEventListener('click', () => {
+            if (hasSpun || hoveredIndex === -1) return;
+            const prize = prizes[hoveredIndex];
+            
+            // Hiện Popup chi tiết quà khi bấm vào ô
+            Swal.fire({
+                title: prize.text,
+                text: 'Hãy nhập Số điện thoại và bấm Quay để thử vận may nhé!',
+                imageUrl: prize.img,
+                imageWidth: 200,
+                imageHeight: 200,
+                imageAlt: prize.text,
+                confirmButtonColor: '#FF69B4',
+                confirmButtonText: 'Đóng'
+            });
+        });
+
+        // =========================================
+        // THUẬT TOÁN QUAY & GỌI API
+        // =========================================
         function getRandomPrizeIndex() {
             let totalWeight = prizes.reduce((sum, prize) => sum + prize.weight, 0);
             let randomNum = Math.random() * totalWeight;
@@ -383,6 +464,10 @@
                 return;
             }
 
+            hasSpun = true; // Khóa tương tác hover/click
+            hoveredIndex = -1; 
+            drawWheel(); // Trả vòng quay về trạng thái bình thường
+
             btn.disabled = true;
             btn.innerText = "Đang kiểm tra...";
 
@@ -400,33 +485,39 @@
 
                 if (data.status === 'success') {
                     btn.innerText = "Đang quay...";
-                    spinWheel(winningIndex, wonPrize.fullText);
+                    spinWheel(winningIndex, wonPrize);
                 } else {
                     Swal.fire('Thất bại', data.message, 'warning');
+                    hasSpun = false; // Mở lại tương tác nếu lỗi
                     btn.disabled = false;
                     btn.innerText = "Kiểm tra & Quay";
                 }
             } catch (error) {
                 Swal.fire('Lỗi', 'Không thể kết nối máy chủ. Vui lòng thử lại!', 'error');
+                hasSpun = false;
                 btn.disabled = false;
                 btn.innerText = "Kiểm tra & Quay";
             }
         }
 
-        function spinWheel(winningIndex, prizeText) {
+        function spinWheel(winningIndex, prizeObj) {
             const degreesPerSlice = 360 / prizes.length;
             const sliceCenterAngle = winningIndex * degreesPerSlice + (degreesPerSlice / 2);
-            const targetDegree = (360 * 8) + 270 - sliceCenterAngle;
+            const targetDegree = (360 * 8) + 270 - sliceCenterAngle; // Quay 8 vòng rồi dừng
 
-            canvas.style.transition = "transform 4.5s cubic-bezier(0.17, 0.67, 0.12, 0.99)";
             canvas.style.transform = `rotate(${targetDegree}deg)`;
 
             setTimeout(() => {
+                // Hộp thoại trúng thưởng hiển thị Ảnh quà + Ghi chú nhỏ
                 Swal.fire({
                     title: 'Chúc Mừng Dâu Rể!',
-                    text: `Phần quà của bạn là: ${prizeText}`,
-                    icon: 'success',
-                    confirmButtonColor: '#FF69B4'
+                    html: `Phần quà của bạn là: <b>${prizeObj.fullText}</b><br><br><span style="font-size: 14px; color: #888; font-style: italic;">* Quà đã được ghi nhận vào hệ thống</span>`,
+                    imageUrl: prizeObj.img,
+                    imageWidth: 200,
+                    imageHeight: 200,
+                    imageAlt: prizeObj.fullText,
+                    confirmButtonColor: '#FF69B4',
+                    confirmButtonText: 'Tuyệt vời!'
                 });
                 document.getElementById('spinBtn').innerText = "ĐÃ NHẬN QUÀ";
             }, 4700); 
