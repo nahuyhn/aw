@@ -72,10 +72,10 @@
            KHỐI NỘI DUNG (HIỆU ỨNG KÍNH MỜ - GLASSMORPHISM)
            ========================================= */
         .main-wrapper {
-            background-color: rgba(255, 255, 255, 0.2); /* Mờ trong suốt */
-            backdrop-filter: blur(15px); /* Hiệu ứng kính làm nhòe nền đằng sau */
-            -webkit-backdrop-filter: blur(15px);
-            border: 1px solid rgba(255, 255, 255, 0.5); /* Viền sáng mỏng */
+            background-color: rgba(255, 255, 255, 0.05); /* Giảm từ 0.2 xuống 0.05 để trong suốt hơn */
+            backdrop-filter: blur(1px); /* Giảm độ nhòe kính từ 15px xuống 5px */
+            -webkit-backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 255, 255, 0.3); /* Viền mờ đi một chút */
             box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
             border-radius: 24px;
             padding: 40px 30px;
@@ -268,7 +268,7 @@
 
     <script>
         // === Thay link API Google Script của bạn vào đây ===
-        const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxITikKSab9yLh8br0m_NXhppHfAcSmWXIfKoRwn7OWC-RrKXv_MzaRwFnb5b9FwZnz/exec'; 
+        const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxVILftDIjiuqkLuhZyjJVvSC22Q8O7djkUp41GfwJKa9HB4Wf0yEFpCZy1ZU8sJYVW/exec'; 
         
         // Thiết lập 8 tùy chọn và gán Tên Ảnh (1.jpg đến 8.jpg) vào từng tùy chọn
         const prizes = [
