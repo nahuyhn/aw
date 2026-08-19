@@ -124,10 +124,14 @@
         /* =========================================
            VÒNG QUAY
            ========================================= */
+        /* =========================================
+           VÒNG QUAY (Đã Fix lỗi bóp méo trên Mobile)
+           ========================================= */
         .wheel-container {
-            position: relative; width: 440px; height: 440px;
-            max-width: 100%; aspect-ratio: 1 / 1; 
+            position: relative; width: 440px; 
+            max-width: 100%; 
             margin: 0 auto 30px;
+            flex-shrink: 0; /* Khóa cứng, không cho điện thoại tự động bóp chiều cao */
         }
 
         .pointer {
@@ -140,7 +144,8 @@
 
         canvas {
             border-radius: 50%; box-shadow: 0 0 25px rgba(0, 0, 0, 0.3);
-            width: 100%; height: 100%;
+            width: 100%; height: auto; /* Tự động tính chiều cao theo chiều rộng */
+            aspect-ratio: 1 / 1; display: block;
             transition: transform 4.5s cubic-bezier(0.17, 0.67, 0.12, 0.99);
         }
 
