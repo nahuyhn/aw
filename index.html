@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aleyna Wedding - Vòng Quay May Mắn</title>
+    <!-- Thư viện Font chữ và Popup -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;1,600&family=Quicksand:wght@400;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <style>
+        :root {
+            --primary-pink: #FFB6C1;
+            --dark-pink: #FF69B4;
+            --text-color: #333333;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Quicksand', sans-serif;
+            color: var(--text-color);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* =========================================
+           HIỆU ỨNG SLIDESHOW ẢNH NỀN
+           ========================================= */
+        .bg-slideshow {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            z-index: -1;
+            background-color: #000; 
+        }
+
+        .bg-slide {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background-size: cover;
+            background-position: center;
+            opacity: 0;
+            animation: fadeZoom 25s infinite; 
+        }
+
+        .slide-1 { background-image: url('bg1.jpg'); animation-delay: 0s; }
+        .slide-2 { background-image: url('bg2.jpg'); animation-delay: 5s; }
+        .slide-3 { background-image: url('bg3.jpg'); animation-delay: 10s; }
+        .slide-4 { background-image: url('bg4.jpg'); animation-delay: 15s; }
+        .slide-5 { background-image: url('bg5.jpg'); animation-delay: 20s; }
+
+        @keyframes fadeZoom {
+            0% { opacity: 0; transform: scale(1); }
+            5% { opacity: 1; }
+            20% { opacity: 1; transform: scale(1.05); } 
+            25% { opacity: 0; }
+            100% { opacity: 0; }
+        }
+
+        .bg-overlay {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.25); /* Lớp phủ đen mỏng làm nổi vòng quay */
+            z-index: 0;
+        }
+
+        /* =========================================
+           KHỐI NỘI DUNG (HIỆU ỨNG KÍNH MỜ - GLASSMORPHISM)
+           ========================================= */
+        .main-wrapper {
+            background-color: rgba(255, 255, 255, 0.2); /* Mờ trong suốt */
+            backdrop-filter: blur(15px); /* Hiệu ứng kính làm nhòe nền đằng sau */
+            -webkit-backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.5); /* Viền sáng mỏng */
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+            border-radius: 24px;
+            padding: 40px 30px;
+            margin: 40px 20px;
+            width: 100%;
+            max-width: 500px; /* Tăng kích thước khung để chứa vòng quay to hơn */
+            z-index: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        .header h1 {
+            font-family: 'Playfair Display', serif;
+            color: #fff;
+            text-shadow: 2px 2px 5px rgba(0,0,0,0.4); /* Đổ bóng chữ để nổi trên nền trong suốt */
+            font-size: 34px;
+            margin: 0 0 5px 0;
+        }
+
+        .header p {
+            font-size: 16px;
+            margin: 0;
+            color: #fff;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
+            font-weight: 600;
+        }
+
+        /* =========================================
+           VÒNG QUAY ĐƯỢC PHÓNG TO
+           ========================================= */
+        .wheel-container {
+            position: relative;
+            width: 400px; /* Vòng quay to hơn */
+            height: 400px;
+            max-width: 90vw; /* Đảm bảo không bị tràn trên điện thoại */
+            max-height: 90vw;
+            margin: 10px auto 35px;
+        }
+
+        .pointer {
+            position: absolute;
+            top: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0; 
+            height: 0; 
+            border-left: 18px solid transparent;
+            border-right: 18px solid transparent;
+            border-top: 35px solid #FF1493; /* Mũi tên đỏ hồng rực rỡ */
+            z-index: 10;
+            filter: drop-shadow(0 4px 5px rgba(0,0,0,0.4));
+        }
+
+        canvas {
+            border-radius: 50%;
+            box-shadow: 0 0 25px rgba(0, 0, 0, 0.3);
+            border: 6px solid rgba(255, 255, 255, 0.8);
+            width: 100%;
+            height: 100%;
+        }
+
+        /* =========================================
+           FORM & NÚT BẤM
+           ========================================= */
+        .form-container {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            width: 100%;
+            margin-bottom: 30px;
+        }
+
+        input[type="tel"] {
+            padding: 14px 15px;
+            border: 2px solid rgba(255, 255, 255, 0.8);
+            background-color: rgba(255, 255, 255, 0.85);
+            border-radius: 10px;
+            font-size: 16px;
+            outline: none;
+            font-family: 'Quicksand', sans-serif;
+            text-align: center;
+            font-weight: 600;
+        }
+
+        input[type="tel"]:focus {
+            border-color: var(--dark-pink);
+            box-shadow: 0 0 10px rgba(255, 105, 180, 0.5);
+        }
+
+        button {
+            padding: 15px;
+            background-color: var(--dark-pink);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 18px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: 0.3s;
+            font-family: 'Quicksand', sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            box-shadow: 0 5px 15px rgba(255, 105, 180, 0.4);
+        }
+
+        button:hover {
+            background-color: #E0529C;
+            transform: translateY(-2px);
+        }
+
+        button:disabled {
+            background-color: #999;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+
+        .rules-box {
+            background-color: rgba(255, 255, 255, 0.4); /* Nền mờ cho phần thể lệ */
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            padding: 20px;
+            border-radius: 12px;
+            width: 100%;
+            box-sizing: border-box;
+            font-size: 14px;
+            line-height: 1.6;
+            color: #111;
+            font-weight: 600;
+        }
+
+        .rules-box h3 {
+            margin-top: 0;
+            color: #D81B60;
+            text-align: center;
+            font-family: 'Playfair Display', serif;
+            font-size: 22px;
+        }
+
+        .rules-box ul {
+            padding-left: 20px;
+            margin-bottom: 0;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- KHU VỰC ẢNH NỀN SLIDESHOW -->
+    <div class="bg-slideshow">
+        <div class="bg-slide slide-1"></div>
+        <div class="bg-slide slide-2"></div>
+        <div class="bg-slide slide-3"></div>
+        <div class="bg-slide slide-4"></div>
+        <div class="bg-slide slide-5"></div>
+    </div>
+    <div class="bg-overlay"></div> 
+
+    <!-- KHU VỰC NỘI DUNG KÍNH MỜ -->
+    <div class="main-wrapper">
+        <div class="header">
+            <h1>Aleyna Wedding</h1>
+            <p>Dịch vụ Bưng quả & Cho thuê Áo dài TP.HCM</p>
+        </div>
+
+        <div class="wheel-container">
+            <div class="pointer"></div>
+            <canvas id="wheelCanvas" width="500" height="500"></canvas>
+        </div>
+
+        <div class="form-container">
+            <input type="tel" id="phoneInput" placeholder="Nhập số điện thoại đã cọc..." required>
+            <button id="spinBtn" onclick="startProcess()">Kiểm tra & Quay</button>
+        </div>
+
+        <div class="rules-box">
+            <h3>Thể Lệ Vòng Quay</h3>
+            <ul>
+                <li>Mỗi dâu rể chỉ quay được 1 lần (nhập SĐT đã cọc).</li>
+                <li>Áp dụng cho hóa đơn từ 999k (Nội Thành HCM).</li>
+                <li>Hình ảnh mang tính chất minh họa.</li>
+                <li>Quà tặng được freeship đến tận nhà Dâu.</li>
+            </ul>
+        </div>
+    </div>
+
+    <script>
+        // === Thay link API Google Script của bạn vào đây ===
+        const SCRIPT_URL = 'YOUR_WEB_APP_URL_HERE'; 
+        
+        // Thiết lập 8 tùy chọn và gán Tên Ảnh (1.jpg đến 8.jpg) vào từng tùy chọn
+        const prizes = [
+            { text: "Phụ kiện quạt", fullText: "Phụ kiện quạt", img: "1.jpg", weight: 5 },
+            { text: "Voucher 50k", fullText: "Voucher 50k", img: "2.jpg", weight: 10 },
+            { text: "Giảm 5% HĐ", fullText: "Giảm 5% trên tổng hóa đơn", img: "3.jpg", weight: 20 },
+            { text: "12 bao lì xì", fullText: "12 bao lì xì", img: "4.jpg", weight: 25 },
+            { text: "Set Chocolate", fullText: "Set chocolate", img: "5.jpg", weight: 5 },
+            { text: "2 Móc khóa", fullText: "2 móc khóa", img: "6.jpg", weight: 20 },
+            { text: "Voucher 100k", fullText: "Voucher 100k", img: "7.jpg", weight: 10 },
+            { text: "1 Cặp ly sứ", fullText: "1 cặp ly sứ", img: "8.jpg", weight: 5 }
+        ];
+
+        const canvas = document.getElementById("wheelCanvas");
+        const ctx = canvas.getContext("2d");
+        const arc = Math.PI / (prizes.length / 2);
+
+        // Tải toàn bộ 8 hình ảnh trước khi vẽ vòng quay
+        let loadedImages = 0;
+        prizes.forEach(prize => {
+            prize.imgObj = new Image();
+            prize.imgObj.src = prize.img;
+            prize.imgObj.onload = () => {
+                loadedImages++;
+                if (loadedImages === prizes.length) drawWheel();
+            };
+            prize.imgObj.onerror = () => {
+                loadedImages++;
+                // Lỗi không tìm thấy ảnh thì vẫn vẽ để web không bị đơ
+                if (loadedImages === prizes.length) drawWheel(); 
+            };
+        });
+        
+        // Hàm vẽ vòng quay với nền là Ảnh
+        function drawWheel() {
+            ctx.clearRect(0, 0, 500, 500);
+            
+            for (let i = 0; i < prizes.length; i++) {
+                const angle = i * arc;
+                
+                // 1. Cắt khung canvas thành hình 1 ô cánh quạt
+                ctx.save();
+                ctx.beginPath();
+                ctx.moveTo(250, 250);
+                ctx.arc(250, 250, 250, angle, angle + arc, false);
+                ctx.closePath();
+                ctx.clip(); // Lệnh này giúp ảnh không bị lem sang ô khác
+                
+                // 2. Chèn ảnh nền vào ô đã cắt
+                if (prizes[i].imgObj && prizes[i].imgObj.complete && prizes[i].imgObj.naturalWidth > 0) {
+                    ctx.translate(250, 250);
+                    ctx.rotate(angle + arc / 2);
+                    // Kéo giãn ảnh ra để phủ kín toàn bộ ô
+                    ctx.drawImage(prizes[i].imgObj, 0, -150, 250, 300);
+                } else {
+                    // Nếu lỗi mất file ảnh, tự động đổ màu hồng dự phòng
+                    ctx.fillStyle = i % 2 === 0 ? "#FFB6C1" : "#FFF0F5";
+                    ctx.fill();
+                }
+                ctx.restore();
+
+                // 3. Vẽ viền trắng phân cách các ô
+                ctx.save();
+                ctx.beginPath();
+                ctx.moveTo(250, 250);
+                ctx.arc(250, 250, 250, angle, angle + arc, false);
+                ctx.lineWidth = 4;
+                ctx.strokeStyle = "#FFFFFF";
+                ctx.stroke();
+                ctx.restore();
+                
+                // 4. Vẽ Chữ lên trên cùng (Có viền trắng để nổi bật trên mọi loại ảnh nền)
+                ctx.save();
+                ctx.translate(250 + Math.cos(angle + arc / 2) * 165, 250 + Math.sin(angle + arc / 2) * 165);
+                ctx.rotate(angle + arc / 2);
+                
+                ctx.font = "bold 23px Quicksand";
+                ctx.textAlign = "center";
+                
+                // Viền ngoài màu trắng
+                ctx.lineWidth = 4;
+                ctx.strokeStyle = "#FFFFFF";
+                ctx.strokeText(prizes[i].text, 0, 8);
+                
+                // Lõi chữ màu đen
+                ctx.fillStyle = "#222222";
+                ctx.fillText(prizes[i].text, 0, 8);
+                ctx.restore();
+            }
+        }
+
+        function getRandomPrizeIndex() {
+            let totalWeight = prizes.reduce((sum, prize) => sum + prize.weight, 0);
+            let randomNum = Math.random() * totalWeight;
+            let weightSum = 0;
+            
+            for (let i = 0; i < prizes.length; i++) {
+                weightSum += prizes[i].weight;
+                if (randomNum <= weightSum) {
+                    return i;
+                }
+            }
+            return 0;
+        }
+
+        async function startProcess() {
+            const phone = document.getElementById('phoneInput').value.trim();
+            const btn = document.getElementById('spinBtn');
+            
+            if (!phone) {
+                Swal.fire('Lỗi', 'Vui lòng nhập số điện thoại của bạn!', 'error');
+                return;
+            }
+
+            btn.disabled = true;
+            btn.innerText = "Đang kiểm tra...";
+
+            const winningIndex = getRandomPrizeIndex();
+            const wonPrize = prizes[winningIndex];
+
+            try {
+                const response = await fetch(SCRIPT_URL, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+                    body: JSON.stringify({ action: 'play', phone: phone, prize: wonPrize.fullText })
+                });
+                
+                const data = await response.json();
+
+                if (data.status === 'success') {
+                    btn.innerText = "Đang quay...";
+                    spinWheel(winningIndex, wonPrize.fullText);
+                } else {
+                    Swal.fire('Thất bại', data.message, 'warning');
+                    btn.disabled = false;
+                    btn.innerText = "Kiểm tra & Quay";
+                }
+            } catch (error) {
+                Swal.fire('Lỗi', 'Không thể kết nối máy chủ. Vui lòng thử lại!', 'error');
+                btn.disabled = false;
+                btn.innerText = "Kiểm tra & Quay";
+            }
+        }
+
+        function spinWheel(winningIndex, prizeText) {
+            const degreesPerSlice = 360 / prizes.length;
+            const sliceCenterAngle = winningIndex * degreesPerSlice + (degreesPerSlice / 2);
+            const targetDegree = (360 * 8) + 270 - sliceCenterAngle;
+
+            canvas.style.transition = "transform 4.5s cubic-bezier(0.17, 0.67, 0.12, 0.99)";
+            canvas.style.transform = `rotate(${targetDegree}deg)`;
+
+            setTimeout(() => {
+                Swal.fire({
+                    title: 'Chúc Mừng Dâu Rể!',
+                    text: `Phần quà của bạn là: ${prizeText}`,
+                    icon: 'success',
+                    confirmButtonColor: '#FF69B4'
+                });
+                document.getElementById('spinBtn').innerText = "ĐÃ NHẬN QUÀ";
+            }, 4700); 
+        }
+    </script>
+</body>
+</html>
