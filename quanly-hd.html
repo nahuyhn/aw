@@ -7,7 +7,9 @@
     <title>Hệ Thống Quản Lý Hợp Đồng - AleynaWedding</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
-        /* CSS GIAO DIỆN WEB */
+        /* ========================================= */
+        /* CSS GIAO DIỆN WEB (QUẢN TRỊ)              */
+        /* ========================================= */
         :root { --primary: #2c3e50; --secondary: #34495e; --accent: #3498db; }
         body { background-color: #f4f6f9; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
         .hidden { display: none !important; }
@@ -21,41 +23,53 @@
         .btn-add-item:hover { border-color: var(--accent); color: var(--accent); background: #f0f8ff; }
         .total-box { background: #f8f9fa; border-radius: 8px; padding: 15px; border: 1px solid #e9ecef; }
         .money-input { font-weight: bold; color: #e74c3c; font-size: 1.1rem; }
-        .filter-row { background-color: #f8f9fa; padding: 15px; border-radius: 8px; border: 1px solid #e1e4e8; margin-bottom: 20px; }
+        
+        /* CSS Bộ lọc Chuyên nghiệp */
+        .filter-row { background-color: #ffffff; padding: 20px; border-radius: 10px; border: 1px solid #e1e4e8; margin-bottom: 20px; box-shadow: 0 2px 10px rgba(0,0,0,0.02); }
+        .filter-title { font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px; color: var(--secondary); font-weight: 700; margin-bottom: 15px; }
+        .count-badge { background-color: #e8f4fd; color: #0056b3; padding: 5px 12px; border-radius: 20px; font-weight: bold; font-size: 0.85rem; }
 
         @media screen { #print-area { display: none !important; } }
 
-        /* CSS GIAO DIỆN IN PDF */
+        /* ========================================= */
+        /* CSS BẢN IN PDF CHUẨN MẪU ALEYNA WEDDING   */
+        /* ========================================= */
         @media print {
             #loginScreen, #mainApp { display: none !important; }
-            #print-area { display: block !important; width: 100%; font-family: 'Times New Roman', serif; color: #000; }
-            @page { size: A4 portrait; margin: 15mm 15mm; }
+            #print-area { display: block !important; width: 100%; font-family: Arial, Helvetica, sans-serif; color: #000; }
+            @page { size: A4 portrait; margin: 10mm 15mm; }
             
-            .p-title { text-align: center; font-weight: bold; font-size: 24px; margin-bottom: 5px; }
-            .p-subtitle { text-align: center; font-size: 14px; margin-bottom: 20px; text-transform: uppercase; letter-spacing: 1px; }
-            .p-header-flex { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 20px; }
-            .dot-line { border-bottom: 1px dotted #333; display: inline-block; min-width: 100px; padding-left: 5px; }
-            .flex-line { display: flex; align-items: baseline; margin-bottom: 10px; font-size: 16px; }
-            .flex-line .dot-line { flex-grow: 1; }
+            .p-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; border-bottom: 1px solid transparent; padding-bottom: 10px; }
+            .p-title-box { text-align: left; }
+            .p-title-text { font-size: 26px; font-weight: bold; margin-bottom: 5px; letter-spacing: 0.5px; }
+            .p-date-text { font-size: 15px; font-family: "Times New Roman", Times, serif; }
+            .p-logo-box { text-align: center; }
+            .logo-al { font-family: 'Brush Script MT', 'Lucida Handwriting', cursive; font-size: 45px; line-height: 1; margin-bottom: 2px; }
+            .logo-name { font-size: 13px; letter-spacing: 2px; font-family: "Times New Roman", Times, serif; margin-bottom: 2px; }
+            .logo-sub { font-size: 9px; letter-spacing: 1px; font-weight: bold; }
+
+            .p-info { margin-bottom: 15px; font-size: 15px; line-height: 1.7; font-family: "Times New Roman", Times, serif;}
+            .r-flex { display: flex; justify-content: space-between; margin-bottom: 4px; }
+            .i-col { display: flex; align-items: flex-end; white-space: nowrap; }
+            .dot { border-bottom: 1px dotted #333; flex-grow: 1; margin-left: 5px; min-height: 18px; display: inline-block; padding-left: 5px; font-weight: bold; color: #000; }
+
+            .p-table { width: 100%; border-collapse: collapse; margin-bottom: 15px; border: 2px solid #000; }
+            .p-table th, .p-table td { border: 1px solid #000; padding: 8px 5px; font-size: 15px; }
+            .p-table th { background-color: #555555 !important; color: #ffffff !important; font-weight: bold; text-align: center; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+            .p-table td.center { text-align: center; }
             
-            .p-table { width: 100%; border-collapse: collapse; margin: 20px 0; }
-            .p-table th, .p-table td { border: 1px solid #000; padding: 10px; text-align: center; font-size: 16px; }
-            .p-table th { font-weight: bold; background-color: #f2f2f2 !important; -webkit-print-color-adjust: exact; }
-            .p-table td:nth-child(2) { text-align: left; }
+            .p-gray-cell { background-color: #555555 !important; color: #ffffff !important; font-weight: bold; text-align: center; -webkit-print-color-adjust: exact; print-color-adjust: exact; letter-spacing: 1px; }
+            .p-val-cell { text-align: center; font-weight: bold; }
             
-            .p-bottom-flex { display: flex; justify-content: space-between; align-items: stretch; margin-top: 15px; gap: 20px; }
-            .p-notes { width: 62%; font-size: 14px; text-align: justify; line-height: 1.4; }
-            .p-notes p { margin-bottom: 8px; }
-            
-            .p-totals { width: 35%; border: 1px solid #000; }
-            .p-total-row { display: flex; border-bottom: 1px solid #000; }
-            .p-total-row:last-child { border-bottom: none; }
-            .p-total-label { width: 50%; padding: 10px; border-right: 1px solid #000; font-weight: bold; }
-            .p-total-value { width: 50%; padding: 10px; text-align: right; font-weight: bold; }
-            
-            .p-sign-flex { display: flex; justify-content: space-around; margin-top: 30px; margin-bottom: 100px; }
-            .p-sign-box { text-align: center; font-weight: bold; font-size: 16px; }
-            .p-footer-bank { border-top: 2px solid #000; padding-top: 15px; font-size: 14px; display: flex; justify-content: space-between; line-height: 1.5; }
+            .p-notes { font-size: 14px; font-family: "Times New Roman", Times, serif; line-height: 1.4; text-align: justify; margin-bottom: 30px;}
+            .p-notes ul { margin: 5px 0 5px 20px; padding: 0; }
+            .p-notes li { margin-bottom: 3px; }
+            .p-notes p { margin: 3px 0; }
+
+            .p-footer { display: flex; justify-content: space-between; font-size: 14px; text-align: center; font-family: "Times New Roman", Times, serif; }
+            .p-sign-box { width: 45%; }
+            .p-sign-title { font-weight: bold; font-family: Arial, sans-serif; font-size: 15px; margin-bottom: 60px; }
+            .p-footer-info { margin-top: 15px; line-height: 1.5; }
         }
     </style>
 </head>
@@ -66,15 +80,8 @@
     <div class="card-box text-center shadow-lg border-0">
         <h3 class="mb-1" style="color: var(--primary); font-weight: 700;">AleynaWedding</h3>
         <p class="text-muted mb-4">Hệ Thống Quản Lý Hợp Đồng Dịch Vụ</p>
-        
-        <div class="form-floating mb-3 hidden" id="urlBox">
-            <input type="text" id="apiUrl" class="form-control" placeholder="Link Web App">
-            <label>Link Web App</label>
-        </div>
-        <div class="form-floating mb-4">
-            <input type="password" id="adminPass" class="form-control" placeholder="Mật khẩu" required>
-            <label>Mật khẩu bảo mật</label>
-        </div>
+        <div class="form-floating mb-3 hidden" id="urlBox"><input type="text" id="apiUrl" class="form-control" placeholder="Link Web App"><label>Link Web App</label></div>
+        <div class="form-floating mb-4"><input type="password" id="adminPass" class="form-control" placeholder="Mật khẩu" required><label>Mật khẩu bảo mật</label></div>
         <button class="btn btn-primary w-100 py-3" style="font-weight: bold; font-size: 1.1rem; border-radius: 8px;" onclick="login()">ĐĂNG NHẬP HỆ THỐNG</button>
     </div>
 </div>
@@ -104,16 +111,16 @@
                         <div class="col-md-6 mb-3"><label class="form-label">Tên Khách Hàng (*)</label><input type="text" id="tenKH" class="form-control" placeholder="Nhập tên..." required></div>
                     </div>
                     <div class="row">
-                        <div class="col-md-4 mb-3"><label class="form-label">Số Điện Thoại</label><input type="text" id="sdt" class="form-control" placeholder="VD: 0358..." required></div>
+                        <div class="col-md-4 mb-3"><label class="form-label">Số Điện Thoại</label><input type="text" id="sdt" class="form-control" placeholder="VD: 0358..."></div>
                         <div class="col-md-8 mb-3"><label class="form-label">Địa chỉ</label><input type="text" id="diaChi" class="form-control" placeholder="Số nhà, đường, phường, quận..."></div>
                     </div>
                     
                     <h5 class="border-bottom pb-2 mt-3 mb-3 fw-bold" style="color: var(--accent);">II. Thời gian dịch vụ</h5>
                     <div class="row">
-                        <div class="col-md-3 mb-3"><label class="form-label">Ngày Lễ</label><input type="date" id="ngayLe" class="form-control"></div>
-                        <div class="col-md-3 mb-3"><label class="form-label">Giờ Lễ / Giờ Có Mặt</label><input type="text" id="gioCoMat" class="form-control" placeholder="VD: 9h sáng"></div>
-                        <div class="col-md-3 mb-3"><label class="form-label">Ngày Lấy Đồ</label><input type="date" id="ngayLay" class="form-control"></div>
-                        <div class="col-md-3 mb-3"><label class="form-label">Ngày Trả Đồ</label><input type="date" id="ngayTra" class="form-control"></div>
+                        <div class="col-md-3 mb-3"><label class="form-label">Ngày Lễ</label><input type="text" id="ngayLe" class="form-control" placeholder="VD: 20/09"></div>
+                        <div class="col-md-3 mb-3"><label class="form-label">Giờ Có Mặt / Thời gian lễ</label><input type="text" id="gioCoMat" class="form-control" placeholder="VD: 9h sáng"></div>
+                        <div class="col-md-3 mb-3"><label class="form-label">Ngày Lấy Đồ</label><input type="text" id="ngayLay" class="form-control" placeholder="VD: 18/09"></div>
+                        <div class="col-md-3 mb-3"><label class="form-label">Ngày Trả Đồ</label><input type="text" id="ngayTra" class="form-control" placeholder="VD: 21/09"></div>
                     </div>
 
                     <h5 class="border-bottom pb-2 mt-3 mb-3 fw-bold" style="color: var(--accent);">III. Chi tiết Sản phẩm / Dịch vụ</h5>
@@ -136,7 +143,7 @@
                     <div class="row mt-4 align-items-start">
                         <div class="col-md-6 mb-3">
                             <label class="form-label">Lưu ý / Ghi chú thanh toán</label>
-                            <textarea id="ghiChu" class="form-control" rows="4" placeholder="VD: Thanh toán chuyển khoản tiền còn lại vào ngày 10/08/2026"></textarea>
+                            <textarea id="ghiChu" class="form-control" rows="4" placeholder="VD: Thanh toán hết khi nhận Áo dài..."></textarea>
                         </div>
                         <div class="col-md-6 mb-3">
                             <div class="total-box shadow-sm">
@@ -155,7 +162,6 @@
                             </div>
                         </div>
                     </div>
-                    
                     <button type="button" class="btn btn-success w-100 py-3 mt-3 fw-bold fs-5 shadow" id="btnLuu" onclick="submitContract()">💾 LƯU HỢP ĐỒNG NÀY VÀO HỆ THỐNG</button>
                     <div id="addResult" class="mt-3 text-center fw-bold fs-5"></div>
                 </form>
@@ -164,81 +170,74 @@
 
         <!-- TAB 2: HỒ SƠ & TRA CỨU -->
         <div class="tab-pane fade" id="tab-list">
-            <div class="card-box border-0 shadow-sm">
+            
+            <!-- BỘ LỌC ĐA ĐIỀU KIỆN (CHUYÊN NGHIỆP) -->
+            <div class="filter-row">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <div class="filter-title mb-0">⚙️ BỘ LỌC DỮ LIỆU</div>
+                    <div id="countResult" class="count-badge hidden">Tìm thấy: 0 hợp đồng</div>
+                </div>
                 
-                <!-- BỘ LỌC ĐA ĐIỀU KIỆN (MỚI) -->
-                <div class="filter-row">
-                    <h6 class="fw-bold mb-3" style="color: var(--primary);">BỘ LỌC TÌM KIẾM CHI TIẾT</h6>
-                    
-                    <div class="row g-3 mb-3">
-                        <div class="col-md-3">
-                            <label class="form-label small">Trường tìm kiếm</label>
-                            <select id="filterField" class="form-select" onchange="applyFilters()">
-                                <option value="all">Tất cả thông tin</option>
-                                <option value="MaHD">Chỉ tìm Mã HĐ</option>
-                                <option value="TenKhachHang">Chỉ tìm Tên KH</option>
-                                <option value="SoDienThoai">Chỉ tìm SĐT</option>
-                            </select>
-                        </div>
-                        <div class="col-md-6">
-                            <label class="form-label small">Từ khóa</label>
-                            <input type="text" id="searchBox" class="form-control" placeholder="Nhập từ khóa..." onkeyup="applyFilters()">
-                        </div>
-                        <div class="col-md-3">
-                            <label class="form-label small">Loại Sản phẩm</label>
-                            <select id="filterProduct" class="form-select" onchange="applyFilters()">
-                                <option value="all">Mọi sản phẩm</option>
-                                <option value="nhân sự">Nhân sự (Bưng quả...)</option>
-                                <option value="áo dài">Áo dài</option>
-                                <option value="khác">Sản phẩm khác</option>
-                            </select>
-                        </div>
+                <div class="row g-3">
+                    <!-- Khối 1: Từ khóa -->
+                    <div class="col-md-2">
+                        <label class="form-label small">Trường tìm kiếm</label>
+                        <select id="filterField" class="form-select" onchange="applyFilters()">
+                            <option value="all">Tất cả thông tin</option>
+                            <option value="MaHD">Mã Hợp Đồng</option>
+                            <option value="TenKhachHang">Tên Khách Hàng</option>
+                            <option value="SoDienThoai">Số Điện Thoại</option>
+                        </select>
+                    </div>
+                    <div class="col-md-4">
+                        <label class="form-label small">Từ khóa</label>
+                        <input type="text" id="searchBox" class="form-control" placeholder="Nhập từ khóa..." onkeyup="applyFilters()">
                     </div>
                     
-                    <div class="row g-3 align-items-end">
-                        <div class="col-md-3">
-                            <label class="form-label small">Lọc theo Thời gian</label>
-                            <select id="filterDateType" class="form-select" onchange="applyFilters()">
-                                <option value="NgayLe">Ngày Lễ</option>
-                                <option value="NgayTao">Ngày Lập HĐ</option>
-                                <option value="NgayLay">Ngày Lấy Đồ</option>
-                            </select>
-                        </div>
-                        <div class="col-md-3">
-                            <label class="form-label small">Từ ngày</label>
-                            <input type="date" id="filterDateFrom" class="form-control" onchange="applyFilters()">
-                        </div>
-                        <div class="col-md-3">
-                            <label class="form-label small">Đến ngày</label>
-                            <input type="date" id="filterDateTo" class="form-control" onchange="applyFilters()">
-                        </div>
-                        <div class="col-md-3 d-flex gap-2">
-                            <button class="btn btn-outline-secondary w-100" onclick="resetFilters()">Làm mới</button>
-                            <button class="btn btn-primary w-100 fw-bold" onclick="loadAllContracts()">Tải lại Data</button>
-                        </div>
+                    <!-- Khối 2: Sản phẩm -->
+                    <div class="col-md-2">
+                        <label class="form-label small">Loại Sản phẩm</label>
+                        <select id="filterProduct" class="form-select" onchange="applyFilters()">
+                            <option value="all">Tất cả SP</option>
+                            <option value="nhân sự">Nhân sự bưng quả</option>
+                            <option value="áo dài">Áo dài</option>
+                            <option value="khác">Sản phẩm khác</option>
+                        </select>
                     </div>
-                </div>
 
-                <div id="loadingText" class="text-center py-4 text-primary fw-bold hidden fs-5">
-                    <div class="spinner-border spinner-border-sm me-2"></div> Đang tải dữ liệu...
+                    <!-- Khối 3: Ngày tháng (Gộp chung) -->
+                    <div class="col-md-2">
+                        <label class="form-label small">Lọc theo Thời gian</label>
+                        <select id="filterDateType" class="form-select" onchange="applyFilters()">
+                            <option value="NgayLe">Ngày Lễ</option>
+                            <option value="NgayTao">Ngày Lập HĐ</option>
+                            <option value="NgayLay">Ngày Lấy Đồ</option>
+                        </select>
+                    </div>
+                    <div class="col-md-2">
+                        <label class="form-label small text-primary">Chọn ngày</label>
+                        <input type="date" id="filterDate" class="form-control border-primary" onchange="applyFilters()">
+                    </div>
                 </div>
+                
+                <!-- Nút thao tác -->
+                <div class="d-flex justify-content-end gap-2 mt-3 pt-3 border-top">
+                    <button class="btn btn-light border px-4" onclick="resetFilters()">↺ Làm mới</button>
+                    <button class="btn btn-primary px-4 fw-bold" onclick="loadAllContracts()">⬇ Tải lại Data Mới Nhất</button>
+                </div>
+            </div>
+
+            <div class="card-box border-0 shadow-sm pt-2">
+                <div id="loadingText" class="text-center py-4 text-primary fw-bold hidden fs-5"><div class="spinner-border spinner-border-sm me-2"></div> Đang kết nối máy chủ...</div>
                 
                 <div class="table-responsive">
                     <table class="table table-hover align-middle border">
                         <thead class="table-dark">
                             <tr>
-                                <th>Mã HĐ</th>
-                                <th>Khách Hàng</th>
-                                <th>SĐT</th>
-                                <th>Ngày Lễ</th>
-                                <th class="text-end">Tổng Tiền</th>
-                                <th class="text-end">Còn Lại</th>
-                                <th class="text-center">Thao tác</th>
+                                <th>Mã HĐ</th><th>Khách Hàng</th><th>SĐT</th><th>Ngày Lễ</th><th class="text-end">Tổng Tiền</th><th class="text-end">Còn Lại</th><th class="text-center">Thao tác</th>
                             </tr>
                         </thead>
-                        <tbody id="listBody">
-                            <!-- Dữ liệu chèn vào đây -->
-                        </tbody>
+                        <tbody id="listBody"></tbody>
                     </table>
                 </div>
             </div>
@@ -246,75 +245,100 @@
     </div>
 </div>
 
-<!-- GIAO DIỆN IN HỢP ĐỒNG (ẨN) -->
+<!-- ============================================================== -->
+<!-- GIAO DIỆN IN HỢP ĐỒNG (SAO Y BẢN CHÍNH ALEYNA WEDDING)         -->
+<!-- ============================================================== -->
 <div id="print-area">
-    <div class="p-header-flex">
-        <div style="width: 25%; text-align: center; line-height: 1.2;">
-            <h1 style="font-size: 45px; margin: 0; font-family: serif; letter-spacing: 1px;">HM</h1>
-            <p style="font-size: 11px; margin: 0; letter-spacing: 3px;">ÁO DÀI<br>NHÂN SỰ</p>
+    <!-- Header -->
+    <div class="p-header">
+        <div class="p-title-box">
+            <div class="p-title-text">HỢP ĐỒNG DỊCH VỤ</div>
+            <div class="p-date-text">Hôm nay, ngày <span id="p-d"></span> tháng <span id="p-m"></span> năm <span id="p-y"></span></div>
         </div>
-        <div style="width: 50%;">
-            <h2 class="p-title">HỶ NHÀ MÌNH</h2>
-            <div class="p-subtitle">Xinh xinh mọi khoảnh khắc</div>
-            <h2 class="p-title" style="margin-top: 15px; font-size: 26px;">HỢP ĐỒNG DỊCH VỤ</h2>
-        </div>
-        <div style="width: 25%; font-size: 15px; text-align: right; padding-top: 25px;">
-            HỢP ĐỒNG SỐ: <span id="p-mahd">........</span><br>
-            <span style="font-size: 14px;">Ngày <span id="p-d">..</span> tháng <span id="p-m">..</span> năm <span id="p-y">....</span></span>
+        <div class="p-logo-box">
+            <div class="logo-al">al</div>
+            <div class="logo-name">ALEYNA WEDDING</div>
+            <div class="logo-sub">ÁO DÀI & NHÂN SỰ</div>
         </div>
     </div>
 
-    <div style="margin-bottom: 20px;">
-        <div class="flex-line">Khách hàng: <span class="dot-line" id="p-tenkh"></span> Địa chỉ: <span class="dot-line" id="p-diachi"></span></div>
-        <div class="flex-line">SĐT: <span class="dot-line" id="p-sdt"></span> Giờ lễ: <span class="dot-line" id="p-giole" style="min-width: 80px;"></span> Có mặt: <span class="dot-line" id="p-giamat" style="min-width: 60px;"></span></div>
-        <div class="flex-line">Ngày lễ: <span class="dot-line" id="p-ngayle" style="min-width: 80px;"></span> Ngày lấy: <span class="dot-line" id="p-ngaylay" style="min-width: 80px;"></span> Ngày trả: <span class="dot-line" id="p-ngaytra" style="min-width: 80px;"></span> Lưu ý: <span class="dot-line" id="p-luuy"></span></div>
+    <!-- Thông tin khách -->
+    <div class="p-info">
+        <div class="r-flex">
+            <div class="i-col" style="flex: 5.5;">Tên khách hàng: <span class="dot" id="p-tenkh"></span></div>
+            <div class="i-col" style="flex: 4.5; padding-left: 10px;">Địa chỉ: <span class="dot" id="p-diachi"></span></div>
+        </div>
+        <div class="r-flex">
+            <div class="i-col" style="flex: 5.5;">SĐT: <span class="dot" id="p-sdt"></span></div>
+            <div class="i-col" style="flex: 4.5; padding-left: 10px;">Thời gian lễ: <span class="dot" id="p-thoigianle"></span></div>
+        </div>
+        <div class="r-flex">
+            <div class="i-col" style="flex: 5.5;">Ngày Lễ: <span class="dot" id="p-ngayle"></span></div>
+            <div class="i-col" style="flex: 4.5; padding-left: 10px;">Giờ có mặt: <span class="dot" id="p-giocomat"></span></div>
+        </div>
+        <div class="r-flex">
+            <div class="i-col" style="flex: 5.5;">Ngày lấy: <span class="dot" id="p-ngaylay"></span></div>
+            <div class="i-col" style="flex: 4.5; padding-left: 10px;">Ghi chú: <span class="dot" id="p-ghichu1"></span></div>
+        </div>
+        <div class="r-flex">
+            <div class="i-col" style="flex: 5.5;">Ngày trả: <span class="dot" id="p-ngaytra"></span></div>
+            <div class="i-col" style="flex: 4.5; padding-left: 10px;"><span class="dot" id="p-ghichu2"></span></div>
+        </div>
     </div>
 
+    <!-- Bảng -->
     <table class="p-table">
         <thead>
             <tr>
-                <th width="8%">STT</th>
-                <th width="42%">SẢN PHẨM</th>
+                <th width="7%">STT</th>
+                <th width="43%">SẢN PHẨM</th>
                 <th width="10%">SL</th>
-                <th width="20%">ĐƠN GIÁ</th>
-                <th width="20%">THÀNH TIỀN</th>
+                <th width="18%">ĐƠN GIÁ</th>
+                <th width="22%">THÀNH TIỀN</th>
             </tr>
         </thead>
         <tbody id="p-items"></tbody>
+        <tfoot>
+            <tr>
+                <td colspan="4" class="p-gray-cell">TỔNG CỘNG</td>
+                <td class="p-val-cell" id="p-tongtien"></td>
+            </tr>
+            <tr>
+                <td colspan="4" class="p-gray-cell">CỌC TRƯỚC</td>
+                <td class="p-val-cell" id="p-tiencoc"></td>
+            </tr>
+            <tr>
+                <td colspan="4" class="p-gray-cell" style="color: #e67e22 !important;">CÒN LẠI</td>
+                <td class="p-val-cell" id="p-conlai" style="color: #e67e22 !important;"></td>
+            </tr>
+        </tfoot>
     </table>
 
-    <div class="p-bottom-flex">
-        <div class="p-notes">
-            <strong style="font-size: 15px;">NHỮNG LƯU Ý NHỎ:</strong>
-            <p>- <strong>Thuê Nhân sự:</strong> Thời gian tối đa <strong>...</strong> tính từ thời điểm nhân sự có mặt đến lúc ra về. Nếu phát sinh, tính thêm phí (trao đổi cụ thể)</p>
-            <p>- <strong>Thuê Áo dài:</strong> Thời gian <strong>giữ đồ 3 ngày</strong> (tính từ ngày lấy đến ngày trả). Nếu phát sinh thời gian thuê, khách vui lòng nhắn trước với shop để được sắp xếp hoặc tính thêm phí nếu có.</p>
-            <p><strong>Khách làm hư hỏng áo dài</strong> do đổ rượu, ủi cháy hay thay đổi hiện trạng ban đầu của áo sẽ bồi thường toàn bộ giá trị sản phẩm ( 300.000đ - 350.000đ/bộ tùy mẫu )</p>
-        </div>
-        <div class="p-totals">
-            <div class="p-total-row">
-                <div class="p-total-label">TỔNG CỘNG</div>
-                <div class="p-total-value" id="p-tongtien"></div>
-            </div>
-            <div class="p-total-row">
-                <div class="p-total-label">CỌC TRƯỚC</div>
-                <div class="p-total-value" id="p-tiencoc"></div>
-            </div>
-            <div class="p-total-row">
-                <div class="p-total-label" style="color: #c0392b !important;">CÒN LẠI</div>
-                <div class="p-total-value" id="p-conlai" style="color: #c0392b !important;"></div>
-            </div>
-        </div>
+    <!-- Lưu ý -->
+    <div class="p-notes">
+        <strong>NHỮNG LƯU Ý NHỎ NHÀ ALEYNA :</strong>
+        <ul>
+            <li><strong>Thuê nhân sự:</strong> Thời gian tối đa 3 tiếng, nếu phát sinh - tính thêm phí (trao đổi cụ thể)</li>
+            <li><strong>Thuê áo dài:</strong></li>
+        </ul>
+        <p>-- Thời gian giữ đồ 3 ngày (tính từ ngày lấy đến ngày trả - nếu phát sinh thời gian thuê, khách vui lòng báo trước với shop để sắp xếp hợp lý - tính phí cụ thể)</p>
+        <p>-- Khách làm hư hỏng áo dài do đổ rượu, ủi cháy hay thay đổi hiện trạng ban đầu của áo sẽ bồi thường toàn bộ giá trị sản phẩm.</p>
+        <ul>
+            <li><strong>Thuê mâm quả:</strong> Giao sáng sớm vào ngày lễ - chưa bao gồm phí vận chuyển (miễn phí vận chuyển trong bán kính 7km)</li>
+            <li><strong>Thuê gia tiên:</strong> Khảo sát nhà Dâu/Rể trước 15 ngày - trang trí trước 1 ngày lễ. Tháo gia tiên sau khi lễ kết thúc (Trao đổi cụ thể với khách)</li>
+        </ul>
     </div>
 
-    <div class="p-sign-flex">
-        <div class="p-sign-box">KHÁCH HÀNG<br><br><br><br>.............................................</div>
-        <div class="p-sign-box">HỶ NHÀ MÌNH<br><br><br><br>Huỳnh Thị Thanh Tuyền</div>
-    </div>
-
-    <div class="p-footer-bank">
-        <div><strong style="font-size: 16px;">THÔNG TIN<br>THANH TOÁN</strong></div>
-        <div>Ngân hàng: Techcombank<br>Huỳnh Thị Thanh Tuyền<br>Số tài khoản: 9040119999</div>
-        <div>Hotline: 0389 446 132<br>Gmail: huynhtuyen.hr@gmail.com<br>Địa chỉ: 35 D11, Tây Thạnh, Tân Phú</div>
+    <!-- Chữ ký -->
+    <div class="p-footer">
+        <div class="p-sign-box">
+            <div class="p-sign-title">KHÁCH HÀNG</div>
+            <div class="p-footer-info"><br>Địa chỉ: 35 đường D11, phường<br>Tây Thạnh, quận Tân Phú<br>Hotline: 0389 446 132</div>
+        </div>
+        <div class="p-sign-box">
+            <div class="p-sign-title">ALEYNA WEDDING</div>
+            <div class="p-footer-info"><br>STK: 9040119999<br>Ngân hàng: Techcombank<br>Chủ TK: Huỳnh Thị Thanh Tuyền</div>
+        </div>
     </div>
 </div>
 
@@ -323,32 +347,14 @@
 <script>
     document.addEventListener("DOMContentLoaded", function() {
         const urlParams = new URLSearchParams(window.location.search);
-        if (urlParams.get('api')) {
-            document.getElementById("apiUrl").value = urlParams.get('api');
-            document.getElementById("urlBox").classList.add("hidden");
-        }
-        addItemRow(); 
-        document.getElementById('ngayTao').valueAsDate = new Date();
+        if (urlParams.get('api')) { document.getElementById("apiUrl").value = urlParams.get('api'); document.getElementById("urlBox").classList.add("hidden"); }
+        addItemRow(); document.getElementById('ngayTao').valueAsDate = new Date();
     });
 
-    let appUrl = localStorage.getItem("crmApi");
-    let appPass = localStorage.getItem("crmPass");
-    let globalContracts = []; 
-
-    if (appUrl && appPass) {
-        document.getElementById("loginScreen").classList.add("hidden");
-        document.getElementById("mainApp").classList.remove("hidden");
-        loadAllContracts(); 
-    }
-
-    function login() {
-        const url = document.getElementById("apiUrl").value.trim();
-        const pass = document.getElementById("adminPass").value.trim();
-        if(!url || !pass) return alert("Thiếu thông tin kết nối!");
-        localStorage.setItem("crmApi", url); 
-        localStorage.setItem("crmPass", pass);
-        window.location.reload();
-    }
+    let appUrl = localStorage.getItem("crmApi"); let appPass = localStorage.getItem("crmPass"); let globalContracts = []; 
+    if (appUrl && appPass) { document.getElementById("loginScreen").classList.add("hidden"); document.getElementById("mainApp").classList.remove("hidden"); loadAllContracts(); }
+    
+    function login() { const u = document.getElementById("apiUrl").value.trim(); const p = document.getElementById("adminPass").value.trim(); if(!u || !p) return alert("Thiếu thông tin kết nối!"); localStorage.setItem("crmApi", u); localStorage.setItem("crmPass", p); window.location.reload(); }
     function logout() { localStorage.clear(); window.location.reload(); }
 
     async function reqGAS(payload) {
@@ -361,32 +367,21 @@
         } catch (e) { alert("Lỗi kết nối Server!"); }
     }
 
-    // Tiền & Format Date
-    function formatCurrency(num) { return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","); }
-    function parseCurrency(str) { return parseInt(str.toString().replace(/,/g, '')) || 0; }
+    function formatCurrency(num) { return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, "."); }
+    function parseCurrency(str) { return parseInt(str.toString().replace(/\./g, '').replace(/,/g, '')) || 0; }
     function formatCurrencyInput(input) { let val = parseCurrency(input.value); input.value = val === 0 ? "0" : formatCurrency(val); }
 
-    // Xử lý Ngày tháng từ Google Sheets (ISO -> DD/MM/YYYY)
     function formatDateView(isoString) {
         if (!isoString) return "";
         let d = new Date(isoString);
         if (isNaN(d.getTime())) return isoString; 
-        let day = String(d.getDate()).padStart(2, '0');
-        let month = String(d.getMonth() + 1).padStart(2, '0');
-        let year = d.getFullYear();
-        return `${day}/${month}/${year}`;
+        return `${String(d.getDate()).padStart(2, '0')}/${String(d.getMonth() + 1).padStart(2, '0')}/${d.getFullYear()}`;
     }
 
     function addItemRow() {
         const tbody = document.getElementById("itemsBody");
         const tr = document.createElement("tr");
-        tr.innerHTML = `
-            <td><input type="text" class="form-control i-ten" placeholder="Nhân sự / Áo dài..."></td>
-            <td><input type="number" class="form-control text-center i-sl" value="1" min="1" oninput="calcRow(this)"></td>
-            <td><input type="text" class="form-control text-end i-gia" placeholder="0" onkeyup="formatCurrencyInput(this); calcRow(this)"></td>
-            <td><input type="text" class="form-control text-end i-tt bg-light" readonly value="0"></td>
-            <td class="text-center"><button type="button" class="btn btn-sm btn-outline-danger border-0 fw-bold" onclick="this.closest('tr').remove(); calculateTotal()">X</button></td>
-        `;
+        tr.innerHTML = `<td><input type="text" class="form-control i-ten" placeholder="Nhân sự / Áo dài..."></td><td><input type="number" class="form-control text-center i-sl" value="1" min="1" oninput="calcRow(this)"></td><td><input type="text" class="form-control text-end i-gia" placeholder="0" onkeyup="formatCurrencyInput(this); calcRow(this)"></td><td><input type="text" class="form-control text-end i-tt bg-light" readonly value="0"></td><td class="text-center"><button type="button" class="btn btn-sm btn-outline-danger border-0 fw-bold" onclick="this.closest('tr').remove(); calculateTotal()">X</button></td>`;
         tbody.appendChild(tr);
     }
 
@@ -399,23 +394,19 @@
     }
 
     function calculateTotal() {
-        let tong = 0;
-        document.querySelectorAll('.i-tt').forEach(inp => { tong += parseCurrency(inp.value); });
+        let tong = 0; document.querySelectorAll('.i-tt').forEach(inp => { tong += parseCurrency(inp.value); });
         document.getElementById('tongTien').value = formatCurrency(tong);
         let coc = parseCurrency(document.getElementById('tienCoc').value);
         document.getElementById('conLai').value = formatCurrency(tong - coc);
     }
 
     async function submitContract() {
-        const btn = document.getElementById("btnLuu");
-        btn.innerHTML = "ĐANG LƯU..."; btn.disabled = true;
-
+        const btn = document.getElementById("btnLuu"); btn.innerHTML = "ĐANG LƯU..."; btn.disabled = true;
         let items = [];
         document.querySelectorAll('#itemsBody tr').forEach(tr => {
             let ten = tr.querySelector('.i-ten').value.trim();
             if(ten) items.push({ ten: ten, sl: tr.querySelector('.i-sl').value, gia: parseCurrency(tr.querySelector('.i-gia').value), tt: parseCurrency(tr.querySelector('.i-tt').value) });
         });
-
         const data = {
             maHD: document.getElementById("maHD").value, ngayTao: document.getElementById("ngayTao").value,
             tenKH: document.getElementById("tenKH").value, sdt: document.getElementById("sdt").value,
@@ -425,98 +416,80 @@
             chiTiet: JSON.stringify(items), tongTien: parseCurrency(document.getElementById("tongTien").value), 
             tienCoc: parseCurrency(document.getElementById("tienCoc").value), conLai: parseCurrency(document.getElementById("conLai").value)
         };
-
-        if(!data.maHD || !data.tenKH) { alert("Mã HĐ và Tên KH là bắt buộc!"); btn.innerHTML = "💾 LƯU HỢP ĐỒNG"; btn.disabled = false; return; }
-
+        if(!data.maHD || !data.tenKH) { alert("Mã HĐ và Tên KH là bắt buộc!"); btn.innerHTML = "💾 LƯU HỢP ĐỒNG NÀY VÀO HỆ THỐNG"; btn.disabled = false; return; }
         const res = await reqGAS({ action: "add", contract: data });
-        if (res?.success) {
-            document.getElementById("addResult").innerHTML = `<span class="text-success">✅ ${res.message}</span>`;
-            document.getElementById("contractForm").reset(); document.getElementById("itemsBody").innerHTML = ""; addItemRow(); calculateTotal();
-            setTimeout(()=> document.getElementById("addResult").innerHTML="", 4000); loadAllContracts(); 
-        }
+        if (res?.success) { document.getElementById("addResult").innerHTML = `<span class="text-success">✅ ${res.message}</span>`; document.getElementById("contractForm").reset(); document.getElementById("itemsBody").innerHTML = ""; addItemRow(); calculateTotal(); setTimeout(()=> document.getElementById("addResult").innerHTML="", 4000); loadAllContracts(); }
         btn.innerHTML = "💾 LƯU HỢP ĐỒNG NÀY VÀO HỆ THỐNG"; btn.disabled = false;
     }
 
     async function loadAllContracts() {
-        document.getElementById("loadingText").classList.remove("hidden");
-        document.getElementById("listBody").innerHTML = "";
+        document.getElementById("loadingText").classList.remove("hidden"); document.getElementById("listBody").innerHTML = "";
         const res = await reqGAS({ action: "getAll" });
-        if (res?.success) { globalContracts = res.data; renderList(globalContracts); }
+        if (res?.success) { globalContracts = res.data; renderList(globalContracts); updateCount(globalContracts.length); }
         document.getElementById("loadingText").classList.add("hidden");
     }
 
-    // LỌC ĐA ĐIỀU KIỆN
+    // HÀM LỌC CHUYÊN NGHIỆP (ĐÃ CHUẨN HÓA MÚI GIỜ)
     function applyFilters() {
         const textStr = document.getElementById("searchBox").value.toLowerCase().trim();
-        const field = document.getElementById("filterField").value;
+        const field = document.getElementById("filterField").value; 
         const product = document.getElementById("filterProduct").value;
-        const dateType = document.getElementById("filterDateType").value;
-        const dateFrom = document.getElementById("filterDateFrom").value;
-        const dateTo = document.getElementById("filterDateTo").value;
+        const dateType = document.getElementById("filterDateType").value; 
+        const filterDate = document.getElementById("filterDate").value;
         
         let filtered = globalContracts.filter(r => {
-            // Lọc Text
+            // 1. Text
             let matchText = true;
-            if (textStr !== "") {
-                if (field === "all") {
-                    matchText = (r.MaHD||"").toLowerCase().includes(textStr) || (r.TenKhachHang||"").toLowerCase().includes(textStr) || 
-                                (r.SoDienThoai||"").includes(textStr) || (r.ChiTietDichVu||"").toLowerCase().includes(textStr);
-                } else {
-                    matchText = (r[field]||"").toString().toLowerCase().includes(textStr);
-                }
+            if (textStr !== "") { 
+                if (field === "all") { matchText = (r.MaHD||"").toLowerCase().includes(textStr) || (r.TenKhachHang||"").toLowerCase().includes(textStr) || (r.SoDienThoai||"").includes(textStr) || (r.ChiTietDichVu||"").toLowerCase().includes(textStr); } 
+                else { matchText = (r[field]||"").toString().toLowerCase().includes(textStr); } 
             }
-            // Lọc Sản Phẩm
+            
+            // 2. Sản phẩm
             let matchProduct = true;
-            if (product !== "all") {
-                if(product === "khác") {
-                    matchProduct = !(r.ChiTietDichVu||"").toLowerCase().includes("nhân sự") && !(r.ChiTietDichVu||"").toLowerCase().includes("áo dài");
-                } else {
-                    matchProduct = (r.ChiTietDichVu||"").toLowerCase().includes(product);
-                }
+            if (product !== "all") { 
+                if(product === "khác") { matchProduct = !(r.ChiTietDichVu||"").toLowerCase().includes("nhân sự") && !(r.ChiTietDichVu||"").toLowerCase().includes("áo dài"); } 
+                else { matchProduct = (r.ChiTietDichVu||"").toLowerCase().includes(product); } 
             }
-            // Lọc Ngày tháng
+            
+            // 3. Thời gian đích danh (Exact Match)
             let matchDate = true;
-            if (dateFrom || dateTo) {
-                if (!r[dateType]) matchDate = false;
-                else {
-                    let rowDate = new Date(r[dateType]); rowDate.setHours(0,0,0,0);
-                    if (dateFrom) { let dF = new Date(dateFrom); dF.setHours(0,0,0,0); if (rowDate < dF) matchDate = false; }
-                    if (dateTo) { let dT = new Date(dateTo); dT.setHours(0,0,0,0); if (rowDate > dT) matchDate = false; }
-                }
+            if (filterDate) { 
+                if (!r[dateType]) {
+                    matchDate = false; 
+                } else { 
+                    // Chuyển r[dateType] thành YYYY-MM-DD để so sánh thẳng với filterDate (vd: "2026-08-11")
+                    let rDate = new Date(r[dateType]);
+                    if(!isNaN(rDate.getTime())) {
+                        let rDateStr = `${rDate.getFullYear()}-${String(rDate.getMonth()+1).padStart(2,'0')}-${String(rDate.getDate()).padStart(2,'0')}`;
+                        if (rDateStr !== filterDate) matchDate = false;
+                    } else {
+                        // Trường hợp nhập chữ thay vì chọn lịch
+                        matchDate = false;
+                    }
+                } 
             }
             return matchText && matchProduct && matchDate;
         });
         renderList(filtered);
+        updateCount(filtered.length);
     }
-
-    function resetFilters() {
-        document.getElementById("filterField").value = "all";
-        document.getElementById("searchBox").value = "";
-        document.getElementById("filterProduct").value = "all";
-        document.getElementById("filterDateFrom").value = "";
-        document.getElementById("filterDateTo").value = "";
-        applyFilters();
+    
+    function resetFilters() { document.getElementById("filterField").value = "all"; document.getElementById("searchBox").value = ""; document.getElementById("filterProduct").value = "all"; document.getElementById("filterDate").value = ""; applyFilters(); }
+    
+    function updateCount(num) {
+        const badge = document.getElementById("countResult");
+        badge.innerText = `Tìm thấy: ${num} hợp đồng`;
+        badge.classList.remove("hidden");
     }
 
     function renderList(dataArray) {
         const tbody = document.getElementById("listBody");
         if(dataArray.length === 0) { tbody.innerHTML = "<tr><td colspan='7' class='text-center text-muted p-4 fs-5'>Không tìm thấy hợp đồng nào phù hợp.</td></tr>"; return; }
-        
         tbody.innerHTML = "";
         dataArray.forEach(r => {
             const tr = document.createElement("tr");
-            tr.innerHTML = `
-                <td><strong class="text-primary">${r.MaHD||""}</strong></td>
-                <td class="fw-bold">${r.TenKhachHang||""}</td>
-                <td>${r.SoDienThoai||""}</td>
-                <td>${formatDateView(r.NgayLe)}</td> <!-- Đã fix lỗi ngày tháng -->
-                <td class="text-end fw-bold">${formatCurrency(r.TongTien||0)}đ</td>
-                <td class="text-end text-danger fw-bold">${formatCurrency(r.ConLai||0)}đ</td>
-                <td class="text-center">
-                    <button class="btn btn-sm btn-dark text-white print-btn me-1">🖨️ In HĐ</button>
-                    <button class="btn btn-sm btn-outline-danger delete-btn">🗑️ Xóa</button>
-                </td>
-            `;
+            tr.innerHTML = `<td><strong class="text-primary">${r.MaHD||""}</strong></td><td class="fw-bold">${r.TenKhachHang||""}</td><td>${r.SoDienThoai||""}</td><td>${formatDateView(r.NgayLe)}</td><td class="text-end fw-bold">${formatCurrency(r.TongTien||0)}đ</td><td class="text-end text-danger fw-bold">${formatCurrency(r.ConLai||0)}đ</td><td class="text-center"><button class="btn btn-sm btn-dark text-white print-btn me-1">🖨️ In HĐ</button><button class="btn btn-sm btn-outline-danger delete-btn">🗑️ Xóa</button></td>`;
             tr.querySelector('.print-btn').onclick = () => triggerPrint(r);
             tr.querySelector('.delete-btn').onclick = () => confirmDelete(r.MaHD, r.TenKhachHang);
             tbody.appendChild(tr);
@@ -531,8 +504,8 @@
         document.getElementById("loadingText").classList.add("hidden");
     }
 
+    // ÁNH XẠ DỮ LIỆU SANG BẢN IN PDF ALEYNA WEDDING
     function triggerPrint(r) {
-        document.getElementById("p-mahd").innerText = r.MaHD || ".........";
         let dTao = new Date(r.NgayTao);
         if(!isNaN(dTao.getTime())) {
             document.getElementById("p-d").innerText = String(dTao.getDate()).padStart(2, '0');
@@ -543,29 +516,35 @@
         document.getElementById("p-tenkh").innerText = r.TenKhachHang || "";
         document.getElementById("p-diachi").innerText = r.DiaChi || "";
         document.getElementById("p-sdt").innerText = r.SoDienThoai || "";
-        document.getElementById("p-giole").innerText = r.GioCoMat || "";
-        document.getElementById("p-giamat").innerText = r.GioCoMat || "";
+        document.getElementById("p-thoigianle").innerText = ""; 
+        document.getElementById("p-giocomat").innerText = r.GioCoMat || "";
         
-        // Fix lỗi ngày tháng trên bản In
-        document.getElementById("p-ngayle").innerText = formatDateView(r.NgayLe);
-        document.getElementById("p-ngaylay").innerText = formatDateView(r.NgayLay);
-        document.getElementById("p-ngaytra").innerText = formatDateView(r.NgayTra);
-        document.getElementById("p-luuy").innerText = (r.GhiChu && r.GhiChu !== "undefined") ? r.GhiChu : "";
+        document.getElementById("p-ngayle").innerText = r.NgayLe || "";
+        document.getElementById("p-ngaylay").innerText = r.NgayLay || "";
+        document.getElementById("p-ngaytra").innerText = r.NgayTra || "";
+
+        let gc = (r.GhiChu && r.GhiChu !== "undefined") ? r.GhiChu : "";
+        if (gc.length > 50) { document.getElementById("p-ghichu1").innerText = gc.substring(0, 50); document.getElementById("p-ghichu2").innerText = gc.substring(50); } 
+        else { document.getElementById("p-ghichu1").innerText = gc; document.getElementById("p-ghichu2").innerText = ""; }
 
         const pItems = document.getElementById("p-items"); pItems.innerHTML = "";
         let itemsArr = [];
         try { itemsArr = JSON.parse(r.ChiTietDichVu); } catch(e) { itemsArr = [{ ten: r.ChiTietDichVu, sl: "", gia: "", tt: "" }]; }
+        
+        let rowCount = 0;
         if(Array.isArray(itemsArr)) {
             itemsArr.forEach((item, idx) => {
-                pItems.innerHTML += `<tr><td>${idx + 1}</td><td>${item.ten || ""}</td><td>${item.sl || ""}</td><td>${item.gia ? formatCurrency(item.gia) + "đ" : ""}</td><td style="font-weight:bold;">${item.tt ? formatCurrency(item.tt) + "đ" : ""}</td></tr>`;
+                pItems.innerHTML += `<tr><td class="center">${idx + 1}</td><td>${item.ten || ""}</td><td class="center">${item.sl || ""}</td><td class="center">${item.gia ? formatCurrency(item.gia) + "đ" : ""}</td><td class="center">${item.tt ? formatCurrency(item.tt) + "đ" : ""}</td></tr>`;
+                rowCount++;
             });
         }
-        for(let i=itemsArr.length; i<5; i++){ pItems.innerHTML += `<tr><td>&nbsp;</td><td></td><td></td><td></td><td></td></tr>`; }
+        for(let i = rowCount; i < 8; i++){ pItems.innerHTML += `<tr><td>&nbsp;</td><td></td><td></td><td></td><td></td></tr>`; }
 
         document.getElementById("p-tongtien").innerText = formatCurrency(r.TongTien||0) + "đ";
         document.getElementById("p-tiencoc").innerText = formatCurrency(r.TienCoc||0) + "đ";
         document.getElementById("p-conlai").innerText = formatCurrency(r.ConLai||0) + "đ";
-        setTimeout(() => { window.print(); }, 200);
+
+        setTimeout(() => { window.print(); }, 300);
     }
 </script>
 </body>
