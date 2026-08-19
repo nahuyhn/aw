@@ -7,9 +7,7 @@
     <title>Hệ Thống Quản Lý Hợp Đồng - AleynaWedding</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
-        /* ========================================= */
-        /* CSS GIAO DIỆN WEB (QUẢN TRỊ)              */
-        /* ========================================= */
+        /* CSS GIAO DIỆN WEB */
         :root { --primary: #2c3e50; --secondary: #34495e; --accent: #3498db; }
         body { background-color: #f4f6f9; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
         .hidden { display: none !important; }
@@ -17,54 +15,34 @@
         .card-box { background: white; border-radius: 12px; box-shadow: 0 5px 20px rgba(0,0,0,0.05); padding: 30px; margin-bottom: 20px; border: 1px solid #e1e4e8; }
         .form-label { font-weight: 600; color: var(--secondary); font-size: 0.9rem; margin-bottom: 4px; }
         .form-control, .form-select { border-radius: 8px; border: 1px solid #ced4da; padding: 10px 15px; }
-        .form-control:focus { border-color: var(--accent); box-shadow: 0 0 0 0.2rem rgba(52, 152, 219, 0.25); }
+        .form-control:focus, .form-select:focus { border-color: var(--accent); box-shadow: 0 0 0 0.2rem rgba(52, 152, 219, 0.25); }
         .table-items th { background-color: #f8f9fa; font-size: 0.85rem; text-transform: uppercase; color: #6c757d; }
         .btn-add-item { border: 2px dashed #ced4da; background: transparent; color: #6c757d; border-radius: 8px; padding: 10px; width: 100%; transition: 0.3s; font-weight: bold; }
         .btn-add-item:hover { border-color: var(--accent); color: var(--accent); background: #f0f8ff; }
         .total-box { background: #f8f9fa; border-radius: 8px; padding: 15px; border: 1px solid #e9ecef; }
         .money-input { font-weight: bold; color: #e74c3c; font-size: 1.1rem; }
+        .filter-row { background-color: #f8f9fa; padding: 15px; border-radius: 8px; border: 1px solid #e1e4e8; margin-bottom: 20px; }
 
-        /* ========================================= */
-        /* CSS ẨN KHU VỰC IN KHI XEM TRÊN MÀN HÌNH   */
-        /* ========================================= */
-        @media screen {
-            #print-area { display: none !important; }
-        }
+        @media screen { #print-area { display: none !important; } }
 
-        /* ========================================= */
-        /* CSS GIAO DIỆN KHI BẤM IN / LƯU PDF        */
-        /* ========================================= */
+        /* CSS GIAO DIỆN IN PDF */
         @media print {
-            /* Ẩn toàn bộ web quản trị */
             #loginScreen, #mainApp { display: none !important; }
-            
-            /* Hiển thị form in */
-            #print-area { 
-                display: block !important; 
-                width: 100%; 
-                font-family: 'Times New Roman', serif; 
-                color: #000; 
-            }
-            
+            #print-area { display: block !important; width: 100%; font-family: 'Times New Roman', serif; color: #000; }
             @page { size: A4 portrait; margin: 15mm 15mm; }
             
-            /* Căn chỉnh Typography Hợp Đồng */
             .p-title { text-align: center; font-weight: bold; font-size: 24px; margin-bottom: 5px; }
             .p-subtitle { text-align: center; font-size: 14px; margin-bottom: 20px; text-transform: uppercase; letter-spacing: 1px; }
             .p-header-flex { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 20px; }
-            
-            /* Dòng kẻ chấm (Dotted lines) */
             .dot-line { border-bottom: 1px dotted #333; display: inline-block; min-width: 100px; padding-left: 5px; }
             .flex-line { display: flex; align-items: baseline; margin-bottom: 10px; font-size: 16px; }
             .flex-line .dot-line { flex-grow: 1; }
             
-            /* Bảng Hợp Đồng (Table in) */
             .p-table { width: 100%; border-collapse: collapse; margin: 20px 0; }
             .p-table th, .p-table td { border: 1px solid #000; padding: 10px; text-align: center; font-size: 16px; }
             .p-table th { font-weight: bold; background-color: #f2f2f2 !important; -webkit-print-color-adjust: exact; }
             .p-table td:nth-child(2) { text-align: left; }
             
-            /* Lưu ý & Tổng Tiền */
             .p-bottom-flex { display: flex; justify-content: space-between; align-items: stretch; margin-top: 15px; gap: 20px; }
             .p-notes { width: 62%; font-size: 14px; text-align: justify; line-height: 1.4; }
             .p-notes p { margin-bottom: 8px; }
@@ -75,10 +53,8 @@
             .p-total-label { width: 50%; padding: 10px; border-right: 1px solid #000; font-weight: bold; }
             .p-total-value { width: 50%; padding: 10px; text-align: right; font-weight: bold; }
             
-            /* Chữ ký & Thông tin CK */
             .p-sign-flex { display: flex; justify-content: space-around; margin-top: 30px; margin-bottom: 100px; }
             .p-sign-box { text-align: center; font-weight: bold; font-size: 16px; }
-            
             .p-footer-bank { border-top: 2px solid #000; padding-top: 15px; font-size: 14px; display: flex; justify-content: space-between; line-height: 1.5; }
         }
     </style>
@@ -134,10 +110,10 @@
                     
                     <h5 class="border-bottom pb-2 mt-3 mb-3 fw-bold" style="color: var(--accent);">II. Thời gian dịch vụ</h5>
                     <div class="row">
-                        <div class="col-md-3 mb-3"><label class="form-label">Ngày Lễ</label><input type="text" id="ngayLe" class="form-control" placeholder="VD: 09/08"></div>
+                        <div class="col-md-3 mb-3"><label class="form-label">Ngày Lễ</label><input type="date" id="ngayLe" class="form-control"></div>
                         <div class="col-md-3 mb-3"><label class="form-label">Giờ Lễ / Giờ Có Mặt</label><input type="text" id="gioCoMat" class="form-control" placeholder="VD: 9h sáng"></div>
-                        <div class="col-md-3 mb-3"><label class="form-label">Ngày Lấy Đồ</label><input type="text" id="ngayLay" class="form-control" placeholder="VD: 08/08"></div>
-                        <div class="col-md-3 mb-3"><label class="form-label">Ngày Trả Đồ</label><input type="text" id="ngayTra" class="form-control" placeholder="VD: 11/08"></div>
+                        <div class="col-md-3 mb-3"><label class="form-label">Ngày Lấy Đồ</label><input type="date" id="ngayLay" class="form-control"></div>
+                        <div class="col-md-3 mb-3"><label class="form-label">Ngày Trả Đồ</label><input type="date" id="ngayTra" class="form-control"></div>
                     </div>
 
                     <h5 class="border-bottom pb-2 mt-3 mb-3 fw-bold" style="color: var(--accent);">III. Chi tiết Sản phẩm / Dịch vụ</h5>
@@ -152,9 +128,7 @@
                                     <th width="5%"></th>
                                 </tr>
                             </thead>
-                            <tbody id="itemsBody">
-                                <!-- Dòng sản phẩm JS -->
-                            </tbody>
+                            <tbody id="itemsBody"></tbody>
                         </table>
                         <button type="button" class="btn-add-item" onclick="addItemRow()">+ Thêm dòng sản phẩm (Thuê áo, Nhân sự...)</button>
                     </div>
@@ -191,17 +165,62 @@
         <!-- TAB 2: HỒ SƠ & TRA CỨU -->
         <div class="tab-pane fade" id="tab-list">
             <div class="card-box border-0 shadow-sm">
-                <div class="row mb-4 align-items-center">
-                    <div class="col-md-9">
-                        <input type="text" id="searchBox" class="form-control form-control-lg border-primary" placeholder="🔍 Tìm theo Tên KH, Mã HĐ, SĐT, hoặc Tên Sản Phẩm..." onkeyup="filterContracts()">
+                
+                <!-- BỘ LỌC ĐA ĐIỀU KIỆN (MỚI) -->
+                <div class="filter-row">
+                    <h6 class="fw-bold mb-3" style="color: var(--primary);">BỘ LỌC TÌM KIẾM CHI TIẾT</h6>
+                    
+                    <div class="row g-3 mb-3">
+                        <div class="col-md-3">
+                            <label class="form-label small">Trường tìm kiếm</label>
+                            <select id="filterField" class="form-select" onchange="applyFilters()">
+                                <option value="all">Tất cả thông tin</option>
+                                <option value="MaHD">Chỉ tìm Mã HĐ</option>
+                                <option value="TenKhachHang">Chỉ tìm Tên KH</option>
+                                <option value="SoDienThoai">Chỉ tìm SĐT</option>
+                            </select>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label small">Từ khóa</label>
+                            <input type="text" id="searchBox" class="form-control" placeholder="Nhập từ khóa..." onkeyup="applyFilters()">
+                        </div>
+                        <div class="col-md-3">
+                            <label class="form-label small">Loại Sản phẩm</label>
+                            <select id="filterProduct" class="form-select" onchange="applyFilters()">
+                                <option value="all">Mọi sản phẩm</option>
+                                <option value="nhân sự">Nhân sự (Bưng quả...)</option>
+                                <option value="áo dài">Áo dài</option>
+                                <option value="khác">Sản phẩm khác</option>
+                            </select>
+                        </div>
                     </div>
-                    <div class="col-md-3">
-                        <button class="btn btn-primary btn-lg w-100 fw-bold shadow-sm" onclick="loadAllContracts()">Tải lại dữ liệu</button>
+                    
+                    <div class="row g-3 align-items-end">
+                        <div class="col-md-3">
+                            <label class="form-label small">Lọc theo Thời gian</label>
+                            <select id="filterDateType" class="form-select" onchange="applyFilters()">
+                                <option value="NgayLe">Ngày Lễ</option>
+                                <option value="NgayTao">Ngày Lập HĐ</option>
+                                <option value="NgayLay">Ngày Lấy Đồ</option>
+                            </select>
+                        </div>
+                        <div class="col-md-3">
+                            <label class="form-label small">Từ ngày</label>
+                            <input type="date" id="filterDateFrom" class="form-control" onchange="applyFilters()">
+                        </div>
+                        <div class="col-md-3">
+                            <label class="form-label small">Đến ngày</label>
+                            <input type="date" id="filterDateTo" class="form-control" onchange="applyFilters()">
+                        </div>
+                        <div class="col-md-3 d-flex gap-2">
+                            <button class="btn btn-outline-secondary w-100" onclick="resetFilters()">Làm mới</button>
+                            <button class="btn btn-primary w-100 fw-bold" onclick="loadAllContracts()">Tải lại Data</button>
+                        </div>
                     </div>
                 </div>
-                
+
                 <div id="loadingText" class="text-center py-4 text-primary fw-bold hidden fs-5">
-                    <div class="spinner-border spinner-border-sm me-2"></div> Đang quét dữ liệu từ máy chủ...
+                    <div class="spinner-border spinner-border-sm me-2"></div> Đang tải dữ liệu...
                 </div>
                 
                 <div class="table-responsive">
@@ -218,7 +237,7 @@
                             </tr>
                         </thead>
                         <tbody id="listBody">
-                            <!-- Dữ liệu hợp đồng chèn vào đây -->
+                            <!-- Dữ liệu chèn vào đây -->
                         </tbody>
                     </table>
                 </div>
@@ -227,9 +246,7 @@
     </div>
 </div>
 
-<!-- ============================================================== -->
-<!-- KHU VỰC ẨN: GIAO DIỆN IN HỢP ĐỒNG (Chỉ hiện khi bấm In)        -->
-<!-- ============================================================== -->
+<!-- GIAO DIỆN IN HỢP ĐỒNG (ẨN) -->
 <div id="print-area">
     <div class="p-header-flex">
         <div style="width: 25%; text-align: center; line-height: 1.2;">
@@ -263,9 +280,7 @@
                 <th width="20%">THÀNH TIỀN</th>
             </tr>
         </thead>
-        <tbody id="p-items">
-            <!-- Dòng sản phẩm đẩy vào đây -->
-        </tbody>
+        <tbody id="p-items"></tbody>
     </table>
 
     <div class="p-bottom-flex">
@@ -303,23 +318,19 @@
     </div>
 </div>
 
-<!-- ============================================================== -->
-<!-- JAVASCRIPT XỬ LÝ LOGIC                                         -->
-<!-- ============================================================== -->
+<!-- SCRIPTS -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 <script>
-    // 1. Tự động lấy URL từ file .bat (Nếu có)
     document.addEventListener("DOMContentLoaded", function() {
         const urlParams = new URLSearchParams(window.location.search);
         if (urlParams.get('api')) {
             document.getElementById("apiUrl").value = urlParams.get('api');
             document.getElementById("urlBox").classList.add("hidden");
         }
-        addItemRow(); // Thêm sẵn 1 dòng sp
-        document.getElementById('ngayTao').valueAsDate = new Date(); // Mặc định ngày hôm nay
+        addItemRow(); 
+        document.getElementById('ngayTao').valueAsDate = new Date();
     });
 
-    // 2. Quản lý Đăng Nhập
     let appUrl = localStorage.getItem("crmApi");
     let appPass = localStorage.getItem("crmPass");
     let globalContracts = []; 
@@ -340,30 +351,37 @@
     }
     function logout() { localStorage.clear(); window.location.reload(); }
 
-    // 3. Gọi Google Script
     async function reqGAS(payload) {
         payload.password = localStorage.getItem("crmPass"); 
         try {
             const res = await fetch(localStorage.getItem("crmApi"), { method: "POST", body: JSON.stringify(payload) });
             const result = await res.json();
-            if(!result.success && result.message === "Sai mật khẩu bảo mật!") { alert("Mật khẩu bảo mật sai! Đăng xuất..."); logout(); }
+            if(!result.success && result.message === "Sai mật khẩu bảo mật!") { alert("Mật khẩu bảo mật sai!"); logout(); }
             return result;
-        } catch (e) { alert("Lỗi kết nối. Vui lòng kiểm tra lại Link Web App!"); }
+        } catch (e) { alert("Lỗi kết nối Server!"); }
     }
 
-    // 4. Xử lý Tiền & Toán học
+    // Tiền & Format Date
     function formatCurrency(num) { return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","); }
     function parseCurrency(str) { return parseInt(str.toString().replace(/,/g, '')) || 0; }
-    function formatCurrencyInput(input) {
-        let val = parseCurrency(input.value);
-        input.value = val === 0 ? "0" : formatCurrency(val);
+    function formatCurrencyInput(input) { let val = parseCurrency(input.value); input.value = val === 0 ? "0" : formatCurrency(val); }
+
+    // Xử lý Ngày tháng từ Google Sheets (ISO -> DD/MM/YYYY)
+    function formatDateView(isoString) {
+        if (!isoString) return "";
+        let d = new Date(isoString);
+        if (isNaN(d.getTime())) return isoString; 
+        let day = String(d.getDate()).padStart(2, '0');
+        let month = String(d.getMonth() + 1).padStart(2, '0');
+        let year = d.getFullYear();
+        return `${day}/${month}/${year}`;
     }
 
     function addItemRow() {
         const tbody = document.getElementById("itemsBody");
         const tr = document.createElement("tr");
         tr.innerHTML = `
-            <td><input type="text" class="form-control i-ten" placeholder="Ví dụ: Nhân sự Nam (Áo hồng)"></td>
+            <td><input type="text" class="form-control i-ten" placeholder="Nhân sự / Áo dài..."></td>
             <td><input type="number" class="form-control text-center i-sl" value="1" min="1" oninput="calcRow(this)"></td>
             <td><input type="text" class="form-control text-end i-gia" placeholder="0" onkeyup="formatCurrencyInput(this); calcRow(this)"></td>
             <td><input type="text" class="form-control text-end i-tt bg-light" readonly value="0"></td>
@@ -388,22 +406,14 @@
         document.getElementById('conLai').value = formatCurrency(tong - coc);
     }
 
-    // 5. Lưu Hợp Đồng
     async function submitContract() {
         const btn = document.getElementById("btnLuu");
-        btn.innerHTML = "<div class='spinner-border spinner-border-sm'></div> ĐANG XỬ LÝ LƯU DỮ LIỆU..."; btn.disabled = true;
+        btn.innerHTML = "ĐANG LƯU..."; btn.disabled = true;
 
         let items = [];
         document.querySelectorAll('#itemsBody tr').forEach(tr => {
             let ten = tr.querySelector('.i-ten').value.trim();
-            if(ten) {
-                items.push({
-                    ten: ten,
-                    sl: tr.querySelector('.i-sl').value,
-                    gia: parseCurrency(tr.querySelector('.i-gia').value),
-                    tt: parseCurrency(tr.querySelector('.i-tt').value)
-                });
-            }
+            if(ten) items.push({ ten: ten, sl: tr.querySelector('.i-sl').value, gia: parseCurrency(tr.querySelector('.i-gia').value), tt: parseCurrency(tr.querySelector('.i-tt').value) });
         });
 
         const data = {
@@ -412,60 +422,85 @@
             diaChi: document.getElementById("diaChi").value, ngayLe: document.getElementById("ngayLe").value,
             gioCoMat: document.getElementById("gioCoMat").value, ngayLay: document.getElementById("ngayLay").value,
             ngayTra: document.getElementById("ngayTra").value, ghiChu: document.getElementById("ghiChu").value,
-            chiTiet: JSON.stringify(items), 
-            tongTien: parseCurrency(document.getElementById("tongTien").value), 
-            tienCoc: parseCurrency(document.getElementById("tienCoc").value),
-            conLai: parseCurrency(document.getElementById("conLai").value)
+            chiTiet: JSON.stringify(items), tongTien: parseCurrency(document.getElementById("tongTien").value), 
+            tienCoc: parseCurrency(document.getElementById("tienCoc").value), conLai: parseCurrency(document.getElementById("conLai").value)
         };
 
-        if(!data.maHD || !data.tenKH) {
-            alert("Mã HĐ và Tên Khách Hàng là bắt buộc!");
-            btn.innerHTML = "💾 LƯU HỢP ĐỒNG NÀY VÀO HỆ THỐNG"; btn.disabled = false; return;
-        }
+        if(!data.maHD || !data.tenKH) { alert("Mã HĐ và Tên KH là bắt buộc!"); btn.innerHTML = "💾 LƯU HỢP ĐỒNG"; btn.disabled = false; return; }
 
         const res = await reqGAS({ action: "add", contract: data });
         if (res?.success) {
             document.getElementById("addResult").innerHTML = `<span class="text-success">✅ ${res.message}</span>`;
-            document.getElementById("contractForm").reset();
-            document.getElementById("itemsBody").innerHTML = ""; addItemRow();
-            calculateTotal();
-            setTimeout(()=> document.getElementById("addResult").innerHTML="", 4000);
-            loadAllContracts(); 
-        } else {
-            document.getElementById("addResult").innerHTML = `<span class="text-danger">❌ ${res?.message}</span>`;
+            document.getElementById("contractForm").reset(); document.getElementById("itemsBody").innerHTML = ""; addItemRow(); calculateTotal();
+            setTimeout(()=> document.getElementById("addResult").innerHTML="", 4000); loadAllContracts(); 
         }
         btn.innerHTML = "💾 LƯU HỢP ĐỒNG NÀY VÀO HỆ THỐNG"; btn.disabled = false;
     }
 
-    // 6. Tra cứu & Vẽ Danh sách
     async function loadAllContracts() {
         document.getElementById("loadingText").classList.remove("hidden");
         document.getElementById("listBody").innerHTML = "";
-        
         const res = await reqGAS({ action: "getAll" });
-        if (res?.success) {
-            globalContracts = res.data;
-            renderList(globalContracts);
-        }
+        if (res?.success) { globalContracts = res.data; renderList(globalContracts); }
         document.getElementById("loadingText").classList.add("hidden");
     }
 
-    function filterContracts() {
-        const txt = document.getElementById("searchBox").value.toLowerCase();
-        const filtered = globalContracts.filter(r => 
-            (r.MaHD||"").toLowerCase().includes(txt) || 
-            (r.TenKhachHang||"").toLowerCase().includes(txt) || 
-            (r.SoDienThoai||"").includes(txt) ||
-            (r.ChiTietDichVu||"").toLowerCase().includes(txt) // Lọc luôn trong Sản Phẩm
-        );
+    // LỌC ĐA ĐIỀU KIỆN
+    function applyFilters() {
+        const textStr = document.getElementById("searchBox").value.toLowerCase().trim();
+        const field = document.getElementById("filterField").value;
+        const product = document.getElementById("filterProduct").value;
+        const dateType = document.getElementById("filterDateType").value;
+        const dateFrom = document.getElementById("filterDateFrom").value;
+        const dateTo = document.getElementById("filterDateTo").value;
+        
+        let filtered = globalContracts.filter(r => {
+            // Lọc Text
+            let matchText = true;
+            if (textStr !== "") {
+                if (field === "all") {
+                    matchText = (r.MaHD||"").toLowerCase().includes(textStr) || (r.TenKhachHang||"").toLowerCase().includes(textStr) || 
+                                (r.SoDienThoai||"").includes(textStr) || (r.ChiTietDichVu||"").toLowerCase().includes(textStr);
+                } else {
+                    matchText = (r[field]||"").toString().toLowerCase().includes(textStr);
+                }
+            }
+            // Lọc Sản Phẩm
+            let matchProduct = true;
+            if (product !== "all") {
+                if(product === "khác") {
+                    matchProduct = !(r.ChiTietDichVu||"").toLowerCase().includes("nhân sự") && !(r.ChiTietDichVu||"").toLowerCase().includes("áo dài");
+                } else {
+                    matchProduct = (r.ChiTietDichVu||"").toLowerCase().includes(product);
+                }
+            }
+            // Lọc Ngày tháng
+            let matchDate = true;
+            if (dateFrom || dateTo) {
+                if (!r[dateType]) matchDate = false;
+                else {
+                    let rowDate = new Date(r[dateType]); rowDate.setHours(0,0,0,0);
+                    if (dateFrom) { let dF = new Date(dateFrom); dF.setHours(0,0,0,0); if (rowDate < dF) matchDate = false; }
+                    if (dateTo) { let dT = new Date(dateTo); dT.setHours(0,0,0,0); if (rowDate > dT) matchDate = false; }
+                }
+            }
+            return matchText && matchProduct && matchDate;
+        });
         renderList(filtered);
+    }
+
+    function resetFilters() {
+        document.getElementById("filterField").value = "all";
+        document.getElementById("searchBox").value = "";
+        document.getElementById("filterProduct").value = "all";
+        document.getElementById("filterDateFrom").value = "";
+        document.getElementById("filterDateTo").value = "";
+        applyFilters();
     }
 
     function renderList(dataArray) {
         const tbody = document.getElementById("listBody");
-        if(dataArray.length === 0) {
-            tbody.innerHTML = "<tr><td colspan='7' class='text-center text-muted p-4 fs-5'>Không tìm thấy hợp đồng nào.</td></tr>"; return;
-        }
+        if(dataArray.length === 0) { tbody.innerHTML = "<tr><td colspan='7' class='text-center text-muted p-4 fs-5'>Không tìm thấy hợp đồng nào phù hợp.</td></tr>"; return; }
         
         tbody.innerHTML = "";
         dataArray.forEach(r => {
@@ -474,7 +509,7 @@
                 <td><strong class="text-primary">${r.MaHD||""}</strong></td>
                 <td class="fw-bold">${r.TenKhachHang||""}</td>
                 <td>${r.SoDienThoai||""}</td>
-                <td>${r.NgayLe || ""}</td>
+                <td>${formatDateView(r.NgayLe)}</td> <!-- Đã fix lỗi ngày tháng -->
                 <td class="text-end fw-bold">${formatCurrency(r.TongTien||0)}đ</td>
                 <td class="text-end text-danger fw-bold">${formatCurrency(r.ConLai||0)}đ</td>
                 <td class="text-center">
@@ -482,88 +517,54 @@
                     <button class="btn btn-sm btn-outline-danger delete-btn">🗑️ Xóa</button>
                 </td>
             `;
-            
             tr.querySelector('.print-btn').onclick = () => triggerPrint(r);
             tr.querySelector('.delete-btn').onclick = () => confirmDelete(r.MaHD, r.TenKhachHang);
             tbody.appendChild(tr);
         });
     }
 
-    // 7. Xóa Hợp Đồng an toàn
     async function confirmDelete(maHD, tenKH) {
-        const isConfirmed = confirm(
-            `CẢNH BÁO NGUY HIỂM ⚠️\n\nBạn đang xóa vĩnh viễn Hợp đồng của:\nKhách hàng: ${tenKH}\nMã HĐ: ${maHD}\n\nDữ liệu sẽ KHÔNG THỂ KHÔI PHỤC. Có chắc chắn xóa?`
-        );
-        if (!isConfirmed) return; 
-        
-        document.getElementById("loadingText").innerText = "Đang tiến hành xóa dữ liệu...";
+        if (!confirm(`CẢNH BÁO ⚠️\nXóa vĩnh viễn hợp đồng của:\nKH: ${tenKH} - Mã: ${maHD}\nKhông thể khôi phục. Xóa?`)) return; 
         document.getElementById("loadingText").classList.remove("hidden");
-        
         const res = await reqGAS({ action: "delete", maHD: maHD });
-        
-        if (res?.success) {
-            alert("✅ " + res.message);
-            loadAllContracts(); 
-        } else {
-            alert("❌ Lỗi: " + res?.message);
-            document.getElementById("loadingText").classList.add("hidden");
-        }
+        if (res?.success) { alert("✅ Đã xóa!"); loadAllContracts(); } else { alert("❌ Lỗi: " + res?.message); }
+        document.getElementById("loadingText").classList.add("hidden");
     }
 
-    // 8. Chức năng In Hợp Đồng (Ánh xạ dữ liệu ra Template Ẩn)
     function triggerPrint(r) {
         document.getElementById("p-mahd").innerText = r.MaHD || ".........";
-        
         let dTao = new Date(r.NgayTao);
         if(!isNaN(dTao.getTime())) {
             document.getElementById("p-d").innerText = String(dTao.getDate()).padStart(2, '0');
             document.getElementById("p-m").innerText = String(dTao.getMonth() + 1).padStart(2, '0');
             document.getElementById("p-y").innerText = dTao.getFullYear();
-        } else {
-            document.getElementById("p-d").innerText = ".."; document.getElementById("p-m").innerText = ".."; document.getElementById("p-y").innerText = "....";
-        }
+        } else { document.getElementById("p-d").innerText = ".."; document.getElementById("p-m").innerText = ".."; document.getElementById("p-y").innerText = "...."; }
 
         document.getElementById("p-tenkh").innerText = r.TenKhachHang || "";
         document.getElementById("p-diachi").innerText = r.DiaChi || "";
         document.getElementById("p-sdt").innerText = r.SoDienThoai || "";
         document.getElementById("p-giole").innerText = r.GioCoMat || "";
         document.getElementById("p-giamat").innerText = r.GioCoMat || "";
-        document.getElementById("p-ngayle").innerText = r.NgayLe || "";
-        document.getElementById("p-ngaylay").innerText = r.NgayLay || "";
-        document.getElementById("p-ngaytra").innerText = r.NgayTra || "";
+        
+        // Fix lỗi ngày tháng trên bản In
+        document.getElementById("p-ngayle").innerText = formatDateView(r.NgayLe);
+        document.getElementById("p-ngaylay").innerText = formatDateView(r.NgayLay);
+        document.getElementById("p-ngaytra").innerText = formatDateView(r.NgayTra);
         document.getElementById("p-luuy").innerText = (r.GhiChu && r.GhiChu !== "undefined") ? r.GhiChu : "";
 
-        // Bảng sản phẩm
-        const pItems = document.getElementById("p-items");
-        pItems.innerHTML = "";
+        const pItems = document.getElementById("p-items"); pItems.innerHTML = "";
         let itemsArr = [];
         try { itemsArr = JSON.parse(r.ChiTietDichVu); } catch(e) { itemsArr = [{ ten: r.ChiTietDichVu, sl: "", gia: "", tt: "" }]; }
-
         if(Array.isArray(itemsArr)) {
             itemsArr.forEach((item, idx) => {
-                pItems.innerHTML += `
-                    <tr>
-                        <td>${idx + 1}</td>
-                        <td>${item.ten || ""}</td>
-                        <td>${item.sl || ""}</td>
-                        <td>${item.gia ? formatCurrency(item.gia) + "đ" : ""}</td>
-                        <td style="font-weight:bold;">${item.tt ? formatCurrency(item.tt) + "đ" : ""}</td>
-                    </tr>
-                `;
+                pItems.innerHTML += `<tr><td>${idx + 1}</td><td>${item.ten || ""}</td><td>${item.sl || ""}</td><td>${item.gia ? formatCurrency(item.gia) + "đ" : ""}</td><td style="font-weight:bold;">${item.tt ? formatCurrency(item.tt) + "đ" : ""}</td></tr>`;
             });
         }
-        
-        // Cố định thêm dòng trống cho đủ layout 5 dòng
-        for(let i=itemsArr.length; i<5; i++){
-             pItems.innerHTML += `<tr><td>&nbsp;</td><td></td><td></td><td></td><td></td></tr>`;
-        }
+        for(let i=itemsArr.length; i<5; i++){ pItems.innerHTML += `<tr><td>&nbsp;</td><td></td><td></td><td></td><td></td></tr>`; }
 
-        // Tiền bạc
         document.getElementById("p-tongtien").innerText = formatCurrency(r.TongTien||0) + "đ";
         document.getElementById("p-tiencoc").innerText = formatCurrency(r.TienCoc||0) + "đ";
         document.getElementById("p-conlai").innerText = formatCurrency(r.ConLai||0) + "đ";
-
-        // KÍCH HOẠT LỆNH IN CỦA TRÌNH DUYỆT
         setTimeout(() => { window.print(); }, 200);
     }
 </script>
