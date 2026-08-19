@@ -2,11 +2,12 @@
 <html lang="vi">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Aleyna Wedding - Vòng Quay May Mắn</title>
-    <!-- Thư viện Font chữ và Popup -->
+    <!-- Thư viện Font chữ, Popup và Icon -->
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;1,600&family=Quicksand:wght@400;600;700&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <style>
         :root {
@@ -15,37 +16,31 @@
             --text-color: #333333;
         }
 
+        *, *::before, *::after {
+            box-sizing: border-box;
+        }
+
         body {
-            margin: 0;
-            padding: 0;
+            margin: 0; padding: 0;
             font-family: 'Quicksand', sans-serif;
             color: var(--text-color);
             min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            position: relative;
-            overflow-x: hidden;
+            display: flex; justify-content: center; align-items: center;
+            position: relative; overflow-x: hidden;
         }
 
         /* =========================================
            HIỆU ỨNG SLIDESHOW 10 ẢNH NỀN
            ========================================= */
         .bg-slideshow {
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            z-index: -1;
-            background-color: #000; 
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            z-index: -1; background-color: #000; 
         }
 
         .bg-slide {
-            position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background-size: cover;
-            background-position: center;
-            opacity: 0;
-            /* 10 ảnh x 5s/ảnh = 50s tổng chu kỳ */
-            animation: fadeZoom 50s infinite; 
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background-size: cover; background-position: center;
+            opacity: 0; animation: fadeZoom 50s infinite; 
         }
 
         .slide-1 { background-image: url('bg1.jpg'); animation-delay: 0s; }
@@ -68,173 +63,130 @@
         }
 
         .bg-overlay {
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0, 0, 0, 0.25); 
-            z-index: 0;
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.25); z-index: 0;
         }
 
         /* =========================================
-           KHỐI NỘI DUNG (HIỆU ỨNG KÍNH MỜ TRONG SUỐT HƠN)
+           KHỐI NỘI DUNG CHÍNH (Đã fix lỗi lồng khung)
            ========================================= */
         .main-wrapper {
-            background-color: rgba(255, 255, 255, 0.05); /* Đã giảm độ đục để nhìn rõ nền */
-            backdrop-filter: blur(2px); /* Đã giảm độ nhòe kính */
+            background-color: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(5px);
             -webkit-backdrop-filter: blur(5px);
             border: 1px solid rgba(255, 255, 255, 0.3); 
             box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
             border-radius: 24px;
-            padding: 40px 30px;
-            margin: 40px 20px;
-            width: 100%;
+            padding: 30px;
+            width: 95%; 
             max-width: 500px; 
+            margin: 20px auto;
             z-index: 1;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-
-        .header {
-            text-align: center;
-            margin-bottom: 25px;
-        }
-
-        .header h1 {
-            font-family: 'Playfair Display', serif;
-            color: #fff;
-            text-shadow: 2px 2px 5px rgba(0,0,0,0.4); 
-            font-size: 34px;
-            margin: 0 0 5px 0;
-        }
-
-        .header p {
-            font-size: 16px;
-            margin: 0;
-            color: #fff;
-            text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
-            font-weight: 600;
+            display: flex; flex-direction: column; align-items: center;
         }
 
         /* =========================================
-           VÒNG QUAY (+10% KÍCH THƯỚC)
+           THANH THỐNG KÊ ẢO (Chữ Trắng - Icon Hồng)
+           ========================================= */
+        .stats-bar {
+            display: flex; justify-content: center; gap: 25px;
+            margin-bottom: 20px; padding: 8px 25px;
+            background: rgba(255, 255, 255, 0.2); /* Nền kính mờ */
+            border-radius: 50px;
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        
+        .stat-item {
+            display: flex; align-items: center; gap: 8px;
+            color: #FFFFFF; /* Chữ màu trắng */
+            font-weight: 700; font-size: 14px;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.6); /* Bóng để nổi trên ảnh nền sáng */
+        }
+
+        .stat-item i, .stat-item b {
+            color: #FF69B4; /* Icon và số màu hồng */
+            text-shadow: none;
+            font-size: 15px;
+        }
+
+        .header { text-align: center; margin-bottom: 25px; width: 100%; }
+        .header h1 {
+            font-family: 'Playfair Display', serif;
+            color: #fff; text-shadow: 2px 2px 5px rgba(0,0,0,0.4); 
+            font-size: 34px; margin: 0 0 5px 0;
+        }
+        .header p {
+            font-size: 16px; margin: 0; color: #fff;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.5); font-weight: 600;
+        }
+
+        /* =========================================
+           VÒNG QUAY
            ========================================= */
         .wheel-container {
-            position: relative;
-            width: 440px; /* Tăng 10% từ 400px lên 440px */
-            height: 440px;
-            max-width: 90vw; 
-            max-height: 90vw;
-            margin: 10px auto 35px;
+            position: relative; width: 440px; height: 440px;
+            max-width: 100%; aspect-ratio: 1 / 1; 
+            margin: 0 auto 30px;
         }
 
         .pointer {
-            position: absolute;
-            top: -20px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 0; 
-            height: 0; 
-            border-left: 18px solid transparent;
-            border-right: 18px solid transparent;
-            border-top: 35px solid #FF1493; 
-            z-index: 10;
-            filter: drop-shadow(0 4px 5px rgba(0,0,0,0.4));
+            position: absolute; top: -15px; left: 50%; transform: translateX(-50%);
+            width: 0; height: 0; 
+            border-left: 15px solid transparent; border-right: 15px solid transparent;
+            border-top: 30px solid #FF1493; 
+            z-index: 10; filter: drop-shadow(0 4px 5px rgba(0,0,0,0.4));
         }
 
         canvas {
-            border-radius: 50%;
-            box-shadow: 0 0 25px rgba(0, 0, 0, 0.3);
-            width: 100%;
-            height: 100%;
+            border-radius: 50%; box-shadow: 0 0 25px rgba(0, 0, 0, 0.3);
+            width: 100%; height: 100%;
             transition: transform 4.5s cubic-bezier(0.17, 0.67, 0.12, 0.99);
         }
 
         /* =========================================
-           FORM & NÚT BẤM
+           FORM & THỂ LỆ
            ========================================= */
-        .form-container {
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-            width: 100%;
-            margin-bottom: 30px;
-        }
-
+        .form-container { display: flex; flex-direction: column; gap: 15px; width: 100%; margin-bottom: 25px; }
         input[type="tel"] {
-            padding: 14px 15px;
-            border: 2px solid rgba(255, 255, 255, 0.8);
-            background-color: rgba(255, 255, 255, 0.85);
-            border-radius: 10px;
-            font-size: 16px;
-            outline: none;
-            font-family: 'Quicksand', sans-serif;
-            text-align: center;
-            font-weight: 600;
+            padding: 14px 15px; border: 2px solid rgba(255, 255, 255, 0.8);
+            background-color: rgba(255, 255, 255, 0.85); border-radius: 10px;
+            font-size: 16px; font-weight: 600; outline: none; text-align: center;
         }
-
-        input[type="tel"]:focus {
-            border-color: var(--dark-pink);
-            box-shadow: 0 0 10px rgba(255, 105, 180, 0.5);
-        }
-
+        input[type="tel"]:focus { border-color: var(--dark-pink); box-shadow: 0 0 10px rgba(255, 105, 180, 0.5); }
         button {
-            padding: 15px;
-            background-color: var(--dark-pink);
-            color: white;
-            border: none;
-            border-radius: 10px;
-            font-size: 18px;
-            font-weight: 700;
-            cursor: pointer;
-            transition: 0.3s;
-            font-family: 'Quicksand', sans-serif;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            box-shadow: 0 5px 15px rgba(255, 105, 180, 0.4);
+            padding: 15px; background-color: var(--dark-pink); color: white; border: none;
+            border-radius: 10px; font-size: 18px; font-weight: 700; cursor: pointer;
+            text-transform: uppercase; box-shadow: 0 5px 15px rgba(255, 105, 180, 0.4);
         }
-
-        button:hover {
-            background-color: #E0529C;
-            transform: translateY(-2px);
-        }
-
-        button:disabled {
-            background-color: #999;
-            cursor: not-allowed;
-            transform: none;
-            box-shadow: none;
-        }
+        button:hover { background-color: #E0529C; }
+        button:disabled { background-color: #999; cursor: not-allowed; box-shadow: none; }
 
         .rules-box {
-            background-color: rgba(255, 255, 255, 0.4); 
-            border: 1px solid rgba(255, 255, 255, 0.5);
-            padding: 20px;
-            border-radius: 12px;
-            width: 100%;
-            box-sizing: border-box;
-            font-size: 14px;
-            line-height: 1.6;
-            color: #111;
-            font-weight: 600;
+            background-color: rgba(255, 255, 255, 0.4); border: 1px solid rgba(255, 255, 255, 0.5);
+            padding: 20px; border-radius: 12px; width: 100%; color: #111; font-weight: 600;
         }
+        .rules-box h3 { margin-top: 0; color: #D81B60; text-align: center; font-family: 'Playfair Display', serif; font-size: 22px; }
+        .rules-box ul { padding-left: 20px; margin-bottom: 0; font-size: 14px; line-height: 1.6;}
 
-        .rules-box h3 {
-            margin-top: 0;
-            color: #D81B60;
-            text-align: center;
-            font-family: 'Playfair Display', serif;
-            font-size: 22px;
-        }
-
-        .rules-box ul {
-            padding-left: 20px;
-            margin-bottom: 0;
+        @media (max-width: 480px) {
+            .main-wrapper { padding: 25px 15px; border-radius: 20px; margin: 15px auto;}
+            .stats-bar { gap: 15px; padding: 6px 15px; }
+            .stat-item { font-size: 13px; }
+            .stat-item i, .stat-item b { font-size: 14px; }
+            .header h1 { font-size: 28px; }
+            .header p { font-size: 14px; }
+            .pointer { top: -10px; border-top-width: 25px; border-left-width: 12px; border-right-width: 12px; }
+            .rules-box { padding: 15px; }
+            .rules-box h3 { font-size: 18px; }
+            .rules-box ul { font-size: 13px; }
+            button { font-size: 16px; padding: 12px; }
+            input[type="tel"] { font-size: 15px; padding: 12px; }
         }
     </style>
 </head>
 <body>
 
-    <!-- KHU VỰC 10 ẢNH NỀN SLIDESHOW -->
     <div class="bg-slideshow">
         <div class="bg-slide slide-1"></div>
         <div class="bg-slide slide-2"></div>
@@ -249,8 +201,21 @@
     </div>
     <div class="bg-overlay"></div> 
 
-    <!-- KHU VỰC NỘI DUNG -->
+    <!-- KHUNG CHÍNH (Đã xóa các thẻ lồng nhau bị dư) -->
     <div class="main-wrapper">
+        
+        <!-- THANH THỐNG KÊ ẢO -->
+        <div class="stats-bar">
+            <div class="stat-item">
+                <i class="fa-solid fa-eye"></i>
+                <span><b id="fakeVisitors">1,245</b> Truy cập</span>
+            </div>
+            <div class="stat-item">
+                <i class="fa-solid fa-gift"></i>
+                <span><b id="fakeSpins">856</b> Đã quay</span>
+            </div>
+        </div>
+
         <div class="header">
             <h1>Aleyna Wedding</h1>
             <p>Dịch vụ Bưng quả & Cho thuê Áo dài TP.HCM</p>
@@ -258,7 +223,6 @@
 
         <div class="wheel-container">
             <div class="pointer"></div>
-            <!-- Canvas to hơn (540px) để có không gian cho ô quà nổi lên khi hover -->
             <canvas id="wheelCanvas" width="540" height="540"></canvas>
         </div>
 
@@ -269,22 +233,32 @@
 
         <div class="rules-box">
             <h3>Thể Lệ Vòng Quay</h3>
-            <ul>
-                <li>Mỗi dâu rể chỉ quay được 1 lần (nhập SĐT đã cọc).</li>
-                <li>Áp dụng cho hóa đơn từ 999k (Nội Thành HCM).</li>
-                <li>Hình ảnh mang tính chất minh họa.</li>
-                <li>Quà tặng được freeship đến tận nhà Dâu.</li>
-            </ul>
+            <ol>
+                <li>Khách hàng có hóa đơn từ 999k tại TP.HCM (trước sáp nhập).</li>
+                <li>Mỗi khách hàng được tham gia 01 lượt quay duy nhất.</li>
+                <li>Vui lòng nhập SĐT đã sử dụng khi đặt cọc để tiến hành quay.</li>
+                <li>Hình ảnh quà tặng chỉ mang tính chất minh họa. Mẫu mã và màu sắc thực tế có thể thay đổi tùy từng thời điểm.</li>
+                <li>Sau khi quay, vui lòng chụp màn hình kết quả và gửi cho shop để xác nhận.</li>
+                <li>Quà tặng sẽ được giao miễn phí trong vòng 07 ngày kể từ ngày xác nhận kết quả.</li>
+            </ol>
         </div>
     </div>
 
+    <!-- =========================================
+         THÊM NHẠC NỀN (Hiệu ứng Fade-in)
+         ========================================= -->
+    <audio id="bgMusic" loop preload="auto">
+        <source src="nhacnen.mp3" type="audio/mpeg">
+    </audio>
+
     <script>
+        //SEC
         const SCRIPT_URL = atob('aHR0cHM6Ly9zY3JpcHQuZ29vZ2xlLmNvbS9tYWNyb3Mvcy9BS2Z5Y2J4VklMZnRESWppdXFrTHVoWnlqSlZ2U0MyMlE4TzdkamtVcDQxR2Z3SkthOUhCNFdmMHlFRnBDWnkxWlU4c0pZVlcvZXhlYw==');
         
         const prizes = [
             { text: "Phụ kiện quạt", fullText: "Phụ kiện quạt", img: "1.jpg", weight: 5 },
-            { text: "Voucher 50k", fullText: "Voucher 50k", img: "2.jpg", weight: 20 }, // <-- Đã sửa từ 10 thành 20
-            { text: "Giảm 5% HĐ", fullText: "Giảm 5% trên tổng hóa đơn", img: "3.jpg", weight: 10 }, // <-- Đã sửa từ 20 thành 10
+            { text: "Voucher 50k", fullText: "Voucher 50k", img: "2.jpg", weight: 20 },
+            { text: "Giảm 5% HĐ", fullText: "Giảm 5% trên tổng hóa đơn", img: "3.jpg", weight: 10 },
             { text: "12 bao lì xì", fullText: "12 bao lì xì", img: "4.jpg", weight: 25 },
             { text: "Set Chocolate", fullText: "Set chocolate", img: "5.jpg", weight: 5 },
             { text: "2 Móc khóa", fullText: "2 móc khóa", img: "6.jpg", weight: 20 },
@@ -295,13 +269,12 @@
         const canvas = document.getElementById("wheelCanvas");
         const ctx = canvas.getContext("2d");
         const arc = Math.PI / (prizes.length / 2);
-        const CX = 270; // Tọa độ trung tâm mới (540/2)
+        const CX = 270; 
         const CY = 270;
 
         let hoveredIndex = -1;
-        let hasSpun = false; // Trạng thái khóa tương tác khi đang quay/đã quay
+        let hasSpun = false;
 
-        // Tải hình ảnh
         let loadedImages = 0;
         prizes.forEach(prize => {
             prize.imgObj = new Image();
@@ -316,23 +289,15 @@
             };
         });
         
-        // HÀM VẼ VÒNG QUAY (Có xử lý hiệu ứng Nổi bọt - Hover)
         function drawWheel() {
             ctx.clearRect(0, 0, 540, 540);
-            
-            // Vẽ vòng nền (các ô bình thường)
-            for (let i = 0; i < prizes.length; i++) {
-                drawSlice(i, false);
-            }
-            // Vẽ đè ô đang được Hover lên trên cùng (để nó to hơn và đè lên các ô bên cạnh)
-            if (hoveredIndex !== -1 && !hasSpun) {
-                drawSlice(hoveredIndex, true);
-            }
+            for (let i = 0; i < prizes.length; i++) drawSlice(i, false);
+            if (hoveredIndex !== -1 && !hasSpun) drawSlice(hoveredIndex, true);
         }
 
         function drawSlice(i, isHovered) {
             const angle = i * arc;
-            const radius = isHovered ? 265 : 250; // Ô bình thường 250, ô hover phóng lên 265
+            const radius = isHovered ? 265 : 250; 
             
             ctx.save();
             ctx.beginPath();
@@ -351,19 +316,17 @@
             }
             ctx.restore();
 
-            // Vẽ viền
             ctx.save();
             ctx.beginPath();
             ctx.moveTo(CX, CY);
             ctx.arc(CX, CY, radius, angle, angle + arc, false);
             ctx.lineWidth = isHovered ? 8 : 6;
-            ctx.strokeStyle = isHovered ? "#FF1493" : "rgba(255, 255, 255, 0.8)"; // Viền hồng rực rỡ khi hover
+            ctx.strokeStyle = isHovered ? "#FF1493" : "rgba(255, 255, 255, 0.8)"; 
             ctx.stroke();
             ctx.restore();
             
-            // Vẽ Chữ
             ctx.save();
-            const textRadius = isHovered ? 180 : 165; // Đẩy chữ ra ngoài một chút khi ô phình to
+            const textRadius = isHovered ? 180 : 165; 
             ctx.translate(CX + Math.cos(angle + arc / 2) * textRadius, CY + Math.sin(angle + arc / 2) * textRadius);
             ctx.rotate(angle + arc / 2);
             ctx.font = "bold 23px Quicksand";
@@ -376,19 +339,13 @@
             ctx.restore();
         }
 
-        // =========================================
-        // XỬ LÝ CHUỘT (HOVER & CLICK ĐỂ XEM QUÀ)
-        // =========================================
-        canvas.addEventListener('mousemove', (e) => {
-            if (hasSpun) return; // Không cho tương tác nếu đã quay
-            
+        function getSliceIndex(clientX, clientY) {
             const rect = canvas.getBoundingClientRect();
-            const scaleX = canvas.width / canvas.clientWidth;
-            const scaleY = canvas.height / canvas.clientHeight;
+            const scaleX = canvas.width / rect.width;
+            const scaleY = canvas.height / rect.height;
             
-            // Lấy tọa độ chuột chính xác trên canvas
-            const x = (e.clientX - rect.left) * scaleX;
-            const y = (e.clientY - rect.top) * scaleY;
+            const x = (clientX - rect.left) * scaleX;
+            const y = (clientY - rect.top) * scaleY;
             
             const dx = x - CX;
             const dy = y - CY;
@@ -397,19 +354,18 @@
             if (dist <= 250) {
                 let angle = Math.atan2(dy, dx);
                 if (angle < 0) angle += 2 * Math.PI;
-                let index = Math.floor(angle / arc);
-                
-                if (hoveredIndex !== index) {
-                    hoveredIndex = index;
-                    canvas.style.cursor = 'pointer';
-                    drawWheel(); // Vẽ lại vòng quay
-                }
-            } else {
-                if (hoveredIndex !== -1) {
-                    hoveredIndex = -1;
-                    canvas.style.cursor = 'default';
-                    drawWheel();
-                }
+                return Math.floor(angle / arc);
+            }
+            return -1;
+        }
+
+        canvas.addEventListener('mousemove', (e) => {
+            if (hasSpun) return;
+            const index = getSliceIndex(e.clientX, e.clientY);
+            if (hoveredIndex !== index) {
+                hoveredIndex = index;
+                canvas.style.cursor = index !== -1 ? 'pointer' : 'default';
+                drawWheel();
             }
         });
 
@@ -420,11 +376,12 @@
             drawWheel();
         });
 
-        canvas.addEventListener('click', () => {
-            if (hasSpun || hoveredIndex === -1) return;
-            const prize = prizes[hoveredIndex];
+        canvas.addEventListener('click', (e) => {
+            if (hasSpun) return;
+            const clickIndex = getSliceIndex(e.clientX, e.clientY);
+            if (clickIndex === -1) return;
+            const prize = prizes[clickIndex];
             
-            // Hiện Popup chi tiết quà khi bấm vào ô
             Swal.fire({
                 title: prize.text,
                 text: 'Hãy nhập Số điện thoại và bấm Quay để thử vận may nhé!',
@@ -437,19 +394,13 @@
             });
         });
 
-        // =========================================
-        // THUẬT TOÁN QUAY & GỌI API
-        // =========================================
         function getRandomPrizeIndex() {
             let totalWeight = prizes.reduce((sum, prize) => sum + prize.weight, 0);
             let randomNum = Math.random() * totalWeight;
             let weightSum = 0;
-            
             for (let i = 0; i < prizes.length; i++) {
                 weightSum += prizes[i].weight;
-                if (randomNum <= weightSum) {
-                    return i;
-                }
+                if (randomNum <= weightSum) return i;
             }
             return 0;
         }
@@ -463,9 +414,9 @@
                 return;
             }
 
-            hasSpun = true; // Khóa tương tác hover/click
+            hasSpun = true; 
             hoveredIndex = -1; 
-            drawWheel(); // Trả vòng quay về trạng thái bình thường
+            drawWheel(); 
 
             btn.disabled = true;
             btn.innerText = "Đang kiểm tra...";
@@ -487,12 +438,12 @@
                     spinWheel(winningIndex, wonPrize);
                 } else {
                     Swal.fire('Thất bại', data.message, 'warning');
-                    hasSpun = false; // Mở lại tương tác nếu lỗi
+                    hasSpun = false; 
                     btn.disabled = false;
                     btn.innerText = "Kiểm tra & Quay";
                 }
             } catch (error) {
-                Swal.fire('Lỗi', 'Không thể kết nối máy chủ. Vui lòng thử lại!', 'error');
+                Swal.fire('Lỗi', 'Không kết nối được máy chủ!', 'error');
                 hasSpun = false;
                 btn.disabled = false;
                 btn.innerText = "Kiểm tra & Quay";
@@ -502,15 +453,14 @@
         function spinWheel(winningIndex, prizeObj) {
             const degreesPerSlice = 360 / prizes.length;
             const sliceCenterAngle = winningIndex * degreesPerSlice + (degreesPerSlice / 2);
-            const targetDegree = (360 * 8) + 270 - sliceCenterAngle; // Quay 8 vòng rồi dừng
+            const targetDegree = (360 * 8) + 270 - sliceCenterAngle; 
 
             canvas.style.transform = `rotate(${targetDegree}deg)`;
 
             setTimeout(() => {
-                // Hộp thoại trúng thưởng hiển thị Ảnh quà + Ghi chú nhỏ
                 Swal.fire({
                     title: 'Chúc Mừng Dâu Rể!',
-                    html: `Phần quà của bạn là: <b>${prizeObj.fullText}</b><br><br><span style="font-size: 14px; color: #888; font-style: italic;">* Quà đã được ghi nhận vào hệ thống</span>`,
+                    html: `Phần quà của bạn là: <br><b style="font-size: 20px; color:#D81B60;">${prizeObj.fullText}</b><br><br><span style="font-size: 14px; color: #888; font-style: italic;">* Quà đã được ghi nhận vào hệ thống</span>`,
                     imageUrl: prizeObj.img,
                     imageWidth: 200,
                     imageHeight: 200,
@@ -521,35 +471,66 @@
                 document.getElementById('spinBtn').innerText = "ĐÃ NHẬN QUÀ";
             }, 4700); 
         }
-    </script>
-    <!-- =========================================
-         THÊM NHẠC NỀN 
-         ========================================= -->
-    <audio id="bgMusic" loop>
-        <source src="nhacnen.mp3" type="audio/mpeg">
-    </audio>
 
-    <audio id="bgMusic" loop preload="auto">
-        <source src="nhacnen.mp3" type="audio/mpeg">
-    </audio>
+        // =========================================
+        // THUẬT TOÁN NHẢY SỐ ẢO (FOMO)
+        // =========================================
+        function initFakeStats() {
+            let visitors = parseInt(localStorage.getItem('fakeVisitors')) || Math.floor(Math.random() * (2800 - 2300) + 2300);
+            let spins = parseInt(localStorage.getItem('fakeSpins')) || Math.floor(visitors * 0.45);
 
-    <script>
+            const formatNum = (num) => num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+
+            const updateDOM = () => {
+                document.getElementById('fakeVisitors').innerText = formatNum(visitors);
+                document.getElementById('fakeSpins').innerText = formatNum(spins);
+                localStorage.setItem('fakeVisitors', visitors);
+                localStorage.setItem('fakeSpins', spins);
+            };
+
+            updateDOM(); 
+
+            setInterval(() => {
+                if (Math.random() > 0.4) { 
+                    visitors += Math.floor(Math.random() * 3) + 1; 
+                    if (Math.random() > 0.7) spins += 1;
+                    updateDOM();
+                }
+            }, 5000); 
+        }
+        initFakeStats();
+
+        // =========================================
+        // NHẠC NỀN FADE-IN
+        // =========================================
         const music = document.getElementById('bgMusic');
-        music.volume = 0.5; // Âm lượng 50%
+        music.volume = 0; 
+        
+        const fadeInMusic = () => {
+            let vol = 0;
+            const fadeInterval = setInterval(() => {
+                if (vol < 0.5) {
+                    vol += 0.02; 
+                    music.volume = Math.min(vol, 0.5); 
+                } else {
+                    clearInterval(fadeInterval); 
+                }
+            }, 100); 
+        };
 
         const startMusic = () => {
             if (music.paused) {
-                music.play().catch(() => {});
+                music.play().then(() => {
+                    fadeInMusic(); 
+                    ['click', 'touchstart', 'mousemove', 'scroll'].forEach(evt => 
+                        document.removeEventListener(evt, startMusic)
+                    );
+                }).catch(() => {});
             }
-            // Ngay khi nhạc đã phát, tự động xóa bộ cảm biến để web chạy mượt
-            ['click', 'touchstart', 'mousemove', 'scroll'].forEach(evt => 
-                document.removeEventListener(evt, startMusic)
-            );
         };
 
-        // Kích hoạt ngay khi có BẤT KỲ cử động nhỏ nhất nào của khách hàng
         ['click', 'touchstart', 'mousemove', 'scroll'].forEach(evt => 
-            document.addEventListener(evt, startMusic, { once: true })
+            document.addEventListener(evt, startMusic)
         );
     </script>
 </body>
