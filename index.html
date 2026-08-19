@@ -529,16 +529,28 @@
         <source src="nhacnen.mp3" type="audio/mpeg">
     </audio>
 
+    <audio id="bgMusic" loop preload="auto">
+        <source src="nhacnen.mp3" type="audio/mpeg">
+    </audio>
+
     <script>
-        // Tự động phát nhạc ngay khi khách hàng chạm tay vào bất kỳ đâu trên màn hình
-        document.body.addEventListener('click', function() {
-            const music = document.getElementById('bgMusic');
+        const music = document.getElementById('bgMusic');
+        music.volume = 0.5; // Âm lượng 50%
+
+        const startMusic = () => {
             if (music.paused) {
-                // Thêm âm lượng vừa phải (0.5 là 50%) để không làm khách giật mình
-                music.volume = 0.5; 
-                music.play().catch(e => console.log("Trình duyệt tạm chặn nhạc"));
+                music.play().catch(() => {});
             }
-        }, { once: true }); // once: true giúp sự kiện này chỉ chạy 1 lần duy nhất, không gây lỗi code khác
+            // Ngay khi nhạc đã phát, tự động xóa bộ cảm biến để web chạy mượt
+            ['click', 'touchstart', 'mousemove', 'scroll'].forEach(evt => 
+                document.removeEventListener(evt, startMusic)
+            );
+        };
+
+        // Kích hoạt ngay khi có BẤT KỲ cử động nhỏ nhất nào của khách hàng
+        ['click', 'touchstart', 'mousemove', 'scroll'].forEach(evt => 
+            document.addEventListener(evt, startMusic, { once: true })
+        );
     </script>
 </body>
 </html>
