@@ -279,13 +279,12 @@
     </div>
 
     <script>
-        // === DÁN LINK API CỦA BẠN VÀO ĐÂY ===
-        const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxVILftDIjiuqkLuhZyjJVvSC22Q8O7djkUp41GfwJKa9HB4Wf0yEFpCZy1ZU8sJYVW/exec'; 
+        const SCRIPT_URL = atob('aHR0cHM6Ly9zY3JpcHQuZ29vZ2xlLmNvbS9tYWNyb3Mvcy9BS2Z5Y2J4VklMZnRESWppdXFrTHVoWnlqSlZ2U0MyMlE4TzdkamtVcDQxR2Z3SkthOUhCNFdmMHlFRnBDWnkxWlU4c0pZVlcvZXhlYw==');
         
         const prizes = [
             { text: "Phụ kiện quạt", fullText: "Phụ kiện quạt", img: "1.jpg", weight: 5 },
-            { text: "Voucher 50k", fullText: "Voucher 50k", img: "2.jpg", weight: 10 },
-            { text: "Giảm 5% HĐ", fullText: "Giảm 5% trên tổng hóa đơn", img: "3.jpg", weight: 20 },
+            { text: "Voucher 50k", fullText: "Voucher 50k", img: "2.jpg", weight: 20 }, // <-- Đã sửa từ 10 thành 20
+            { text: "Giảm 5% HĐ", fullText: "Giảm 5% trên tổng hóa đơn", img: "3.jpg", weight: 10 }, // <-- Đã sửa từ 20 thành 10
             { text: "12 bao lì xì", fullText: "12 bao lì xì", img: "4.jpg", weight: 25 },
             { text: "Set Chocolate", fullText: "Set chocolate", img: "5.jpg", weight: 5 },
             { text: "2 Móc khóa", fullText: "2 móc khóa", img: "6.jpg", weight: 20 },
