@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="vi">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -14,1188 +13,653 @@
         /* ========================================= */
         /* CSS GIAO DIỆN WEB (CHUẨN CRM CHUYÊN NGHIỆP)*/
         /* ========================================= */
-        :root {
-            --primary: #4338ca;
-            /* Màu chủ đạo Indigo */
+        :root { 
+            --primary: #4338ca; 
             --primary-hover: #3730a3;
-            --secondary: #64748b;
-            --bg-body: #f8fafc;
+            --secondary: #64748b; 
+            --bg-body: #f8fafc; 
             --text-dark: #0f172a;
             --border-color: #e2e8f0;
         }
+        body { background-color: var(--bg-body); font-family: 'Inter', sans-serif; color: var(--text-dark); }
+        .hidden { display: none !important; }
+        .app-container { max-width: 1280px; margin: 0 auto; padding: 25px 15px 50px 15px; }
+        
+        .card-box { background: white; border-radius: 12px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05), 0 2px 4px -1px rgba(0,0,0,0.03); padding: 30px; border: 1px solid var(--border-color); margin-bottom: 25px;}
+        .form-label { font-weight: 700; color: #475569; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 6px; }
+        .form-control, .form-select { border-radius: 8px; border: 1px solid #cbd5e1; padding: 10px 14px; font-size: 0.95rem; font-weight: 500; transition: 0.2s;}
+        .form-control:focus, .form-select:focus { border-color: var(--primary); box-shadow: 0 0 0 3px rgba(67, 56, 202, 0.15); outline: none; }
+        
+        .btn-primary { background-color: var(--primary); border-color: var(--primary); border-radius: 8px; font-weight: 600; padding: 10px 24px; transition: all 0.2s; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
+        .btn-primary:hover { background-color: var(--primary-hover); transform: translateY(-1px); box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
+        
+        .nav-pills { background: #f1f5f9; padding: 6px; border-radius: 10px; display: inline-flex; margin-bottom: 25px; }
+        .nav-pills .nav-link { color: var(--secondary); font-weight: 600; border-radius: 8px; padding: 10px 24px; transition: 0.2s; font-size: 0.9rem; }
+        .nav-pills .nav-link:hover { color: var(--primary); }
+        .nav-pills .nav-link.active { background-color: white; color: var(--primary); box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
+        
+        .table-items th { background-color: #f8fafc; font-size: 0.75rem; text-transform: uppercase; color: var(--secondary); border-bottom: 2px solid var(--border-color); padding: 12px; }
+        .btn-add-item { border: 2px dashed #cbd5e1; background: transparent; color: var(--secondary); border-radius: 8px; padding: 12px; width: 100%; font-weight: 600; font-size: 0.9rem; transition: 0.2s;}
+        .btn-add-item:hover { border-color: var(--primary); color: var(--primary); background: #eef2ff; }
+        
+        .total-box { background: linear-gradient(to right bottom, #f8fafc, #f1f5f9); border-radius: 12px; padding: 20px; border: 1px solid var(--border-color); }
+        .money-input { font-weight: 800; color: #dc2626; font-size: 1.15rem; background-color: white !important; }
+        
+        .filter-row { background-color: #ffffff; padding: 20px; border-radius: 12px; border: 1px solid var(--border-color); margin-bottom: 20px; }
+        .count-badge { background-color: #eef2ff; color: var(--primary); padding: 6px 14px; border-radius: 20px; font-weight: 700; font-size: 0.8rem; }
+        
+        .data-table { border-collapse: separate; border-spacing: 0; width: 100%; }
+        .data-table th { background-color: #f8fafc; padding: 12px 15px; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.5px; color: var(--secondary); font-weight: 700; border-bottom: 2px solid var(--border-color); }
+        .data-table td { padding: 15px; vertical-align: middle; border-bottom: 1px solid var(--border-color); font-size: 0.9rem; }
+        .data-table tbody tr:hover { background-color: #f1f5f9; }
 
-        body {
-            background-color: var(--bg-body);
-            font-family: 'Inter', sans-serif;
-            color: var(--text-dark);
-        }
+        .sortable-header { cursor: pointer; transition: 0.2s; user-select: none; }
+        .sortable-header:hover { color: var(--primary); background-color: #e2e8f0; }
+        .sort-icon { display: inline-block; margin-left: 4px; font-size: 0.8rem; opacity: 0.4; }
+        .sort-icon.active { opacity: 1; color: var(--primary); font-weight: bold; }
 
-        .hidden {
-            display: none !important;
-        }
+        .badge-status { padding: 6px 12px; border-radius: 20px; font-size: 0.75rem; font-weight: 700; display: inline-flex; align-items: center; justify-content: center; }
+        .badge-quahan { background-color: #fef2f2; color: #ef4444; border: 1px solid #fecaca; }
+        .badge-dangxuly { background-color: #fffbeb; color: #d97706; border: 1px solid #fde68a; }
+        .badge-hoanthanh { background-color: #f0fdf4; color: #16a34a; border: 1px solid #bbf7d0; }
 
-        .app-container {
-            max-width: 1280px;
-            margin: 0 auto;
-            padding: 25px 15px 50px 15px;
-        }
+        .btn-action { border-radius: 6px; padding: 6px 12px; font-size: 0.8rem; font-weight: 600; display: inline-flex; align-items: center; gap: 5px; transition: all 0.2s; cursor: pointer; }
+        .btn-action:disabled { opacity: 0.5; cursor: not-allowed; }
+        .btn-xong { background-color: #10b981; color: white; border: 1px solid #10b981; }
+        .btn-xong:hover:not(:disabled) { background-color: #059669; }
+        .btn-in { background-color: #334155; color: white; border: 1px solid #334155; }
+        .btn-in:hover { background-color: #0f172a; }
+        .btn-xoa { background-color: transparent; color: #ef4444; border: 1px solid #ef4444; }
+        .btn-xoa:hover { background-color: #fef2f2; }
 
-        /* Box & Forms */
-        .card-box {
-            background: white;
-            border-radius: 12px;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
-            padding: 30px;
-            border: 1px solid var(--border-color);
-            margin-bottom: 25px;
-        }
-
-        .form-label {
-            font-weight: 700;
-            color: #475569;
-            font-size: 0.75rem;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            margin-bottom: 6px;
-        }
-
-        .form-control,
-        .form-select {
-            border-radius: 8px;
-            border: 1px solid #cbd5e1;
-            padding: 10px 14px;
-            font-size: 0.95rem;
-            font-weight: 500;
-            transition: 0.2s;
-        }
-
-        .form-control:focus,
-        .form-select:focus {
-            border-color: var(--primary);
-            box-shadow: 0 0 0 3px rgba(67, 56, 202, 0.15);
-            outline: none;
-        }
-
-        /* Main Action Buttons */
-        .btn-primary {
-            background-color: var(--primary);
-            border-color: var(--primary);
-            border-radius: 8px;
-            font-weight: 600;
-            padding: 10px 24px;
-            transition: all 0.2s;
-            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-        }
-
-        .btn-primary:hover {
-            background-color: var(--primary-hover);
-            transform: translateY(-1px);
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        }
-
-        /* Tabs Navbar */
-        .nav-pills {
-            background: #f1f5f9;
-            padding: 6px;
-            border-radius: 10px;
-            display: inline-flex;
-            margin-bottom: 25px;
-        }
-
-        .nav-pills .nav-link {
-            color: var(--secondary);
-            font-weight: 600;
-            border-radius: 8px;
-            padding: 10px 24px;
-            transition: 0.2s;
-            font-size: 0.9rem;
-        }
-
-        .nav-pills .nav-link:hover {
-            color: var(--primary);
-        }
-
-        .nav-pills .nav-link.active {
-            background-color: white;
-            color: var(--primary);
-            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-        }
-
-        /* Table Creation */
-        .table-items th {
-            background-color: #f8fafc;
-            font-size: 0.75rem;
-            text-transform: uppercase;
-            color: var(--secondary);
-            border-bottom: 2px solid var(--border-color);
-            padding: 12px;
-        }
-
-        .btn-add-item {
-            border: 2px dashed #cbd5e1;
-            background: transparent;
-            color: var(--secondary);
-            border-radius: 8px;
-            padding: 12px;
-            width: 100%;
-            font-weight: 600;
-            font-size: 0.9rem;
-            transition: 0.2s;
-        }
-
-        .btn-add-item:hover {
-            border-color: var(--primary);
-            color: var(--primary);
-            background: #eef2ff;
-        }
-
-        /* Totals Box */
-        .total-box {
-            background: linear-gradient(to right bottom, #f8fafc, #f1f5f9);
-            border-radius: 12px;
-            padding: 20px;
-            border: 1px solid var(--border-color);
-        }
-
-        .money-input {
-            font-weight: 800;
-            color: #dc2626;
-            font-size: 1.15rem;
-            background-color: white !important;
-        }
-
-        /* Filter Box */
-        .filter-row {
-            background-color: #ffffff;
-            padding: 20px;
-            border-radius: 12px;
-            border: 1px solid var(--border-color);
-            margin-bottom: 20px;
-        }
-
-        .count-badge {
-            background-color: #eef2ff;
-            color: var(--primary);
-            padding: 6px 14px;
-            border-radius: 20px;
-            font-weight: 700;
-            font-size: 0.8rem;
-        }
-
-        /* ========================================= */
-        /* CSS BẢNG DỮ LIỆU & NÚT BẤM                */
-        /* ========================================= */
-        .data-table {
-            border-collapse: separate;
-            border-spacing: 0;
-            width: 100%;
-        }
-
-        .data-table th {
-            background-color: #f8fafc;
-            padding: 12px 15px;
-            font-size: 0.75rem;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            color: var(--secondary);
-            font-weight: 700;
-            border-bottom: 2px solid var(--border-color);
-        }
-
-        .data-table td {
-            padding: 15px;
-            vertical-align: middle;
-            border-bottom: 1px solid var(--border-color);
-            font-size: 0.9rem;
-        }
-
-        .data-table tbody tr:hover {
-            background-color: #f1f5f9;
-        }
-
-        /* Sortable Headers */
-        .sortable-header {
-            cursor: pointer;
-            transition: 0.2s;
-            user-select: none;
-        }
-
-        .sortable-header:hover {
-            color: var(--primary);
-            background-color: #e2e8f0;
-        }
-
-        .sort-icon {
-            display: inline-block;
-            margin-left: 4px;
-            font-size: 0.8rem;
-            opacity: 0.4;
-        }
-
-        .sort-icon.active {
-            opacity: 1;
-            color: var(--primary);
-            font-weight: bold;
-        }
-
-        /* Trạng Thái Badges */
-        .badge-status {
-            padding: 6px 12px;
-            border-radius: 20px;
-            font-size: 0.75rem;
-            font-weight: 700;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .badge-quahan {
-            background-color: #fef2f2;
-            color: #ef4444;
-            border: 1px solid #fecaca;
-        }
-
-        .badge-dangxuly {
-            background-color: #fffbeb;
-            color: #d97706;
-            border: 1px solid #fde68a;
-        }
-
-        .badge-hoanthanh {
-            background-color: #f0fdf4;
-            color: #16a34a;
-            border: 1px solid #bbf7d0;
-        }
-
-        /* Nút thao tác chuyên nghiệp */
-        .btn-action {
-            border-radius: 6px;
-            padding: 6px 12px;
-            font-size: 0.8rem;
-            font-weight: 600;
-            display: inline-flex;
-            align-items: center;
-            gap: 5px;
-            transition: all 0.2s;
-            cursor: pointer;
-        }
-
-        .btn-action:disabled {
-            opacity: 0.5;
-            cursor: not-allowed;
-        }
-
-        .btn-xong {
-            background-color: #10b981;
-            color: white;
-            border: 1px solid #10b981;
-        }
-
-        .btn-xong:hover:not(:disabled) {
-            background-color: #059669;
-        }
-
-        .btn-in {
-            background-color: #334155;
-            color: white;
-            border: 1px solid #334155;
-        }
-
-        .btn-in:hover {
-            background-color: #0f172a;
-        }
-
-        .btn-xoa {
-            background-color: transparent;
-            color: #ef4444;
-            border: 1px solid #ef4444;
-        }
-
-        .btn-xoa:hover {
-            background-color: #fef2f2;
-        }
-
-        @media screen {
-            #print-area {
-                display: none !important;
-            }
-        }
+        @media screen { #print-area { display: none !important; } }
 
         /* ========================================= */
         /* CSS BẢN IN PDF ALEYNA WEDDING             */
         /* ========================================= */
         @media print {
-
-            #loginScreen,
-            #mainApp {
-                display: none !important;
-            }
-
-            @page {
-                size: A4 portrait;
-                margin: 0;
-            }
-
-            #print-area {
-                display: block !important;
-                width: 100%;
-                font-family: 'Times New Roman', Times, serif;
-                color: #000;
-                padding: 12mm 15mm;
-                box-sizing: border-box;
-            }
-
-            .p-header {
-                display: flex;
-                justify-content: space-between;
-                align-items: center;
-                margin-bottom: 20px;
-                padding-bottom: 5px;
-            }
-
-            .p-title-box {
-                text-align: left;
-            }
-
-            .p-title-text {
-                font-size: 26px;
-                font-weight: bold;
-                margin-bottom: 5px;
-                font-family: Arial, sans-serif;
-                letter-spacing: 0.5px;
-            }
-
-            .p-date-text {
-                font-size: 15px;
-            }
-
-            .p-logo-box {
-                text-align: center;
-            }
-
-            .logo-name {
-                font-size: 17px;
-                letter-spacing: 3px;
-                margin-bottom: 5px;
-                font-weight: bold;
-            }
-
-            .logo-sub {
-                font-size: 11px;
-                letter-spacing: 1.5px;
-                font-weight: bold;
-                font-family: Arial, sans-serif;
-            }
-
-            .p-info {
-                margin-bottom: 15px;
-                font-size: 15px;
-                line-height: 1.8;
-            }
-
-            .r-flex {
-                display: flex;
-                justify-content: space-between;
-                margin-bottom: 4px;
-            }
-
-            .i-col {
-                display: flex;
-                align-items: flex-end;
-                white-space: nowrap;
-            }
-
-            .dot {
-                border-bottom: 1px dotted #000;
-                flex-grow: 1;
-                margin-left: 5px;
-                min-height: 18px;
-                display: inline-block;
-                padding-left: 5px;
-                font-weight: bold;
-                font-family: Arial, sans-serif;
-            }
-
-            .p-table {
-                width: 100%;
-                border-collapse: collapse;
-                margin-bottom: 10px;
-                border: 2px solid #000;
-                font-family: Arial, sans-serif;
-            }
-
-            .p-table th,
-            .p-table td {
-                border: 1px solid #000;
-                padding: 7px 5px;
-                font-size: 14px;
-            }
-
-            .p-table th {
-                background-color: #555555 !important;
-                color: #ffffff !important;
-                font-weight: bold;
-                text-align: center;
-                -webkit-print-color-adjust: exact;
-                print-color-adjust: exact;
-            }
-
-            .p-table td.center {
-                text-align: center;
-            }
-
-            .p-gray-cell {
-                background-color: #555555 !important;
-                color: #ffffff !important;
-                font-weight: bold;
-                text-align: center;
-                -webkit-print-color-adjust: exact;
-                print-color-adjust: exact;
-            }
-
-            .p-val-cell {
-                text-align: center;
-                font-weight: bold;
-            }
-
-            .p-keep-together {
-                page-break-inside: avoid !important;
-                display: block;
-            }
-
-            .p-notes {
-                font-size: 14.5px;
-                line-height: 1.4;
-                text-align: justify;
-                margin-bottom: 30px;
-                margin-top: 15px;
-            }
-
-            .p-notes ul {
-                margin: 5px 0 5px 20px;
-                padding: 0;
-            }
-
-            .p-notes li {
-                margin-bottom: 4px;
-            }
-
-            .p-footer {
-                display: flex;
-                justify-content: space-between;
-                font-size: 14px;
-                text-align: center;
-            }
-
-            .p-sign-box {
-                width: 45%;
-            }
-
-            .p-sign-title {
-                font-weight: bold;
-                font-family: Arial, sans-serif;
-                font-size: 15px;
-                margin-bottom: 70px;
-            }
-
-            .p-footer-info {
-                margin-top: 15px;
-                line-height: 1.5;
-            }
+            #loginScreen, #mainApp { display: none !important; }
+            @page { size: A4 portrait; margin: 0; }
+            #print-area { display: block !important; width: 100%; font-family: 'Times New Roman', Times, serif; color: #000; padding: 12mm 15mm; box-sizing: border-box;}
+            .p-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; padding-bottom: 5px; }
+            .p-title-box { text-align: left; }
+            .p-title-text { font-size: 26px; font-weight: bold; margin-bottom: 5px; font-family: Arial, sans-serif; letter-spacing: 0.5px;}
+            .p-date-text { font-size: 15px; }
+            .p-logo-box { text-align: center; }
+            .logo-name { font-size: 17px; letter-spacing: 3px; margin-bottom: 5px; font-weight: bold;}
+            .logo-sub { font-size: 11px; letter-spacing: 1.5px; font-weight: bold; font-family: Arial, sans-serif; }
+            .p-info { margin-bottom: 15px; font-size: 15px; line-height: 1.8; }
+            .r-flex { display: flex; justify-content: space-between; margin-bottom: 4px; }
+            .i-col { display: flex; align-items: flex-end; white-space: nowrap; }
+            .dot { border-bottom: 1px dotted #000; flex-grow: 1; margin-left: 5px; min-height: 18px; display: inline-block; padding-left: 5px; font-weight: bold; font-family: Arial, sans-serif;}
+            .p-table { width: 100%; border-collapse: collapse; margin-bottom: 10px; border: 2px solid #000; font-family: Arial, sans-serif; }
+            .p-table th, .p-table td { border: 1px solid #000; padding: 7px 5px; font-size: 14px; }
+            .p-table th { background-color: #555555 !important; color: #ffffff !important; font-weight: bold; text-align: center; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+            .p-table td.center { text-align: center; }
+            .p-gray-cell { background-color: #555555 !important; color: #ffffff !important; font-weight: bold; text-align: center; -webkit-print-color-adjust: exact; print-color-adjust: exact;}
+            .p-val-cell { text-align: center; font-weight: bold; }
+            .p-keep-together { page-break-inside: avoid !important; display: block; }
+            .p-notes { font-size: 14.5px; line-height: 1.4; text-align: justify; margin-bottom: 30px; margin-top: 15px;}
+            .p-notes ul { margin: 5px 0 5px 20px; padding: 0; }
+            .p-notes li { margin-bottom: 4px; }
+            .p-footer { display: flex; justify-content: space-between; font-size: 14px; text-align: center; }
+            .p-sign-box { width: 45%; }
+            .p-sign-title { font-weight: bold; font-family: Arial, sans-serif; font-size: 15px; margin-bottom: 70px; }
+            .p-footer-info { margin-top: 15px; line-height: 1.5; }
         }
     </style>
 </head>
-
 <body>
 
-    <!-- MÀN HÌNH ĐĂNG NHẬP -->
-    <div id="loginScreen" class="container mt-5" style="max-width: 400px;">
-        <div class="card-box text-center border-0" style="padding: 40px 25px;">
-            <h3 class="mb-2" style="color: var(--primary); font-weight: 800;">ALEYNA WEDDING</h3>
-            <p class="text-muted mb-4 fw-bold">Hệ Thống Quản Lý Hợp Đồng</p>
-            <div class="form-floating mb-3 hidden" id="urlBox"><input type="text" id="apiUrl" class="form-control"
-                    placeholder="Link Web App"><label>Link Web App</label></div>
-            <div class="form-floating mb-4"><input type="password" id="adminPass" class="form-control"
-                    placeholder="Mật khẩu" required><label>Mật khẩu bảo mật</label></div>
-            <button class="btn btn-primary w-100 py-3 fs-6" onclick="login()">ĐĂNG NHẬP</button>
+<!-- MÀN HÌNH ĐĂNG NHẬP -->
+<div id="loginScreen" class="container mt-5" style="max-width: 400px;">
+    <div class="card-box text-center border-0" style="padding: 40px 25px;">
+        <h3 class="mb-2" style="color: var(--primary); font-weight: 800;">ALEYNA WEDDING</h3>
+        <p class="text-muted mb-4 fw-bold">Hệ Thống Quản Lý Hợp Đồng</p>
+        <div class="form-floating mb-3 hidden" id="urlBox"><input type="text" id="apiUrl" class="form-control" placeholder="Link Web App"><label>Link Web App</label></div>
+        <div class="form-floating mb-4"><input type="password" id="adminPass" class="form-control" placeholder="Mật khẩu" required><label>Mật khẩu bảo mật</label></div>
+        <button class="btn btn-primary w-100 py-3 fs-6" onclick="login()">ĐĂNG NHẬP</button>
+    </div>
+</div>
+
+<!-- ỨNG DỤNG CHÍNH -->
+<div id="mainApp" class="app-container hidden">
+    <!-- Header -->
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <div>
+            <h3 style="font-weight: 800; color: var(--text-dark); margin: 0; letter-spacing: -0.5px;">Quản Trị Hợp Đồng</h3>
+            <span class="text-muted fw-bold" style="font-size: 0.85rem;">Aleyna Wedding CRM</span>
         </div>
+        <button class="btn btn-light fw-bold" style="border: 1px solid #cbd5e1; color: #ef4444;" onclick="logout()">Thoát ứng dụng</button>
     </div>
 
-    <!-- ỨNG DỤNG CHÍNH -->
-    <div id="mainApp" class="app-container hidden">
-        <!-- Header -->
-        <div class="d-flex justify-content-between align-items-center mb-3">
-            <div>
-                <h3 style="font-weight: 800; color: var(--text-dark); margin: 0; letter-spacing: -0.5px;">Quản Trị Hợp
-                    Đồng</h3>
-                <span class="text-muted fw-bold" style="font-size: 0.85rem;">Aleyna Wedding CRM</span>
-            </div>
-            <button class="btn btn-light fw-bold" style="border: 1px solid #cbd5e1; color: #ef4444;"
-                onclick="logout()">Thoát ứng dụng</button>
-        </div>
+    <!-- TABS -->
+    <ul class="nav nav-pills" role="tablist">
+        <li class="nav-item"><button class="nav-link active" data-bs-toggle="pill" data-bs-target="#tab-add">
+            <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16" style="margin-right:4px; margin-top:-2px;"><path d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2Z"/></svg> TẠO ĐƠN MỚI
+        </button></li>
+        <li class="nav-item"><button class="nav-link" data-bs-toggle="pill" data-bs-target="#tab-list">
+            <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16" style="margin-right:4px; margin-top:-2px;"><path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/></svg> TRA CỨU HỒ SƠ
+        </button></li>
+    </ul>
 
-        <!-- TABS (Xóa onclick để không bị lỗi xung đột lúc trượt tab) -->
-        <ul class="nav nav-pills" role="tablist">
-            <li class="nav-item"><button class="nav-link active" data-bs-toggle="pill" data-bs-target="#tab-add">
-                    <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16"
-                        style="margin-right:4px; margin-top:-2px;">
-                        <path
-                            d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2Z" />
-                    </svg> TẠO ĐƠN MỚI
-                </button></li>
-            <li class="nav-item"><button class="nav-link" data-bs-toggle="pill" data-bs-target="#tab-list">
-                    <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16"
-                        style="margin-right:4px; margin-top:-2px;">
-                        <path
-                            d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
-                    </svg> TRA CỨU HỒ SƠ
-                </button></li>
-        </ul>
+    <div class="tab-content">
+        <!-- TAB 1: FORM TẠO HỢP ĐỒNG -->
+        <div class="tab-pane fade show active" id="tab-add">
+            <div class="card-box">
+                <form id="contractForm">
+                    <h6 class="border-bottom pb-2 mb-3 fw-bold" style="color: var(--primary);">I. Thông tin khách hàng</h6>
+                    <div class="row">
+                        <div class="col-6 col-md-3 mb-3"><label class="form-label">Mã HĐ (*)</label><input type="text" id="maHD" class="form-control" style="background-color: #f1f5f9;" required></div>
+                        <div class="col-6 col-md-3 mb-3"><label class="form-label">Ngày Lập</label><input type="date" id="ngayTao" class="form-control" required></div>
+                        <div class="col-12 col-md-6 mb-3"><label class="form-label">Tên Khách Hàng (*)</label><input type="text" id="tenKH" class="form-control" required></div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12 col-md-4 mb-3"><label class="form-label">Số Điện Thoại</label><input type="text" id="sdt" class="form-control"></div>
+                        <div class="col-12 col-md-8 mb-3"><label class="form-label">Địa chỉ</label><input type="text" id="diaChi" class="form-control"></div>
+                    </div>
+                    
+                    <h6 class="border-bottom pb-2 mt-3 mb-3 fw-bold" style="color: var(--primary);">II. Thời gian dịch vụ</h6>
+                    <div class="row">
+                        <div class="col-6 col-md-3 mb-3"><label class="form-label">Ngày Lễ</label><input type="date" id="ngayLe" class="form-control"></div>
+                        <div class="col-6 col-md-3 mb-3"><label class="form-label">Giờ Có Mặt</label><input type="text" id="gioCoMat" class="form-control" placeholder="VD: 9h sáng"></div>
+                        <div class="col-6 col-md-3 mb-3"><label class="form-label">Ngày Lấy Đồ</label><input type="date" id="ngayLay" class="form-control"></div>
+                        <div class="col-6 col-md-3 mb-3"><label class="form-label">Ngày Trả Đồ</label><input type="date" id="ngayTra" class="form-control"></div>
+                    </div>
 
-        <div class="tab-content">
-            <!-- TAB 1: FORM TẠO HỢP ĐỒNG -->
-            <div class="tab-pane fade show active" id="tab-add">
-                <div class="card-box">
-                    <form id="contractForm">
-                        <h6 class="border-bottom pb-2 mb-3 fw-bold" style="color: var(--primary);">I. Thông tin khách
-                            hàng</h6>
-                        <div class="row">
-                            <div class="col-6 col-md-3 mb-3"><label class="form-label">Mã HĐ (*)</label><input
-                                    type="text" id="maHD" class="form-control" style="background-color: #f1f5f9;"
-                                    required></div>
-                            <div class="col-6 col-md-3 mb-3"><label class="form-label">Ngày Lập</label><input
-                                    type="date" id="ngayTao" class="form-control" required></div>
-                            <div class="col-12 col-md-6 mb-3"><label class="form-label">Tên Khách Hàng (*)</label><input
-                                    type="text" id="tenKH" class="form-control" required></div>
+                    <h6 class="border-bottom pb-2 mt-3 mb-3 fw-bold" style="color: var(--primary);">III. Chi tiết Sản phẩm</h6>
+                    <div class="table-responsive mb-3 border-0">
+                        <table class="table table-borderless table-items align-middle" id="itemsTable">
+                            <thead style="border-radius: 10px;">
+                                <tr>
+                                    <th width="45%" style="min-width: 180px;">Tên Sản phẩm / Ghi chú</th>
+                                    <th width="10%" class="text-center" style="min-width: 70px;">SL</th>
+                                    <th width="20%" class="text-end" style="min-width: 110px;">Đơn giá</th>
+                                    <th width="20%" class="text-end" style="min-width: 110px;">Thành tiền</th>
+                                    <th width="5%"></th>
+                                </tr>
+                            </thead>
+                            <tbody id="itemsBody"></tbody>
+                        </table>
+                        <button type="button" class="btn-add-item" onclick="addItemRow()">+ Thêm dòng sản phẩm</button>
+                    </div>
+
+                    <div class="row mt-4 align-items-start">
+                        <div class="col-12 col-md-6 mb-3">
+                            <label class="form-label">Ghi chú thanh toán / Lưu ý</label>
+                            <textarea id="ghiChu" class="form-control" rows="4"></textarea>
                         </div>
-                        <div class="row">
-                            <div class="col-12 col-md-4 mb-3"><label class="form-label">Số Điện Thoại</label><input
-                                    type="text" id="sdt" class="form-control"></div>
-                            <div class="col-12 col-md-8 mb-3"><label class="form-label">Địa chỉ</label><input
-                                    type="text" id="diaChi" class="form-control"></div>
-                        </div>
-
-                        <h6 class="border-bottom pb-2 mt-3 mb-3 fw-bold" style="color: var(--primary);">II. Thời gian
-                            dịch vụ</h6>
-                        <div class="row">
-                            <div class="col-6 col-md-3 mb-3"><label class="form-label">Ngày Lễ</label><input type="date"
-                                    id="ngayLe" class="form-control"></div>
-                            <div class="col-6 col-md-3 mb-3"><label class="form-label">Giờ Có Mặt</label><input
-                                    type="text" id="gioCoMat" class="form-control" placeholder="VD: 9h sáng"></div>
-                            <div class="col-6 col-md-3 mb-3"><label class="form-label">Ngày Lấy Đồ</label><input
-                                    type="date" id="ngayLay" class="form-control"></div>
-                            <div class="col-6 col-md-3 mb-3"><label class="form-label">Ngày Trả Đồ</label><input
-                                    type="date" id="ngayTra" class="form-control"></div>
-                        </div>
-
-                        <h6 class="border-bottom pb-2 mt-3 mb-3 fw-bold" style="color: var(--primary);">III. Chi tiết
-                            Sản phẩm</h6>
-                        <div class="table-responsive mb-3 border-0">
-                            <table class="table table-borderless table-items align-middle" id="itemsTable">
-                                <thead style="border-radius: 10px;">
-                                    <tr>
-                                        <th width="45%" style="min-width: 180px;">Tên Sản phẩm / Ghi chú</th>
-                                        <th width="10%" class="text-center" style="min-width: 70px;">SL</th>
-                                        <th width="20%" class="text-end" style="min-width: 110px;">Đơn giá</th>
-                                        <th width="20%" class="text-end" style="min-width: 110px;">Thành tiền</th>
-                                        <th width="5%"></th>
-                                    </tr>
-                                </thead>
-                                <tbody id="itemsBody"></tbody>
-                            </table>
-                            <button type="button" class="btn-add-item" onclick="addItemRow()">+ Thêm dòng sản
-                                phẩm</button>
-                        </div>
-
-                        <div class="row mt-4 align-items-start">
-                            <div class="col-12 col-md-6 mb-3">
-                                <label class="form-label">Ghi chú thanh toán / Lưu ý</label>
-                                <textarea id="ghiChu" class="form-control" rows="4"></textarea>
-                            </div>
-                            <div class="col-12 col-md-6 mb-3">
-                                <div class="total-box">
-                                    <div class="row align-items-center mb-2">
-                                        <div class="col-5 fw-bold text-secondary">TỔNG CỘNG:</div>
-                                        <div class="col-7"><input type="text" id="tongTien"
-                                                class="form-control text-end fw-bold" style="color: var(--primary);"
-                                                readonly value="0"></div>
-                                    </div>
-                                    <div class="row align-items-center mb-2">
-                                        <div class="col-5 fw-bold text-secondary">CỌC TRƯỚC:</div>
-                                        <div class="col-7"><input type="text" id="tienCoc"
-                                                class="form-control text-end fw-bold" style="color: #16a34a;"
-                                                onkeyup="formatCurrencyInput(this); calculateTotal()" value="0"></div>
-                                    </div>
-                                    <div class="row align-items-center">
-                                        <div class="col-5 fw-bold text-danger">CÒN LẠI:</div>
-                                        <div class="col-7"><input type="text" id="conLai"
-                                                class="form-control text-end money-input" readonly value="0"></div>
-                                    </div>
+                        <div class="col-12 col-md-6 mb-3">
+                            <div class="total-box">
+                                <div class="row align-items-center mb-2">
+                                    <div class="col-5 fw-bold text-secondary">TỔNG CỘNG:</div>
+                                    <div class="col-7"><input type="text" id="tongTien" class="form-control text-end fw-bold" style="color: var(--primary);" readonly value="0"></div>
+                                </div>
+                                <div class="row align-items-center mb-2">
+                                    <div class="col-5 fw-bold text-secondary">CỌC TRƯỚC:</div>
+                                    <div class="col-7"><input type="text" id="tienCoc" class="form-control text-end fw-bold" style="color: #16a34a;" onkeyup="formatCurrencyInput(this); calculateTotal()" value="0"></div>
+                                </div>
+                                <div class="row align-items-center">
+                                    <div class="col-5 fw-bold text-danger">CÒN LẠI:</div>
+                                    <div class="col-7"><input type="text" id="conLai" class="form-control text-end money-input" readonly value="0"></div>
                                 </div>
                             </div>
                         </div>
-                        <button type="button" class="btn btn-primary w-100 py-3 mt-2 fs-5" id="btnLuu"
-                            onclick="submitContract()">LƯU HỢP ĐỒNG NÀY</button>
-                    </form>
+                    </div>
+                    <button type="button" class="btn btn-primary w-100 py-3 mt-2 fs-5" id="btnLuu" onclick="submitContract()">LƯU HỢP ĐỒNG NÀY</button>
+                </form>
+            </div>
+        </div>
+
+        <!-- TAB 2: HỒ SƠ & TRA CỨU -->
+        <div class="tab-pane fade" id="tab-list">
+            <div class="filter-row">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <h6 class="fw-bold mb-0" style="color: var(--primary);">BỘ LỌC TÌM KIẾM</h6>
+                    <div id="countResult" class="count-badge hidden">0 hợp đồng</div>
+                </div>
+                
+                <div class="row g-2">
+                    <div class="col-6 col-md-2">
+                        <label class="form-label">Tìm theo</label>
+                        <select id="filterField" class="form-select" onchange="applyFilters()">
+                            <option value="all">Tất cả</option>
+                            <option value="MaHD">Mã HĐ</option>
+                            <option value="TenKhachHang">Tên KH</option>
+                            <option value="SoDienThoai">SĐT</option>
+                        </select>
+                    </div>
+                    <div class="col-6 col-md-4">
+                        <label class="form-label">Từ khóa</label>
+                        <input type="text" id="searchBox" class="form-control" placeholder="Nhập tìm kiếm..." onkeyup="applyFilters()">
+                    </div>
+                    <div class="col-6 col-md-2">
+                        <label class="form-label">Sản phẩm</label>
+                        <select id="filterProduct" class="form-select" onchange="applyFilters()">
+                            <option value="all">Tất cả</option>
+                            <option value="nhân sự">Nhân sự</option>
+                            <option value="áo dài">Áo dài</option>
+                            <option value="khác">Khác</option>
+                        </select>
+                    </div>
+                    
+                    <div class="col-6 col-md-2">
+                        <label class="form-label">Lọc theo Tháng</label>
+                        <input type="month" id="filterMonth" class="form-control border-primary" onchange="applyFilters()">
+                    </div>
+                    <div class="col-6 col-md-2">
+                        <label class="form-label">Ngày cụ thể</label>
+                        <input type="date" id="filterDate" class="form-control" onchange="applyFilters()">
+                    </div>
+                </div>
+                
+                <div class="d-flex justify-content-end gap-2 mt-3 pt-3 border-top">
+                    <button class="btn btn-light border fw-bold text-secondary" onclick="resetFilters()">Làm mới</button>
+                    <button class="btn btn-primary fw-bold" onclick="loadAllContracts()">Tải lại dữ liệu</button>
                 </div>
             </div>
 
-            <!-- TAB 2: HỒ SƠ & TRA CỨU -->
-            <div class="tab-pane fade" id="tab-list">
-                <div class="filter-row">
-                    <div class="d-flex justify-content-between align-items-center mb-3">
-                        <h6 class="fw-bold mb-0" style="color: var(--primary);">BỘ LỌC TÌM KIẾM</h6>
-                        <div id="countResult" class="count-badge hidden">0 hợp đồng</div>
-                    </div>
-
-                    <div class="row g-2">
-                        <div class="col-6 col-md-2">
-                            <label class="form-label">Tìm theo</label>
-                            <select id="filterField" class="form-select" onchange="applyFilters()">
-                                <option value="all">Tất cả</option>
-                                <option value="MaHD">Mã HĐ</option>
-                                <option value="TenKhachHang">Tên KH</option>
-                                <option value="SoDienThoai">SĐT</option>
-                            </select>
-                        </div>
-                        <div class="col-6 col-md-4">
-                            <label class="form-label">Từ khóa</label>
-                            <input type="text" id="searchBox" class="form-control" placeholder="Nhập tìm kiếm..."
-                                onkeyup="applyFilters()">
-                        </div>
-                        <div class="col-6 col-md-2">
-                            <label class="form-label">Sản phẩm</label>
-                            <select id="filterProduct" class="form-select" onchange="applyFilters()">
-                                <option value="all">Tất cả</option>
-                                <option value="nhân sự">Nhân sự</option>
-                                <option value="áo dài">Áo dài</option>
-                                <option value="khác">Khác</option>
-                            </select>
-                        </div>
-
-                        <div class="col-6 col-md-2">
-                            <label class="form-label">Lọc theo Tháng</label>
-                            <input type="month" id="filterMonth" class="form-control border-primary"
-                                onchange="applyFilters()">
-                        </div>
-                        <div class="col-6 col-md-2">
-                            <label class="form-label">Ngày cụ thể</label>
-                            <input type="date" id="filterDate" class="form-control" onchange="applyFilters()">
-                        </div>
-                    </div>
-
-                    <div class="d-flex justify-content-end gap-2 mt-3 pt-3 border-top">
-                        <button class="btn btn-light border fw-bold text-secondary" onclick="resetFilters()">Làm
-                            mới</button>
-                        <!-- Chuyển Tải dữ liệu thành nút load Inline (Không dùng popup Swal chặn tab nữa) -->
-                        <button class="btn btn-primary fw-bold" onclick="loadAllContracts()">Tải lại dữ liệu</button>
-                    </div>
-                </div>
-
-                <!-- BẢNG DANH SÁCH (THÊM CHỨC NĂNG SORT) -->
-                <div class="card-box p-0 pt-2 border-0 bg-transparent">
-                    <!-- Thanh Loading nhẹ nhàng, không gây kẹt màn hình -->
-                    <div id="loadingText" class="text-center py-4 text-primary fw-bold hidden fs-5">
-                        <div class="spinner-border spinner-border-sm me-2"></div> Đang kết nối tải dữ liệu...
-                    </div>
-
-                    <div class="table-responsive bg-white"
-                        style="border-radius: 12px; border: 1px solid var(--border-color);">
-                        <table class="data-table">
-                            <thead>
-                                <tr>
-                                    <th style="width: 10%;" class="sortable-header" onclick="toggleSort('mahd')">Mã HĐ
-                                        <span id="sort-mahd" class="sort-icon">↕</span></th>
-                                    <th style="width: 22%;">Khách Hàng</th>
-                                    <th style="width: 13%;">SĐT</th>
-                                    <th style="width: 13%;" class="sortable-header" onclick="toggleSort('ngayle')">Ngày
-                                        Lễ <span id="sort-ngayle" class="sort-icon">↕</span></th>
-                                    <th style="width: 12%; text-align: center;" class="sortable-header"
-                                        onclick="toggleSort('trangthai')">Trạng thái <span id="sort-trangthai"
-                                            class="sort-icon">↕</span></th>
-                                    <th style="width: 12%; text-align: right;" class="sortable-header"
-                                        onclick="toggleSort('conlai')">Còn Lại <span id="sort-conlai"
-                                            class="sort-icon">↕</span></th>
-                                    <th style="width: 18%; text-align: center;">Thao tác</th>
-                                </tr>
-                            </thead>
-                            <tbody id="listBody"></tbody>
-                        </table>
-                    </div>
+            <div class="card-box p-0 pt-2 border-0 bg-transparent">
+                <div id="loadingText" class="text-center py-4 text-primary fw-bold hidden fs-5"><div class="spinner-border spinner-border-sm me-2"></div> Đang kết nối tải dữ liệu...</div>
+                
+                <div class="table-responsive bg-white" style="border-radius: 12px; border: 1px solid var(--border-color);">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th style="width: 10%;" class="sortable-header" onclick="toggleSort('mahd')">Mã HĐ <span id="sort-mahd" class="sort-icon">↕</span></th>
+                                <th style="width: 22%;">Khách Hàng</th>
+                                <th style="width: 13%;">SĐT</th>
+                                <th style="width: 13%;" class="sortable-header" onclick="toggleSort('ngayle')">Ngày Lễ <span id="sort-ngayle" class="sort-icon">↕</span></th>
+                                <th style="width: 12%; text-align: center;" class="sortable-header" onclick="toggleSort('trangthai')">Trạng thái <span id="sort-trangthai" class="sort-icon">↕</span></th>
+                                <th style="width: 12%; text-align: right;" class="sortable-header" onclick="toggleSort('conlai')">Còn Lại <span id="sort-conlai" class="sort-icon">↕</span></th>
+                                <th style="width: 18%; text-align: center;">Thao tác</th>
+                            </tr>
+                        </thead>
+                        <tbody id="listBody"></tbody>
+                    </table>
                 </div>
             </div>
         </div>
     </div>
+</div>
 
-    <!-- GIAO DIỆN IN PDF ALEYNA WEDDING -->
-    <div id="print-area">
-        <div class="p-header">
-            <div class="p-title-box">
-                <div class="p-title-text">HỢP ĐỒNG DỊCH VỤ</div>
-                <div class="p-date-text">Hôm nay, ngày <span id="p-d"></span> tháng <span id="p-m"></span> năm <span
-                        id="p-y"></span></div>
-            </div>
-            <div class="p-logo-box">
-                <div class="logo-name">A L E Y N A &nbsp; W E D D I N G</div>
-                <div class="logo-sub">ÁO DÀI & NHÂN SỰ</div>
-            </div>
+<!-- GIAO DIỆN IN PDF ALEYNA WEDDING -->
+<div id="print-area">
+    <div class="p-header">
+        <div class="p-title-box"><div class="p-title-text">HỢP ĐỒNG DỊCH VỤ</div><div class="p-date-text">Hôm nay, ngày <span id="p-d"></span> tháng <span id="p-m"></span> năm <span id="p-y"></span></div></div>
+        <div class="p-logo-box"><div class="logo-name">A L E Y N A &nbsp; W E D D I N G</div><div class="logo-sub">ÁO DÀI & NHÂN SỰ</div></div>
+    </div>
+    <div class="p-info">
+        <div class="r-flex"><div class="i-col" style="flex: 5.5;">Tên khách hàng: <span class="dot" id="p-tenkh"></span></div><div class="i-col" style="flex: 4.5; padding-left: 10px;">Địa chỉ: <span class="dot" id="p-diachi"></span></div></div>
+        <div class="r-flex"><div class="i-col" style="flex: 5.5;">SĐT: <span class="dot" id="p-sdt"></span></div><div class="i-col" style="flex: 4.5; padding-left: 10px;">Thời gian lễ: <span class="dot" id="p-thoigianle"></span></div></div>
+        <div class="r-flex"><div class="i-col" style="flex: 5.5;">Ngày Lễ: <span class="dot" id="p-ngayle"></span></div><div class="i-col" style="flex: 4.5; padding-left: 10px;">Giờ có mặt: <span class="dot" id="p-giocomat"></span></div></div>
+        <div class="r-flex"><div class="i-col" style="flex: 5.5;">Ngày lấy: <span class="dot" id="p-ngaylay"></span></div><div class="i-col" style="flex: 4.5; padding-left: 10px;">Ghi chú: <span class="dot" id="p-ghichu1"></span></div></div>
+        <div class="r-flex"><div class="i-col" style="flex: 5.5;">Ngày trả: <span class="dot" id="p-ngaytra"></span></div><div class="i-col" style="flex: 4.5; padding-left: 10px;"><span class="dot" id="p-ghichu2"></span></div></div>
+    </div>
+    <table class="p-table">
+        <thead><tr><th width="7%">STT</th><th width="43%">SẢN PHẨM</th><th width="10%">SL</th><th width="18%">ĐƠN GIÁ</th><th width="22%">THÀNH TIỀN</th></tr></thead>
+        <tbody id="p-items"></tbody>
+        <tfoot>
+            <tr><td colspan="4" class="p-gray-cell">TỔNG CỘNG</td><td class="p-val-cell" id="p-tongtien"></td></tr>
+            <tr><td colspan="4" class="p-gray-cell">CỌC TRƯỚC</td><td class="p-val-cell" id="p-tiencoc"></td></tr>
+            <tr><td colspan="4" class="p-gray-cell" style="color: #e67e22 !important;">CÒN LẠI</td><td class="p-val-cell" id="p-conlai" style="color: #e67e22 !important;"></td></tr>
+        </tfoot>
+    </table>
+    <div class="p-keep-together">
+        <div class="p-notes">
+            <strong>NHỮNG LƯU Ý NHỎ NHÀ ALEYNA :</strong>
+            <ul><li><strong>Thuê nhân sự:</strong> Thời gian tối đa 3 tiếng, nếu phát sinh - tính thêm phí (trao đổi cụ thể)</li><li><strong>Thuê áo dài:</strong></li></ul>
+            <p>-- Thời gian giữ đồ 3 ngày (tính từ ngày lấy đến ngày trả - nếu phát sinh thời gian thuê, khách vui lòng báo trước với shop để sắp xếp hợp lý - tính phí cụ thể)</p>
+            <p>-- Khách làm hư hỏng áo dài do đổ rượu, ủi cháy hay thay đổi hiện trạng ban đầu của áo sẽ bồi thường toàn bộ giá trị sản phẩm.</p>
+            <ul><li><strong>Thuê mâm quả:</strong> Giao sáng sớm vào ngày lễ - chưa bao gồm phí vận chuyển (miễn phí vận chuyển trong bán kính 7km)</li><li><strong>Thuê gia tiên:</strong> Khảo sát nhà Dâu/Rể trước 15 ngày - trang trí trước 1 ngày lễ. Tháo gia tiên sau khi lễ kết thúc (Trao đổi cụ thể với khách)</li></ul>
         </div>
-        <div class="p-info">
-            <div class="r-flex">
-                <div class="i-col" style="flex: 5.5;">Tên khách hàng: <span class="dot" id="p-tenkh"></span></div>
-                <div class="i-col" style="flex: 4.5; padding-left: 10px;">Địa chỉ: <span class="dot"
-                        id="p-diachi"></span></div>
-            </div>
-            <div class="r-flex">
-                <div class="i-col" style="flex: 5.5;">SĐT: <span class="dot" id="p-sdt"></span></div>
-                <div class="i-col" style="flex: 4.5; padding-left: 10px;">Thời gian lễ: <span class="dot"
-                        id="p-thoigianle"></span></div>
-            </div>
-            <div class="r-flex">
-                <div class="i-col" style="flex: 5.5;">Ngày Lễ: <span class="dot" id="p-ngayle"></span></div>
-                <div class="i-col" style="flex: 4.5; padding-left: 10px;">Giờ có mặt: <span class="dot"
-                        id="p-giocomat"></span></div>
-            </div>
-            <div class="r-flex">
-                <div class="i-col" style="flex: 5.5;">Ngày lấy: <span class="dot" id="p-ngaylay"></span></div>
-                <div class="i-col" style="flex: 4.5; padding-left: 10px;">Ghi chú: <span class="dot"
-                        id="p-ghichu1"></span></div>
-            </div>
-            <div class="r-flex">
-                <div class="i-col" style="flex: 5.5;">Ngày trả: <span class="dot" id="p-ngaytra"></span></div>
-                <div class="i-col" style="flex: 4.5; padding-left: 10px;"><span class="dot" id="p-ghichu2"></span></div>
-            </div>
-        </div>
-        <table class="p-table">
-            <thead>
-                <tr>
-                    <th width="7%">STT</th>
-                    <th width="43%">SẢN PHẨM</th>
-                    <th width="10%">SL</th>
-                    <th width="18%">ĐƠN GIÁ</th>
-                    <th width="22%">THÀNH TIỀN</th>
-                </tr>
-            </thead>
-            <tbody id="p-items"></tbody>
-            <tfoot>
-                <tr>
-                    <td colspan="4" class="p-gray-cell">TỔNG CỘNG</td>
-                    <td class="p-val-cell" id="p-tongtien"></td>
-                </tr>
-                <tr>
-                    <td colspan="4" class="p-gray-cell">CỌC TRƯỚC</td>
-                    <td class="p-val-cell" id="p-tiencoc"></td>
-                </tr>
-                <tr>
-                    <td colspan="4" class="p-gray-cell" style="color: #e67e22 !important;">CÒN LẠI</td>
-                    <td class="p-val-cell" id="p-conlai" style="color: #e67e22 !important;"></td>
-                </tr>
-            </tfoot>
-        </table>
-        <div class="p-keep-together">
-            <div class="p-notes">
-                <strong>NHỮNG LƯU Ý NHỎ NHÀ ALEYNA :</strong>
-                <ul>
-                    <li><strong>Thuê nhân sự:</strong> Thời gian tối đa 3 tiếng, nếu phát sinh - tính thêm phí (trao đổi
-                        cụ thể)</li>
-                    <li><strong>Thuê áo dài:</strong></li>
-                </ul>
-                <p>-- Thời gian giữ đồ 3 ngày (tính từ ngày lấy đến ngày trả - nếu phát sinh thời gian thuê, khách vui
-                    lòng báo trước với shop để sắp xếp hợp lý - tính phí cụ thể)</p>
-                <p>-- Khách làm hư hỏng áo dài do đổ rượu, ủi cháy hay thay đổi hiện trạng ban đầu của áo sẽ bồi thường
-                    toàn bộ giá trị sản phẩm.</p>
-                <ul>
-                    <li><strong>Thuê mâm quả:</strong> Giao sáng sớm vào ngày lễ - chưa bao gồm phí vận chuyển (miễn phí
-                        vận chuyển trong bán kính 7km)</li>
-                    <li><strong>Thuê gia tiên:</strong> Khảo sát nhà Dâu/Rể trước 15 ngày - trang trí trước 1 ngày lễ.
-                        Tháo gia tiên sau khi lễ kết thúc (Trao đổi cụ thể với khách)</li>
-                </ul>
-            </div>
-            <div class="p-footer">
-                <div class="p-sign-box">
-                    <div class="p-sign-title">KHÁCH HÀNG</div>
-                    <div class="p-footer-info">Địa chỉ: 35 đường D11, phường<br>Tây Thạnh, quận Tân Phú<br>Hotline: 0389
-                        446 132</div>
-                </div>
-                <div class="p-sign-box">
-                    <div class="p-sign-title">ALEYNA WEDDING</div>
-                    <div class="p-footer-info">STK: 9040119999<br>Ngân hàng: Techcombank<br>Chủ TK: Huỳnh Thị Thanh
-                        Tuyền</div>
-                </div>
-            </div>
+        <div class="p-footer">
+            <div class="p-sign-box"><div class="p-sign-title">KHÁCH HÀNG</div><div class="p-footer-info">Địa chỉ: 35 đường D11, phường<br>Tây Thạnh, quận Tân Phú<br>Hotline: 0389 446 132</div></div>
+            <div class="p-sign-box"><div class="p-sign-title">ALEYNA WEDDING</div><div class="p-footer-info">STK: 9040119999<br>Ngân hàng: Techcombank<br>Chủ TK: Huỳnh Thị Thanh Tuyền</div></div>
         </div>
     </div>
+</div>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script>
-        // --- KHỞI TẠO ---
-        document.addEventListener("DOMContentLoaded", function () {
-            const urlParams = new URLSearchParams(window.location.search);
-            if (urlParams.get('api')) {
-                let newApi = urlParams.get('api');
-                document.getElementById("apiUrl").value = newApi;
-                document.getElementById("urlBox").classList.add("hidden");
-                localStorage.setItem("crmApi", newApi);
+<!-- SCRIPTS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+    // --- KHỞI TẠO ---
+    document.addEventListener("DOMContentLoaded", function() {
+        const urlParams = new URLSearchParams(window.location.search);
+        if (urlParams.get('api')) { 
+            let newApi = urlParams.get('api');
+            document.getElementById("apiUrl").value = newApi; 
+            document.getElementById("urlBox").classList.add("hidden"); 
+            localStorage.setItem("crmApi", newApi); 
+        }
+        addItemRow(); document.getElementById('ngayTao').valueAsDate = new Date();
+    });
+
+    let appUrl = localStorage.getItem("crmApi"); let appPass = localStorage.getItem("crmPass"); 
+    let globalContracts = []; let currentSort = { col: '', asc: true };
+
+    if (appUrl && appPass) { document.getElementById("loginScreen").classList.add("hidden"); document.getElementById("mainApp").classList.remove("hidden"); loadAllContracts(); }
+    
+    function login() { const u = document.getElementById("apiUrl").value.trim(); const p = document.getElementById("adminPass").value.trim(); if(!u || !p) return Swal.fire('Lỗi', 'Thiếu thông tin kết nối!', 'error'); localStorage.setItem("crmApi", u); localStorage.setItem("crmPass", p); window.location.reload(); }
+    function logout() { localStorage.clear(); window.location.reload(); }
+
+    async function reqGAS(payload) {
+        payload.password = localStorage.getItem("crmPass"); 
+        try {
+            const res = await fetch(localStorage.getItem("crmApi"), { method: "POST", body: JSON.stringify(payload) });
+            const result = await res.json();
+            if(!result.success && result.message === "Sai mật khẩu bảo mật!") { Swal.fire('Lỗi', 'Mật khẩu sai!', 'error').then(()=>logout()); }
+            return result;
+        } catch (e) { Swal.fire('Lỗi', 'Không kết nối được server!', 'error'); }
+    }
+
+    // --- CÁC HÀM TIỆN ÍCH CHUẨN HÓA DỮ LIỆU ---
+    function formatCurrency(num) { return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, "."); }
+    function parseCurrency(str) { return parseInt(str.toString().replace(/\./g, '').replace(/,/g, '')) || 0; }
+    function formatCurrencyInput(input) { let val = parseCurrency(input.value); input.value = val === 0 ? "0" : formatCurrency(val); }
+
+    function getSafeVal(record, keys) {
+        const normKeys = keys.map(k => String(k).toLowerCase().replace(/\s/g, ''));
+        for (let key in record) {
+            let nk = String(key).toLowerCase().replace(/\s/g, '');
+            if (normKeys.includes(nk)) { let val = record[key]; return (val !== null && val !== undefined) ? val : ""; }
+        } return "";
+    }
+
+    function formatDateView(val) {
+        if (!val) return ""; let str = String(val);
+        if (str.match(/^\d{1,2}\/\d{1,2}\/\d{4}$/)) return str;
+        let d = new Date(val); if (isNaN(d.getTime())) return str; 
+        return `${String(d.getDate()).padStart(2, '0')}/${String(d.getMonth() + 1).padStart(2, '0')}/${d.getFullYear()}`;
+    }
+
+    function setPText(id, txt) { let el = document.getElementById(id); if(el) el.innerText = txt || ""; }
+
+    // --- TÍNH TOÁN FORM ---
+    function addItemRow() {
+        const tbody = document.getElementById("itemsBody"); const tr = document.createElement("tr");
+        tr.innerHTML = `<td><input type="text" class="form-control i-ten" placeholder="SP..."></td><td><input type="number" class="form-control text-center i-sl" value="1" min="1" oninput="calcRow(this)"></td><td><input type="text" class="form-control text-end i-gia" placeholder="0" onkeyup="formatCurrencyInput(this); calcRow(this)"></td><td><input type="text" class="form-control text-end i-tt bg-light" readonly value="0"></td><td class="text-center"><button type="button" class="btn btn-sm btn-outline-danger fw-bold fs-5" style="border:none; padding:10px;" onclick="this.closest('tr').remove(); calculateTotal()">×</button></td>`;
+        tbody.appendChild(tr);
+    }
+
+    function calcRow(el) {
+        const tr = el.closest('tr'); const sl = parseInt(tr.querySelector('.i-sl').value) || 0; const gia = parseCurrency(tr.querySelector('.i-gia').value);
+        tr.querySelector('.i-tt').value = formatCurrency(sl * gia); calculateTotal();
+    }
+
+    function calculateTotal() {
+        let tong = 0; document.querySelectorAll('.i-tt').forEach(inp => { tong += parseCurrency(inp.value); });
+        document.getElementById('tongTien').value = formatCurrency(tong);
+        let coc = parseCurrency(document.getElementById('tienCoc').value);
+        document.getElementById('conLai').value = formatCurrency(tong - coc);
+    }
+
+    // --- GIAO TIẾP VỚI SERVER ---
+    async function submitContract() {
+        const btn = document.getElementById("btnLuu"); 
+        let items = [];
+        document.querySelectorAll('#itemsBody tr').forEach(tr => {
+            let ten = tr.querySelector('.i-ten').value.trim();
+            if(ten) items.push({ ten: ten, sl: tr.querySelector('.i-sl').value, gia: parseCurrency(tr.querySelector('.i-gia').value), tt: parseCurrency(tr.querySelector('.i-tt').value) });
+        });
+        const data = {
+            maHD: document.getElementById("maHD").value, ngayTao: document.getElementById("ngayTao").value, tenKH: document.getElementById("tenKH").value, sdt: document.getElementById("sdt").value,
+            diaChi: document.getElementById("diaChi").value, ngayLe: document.getElementById("ngayLe").value, gioCoMat: document.getElementById("gioCoMat").value, ngayLay: document.getElementById("ngayLay").value,
+            ngayTra: document.getElementById("ngayTra").value, ghiChu: document.getElementById("ghiChu").value, chiTiet: JSON.stringify(items), tongTien: parseCurrency(document.getElementById("tongTien").value), 
+            tienCoc: parseCurrency(document.getElementById("tienCoc").value), conLai: parseCurrency(document.getElementById("conLai").value)
+        };
+        if(!data.maHD || !data.tenKH) { return Swal.fire('Cảnh báo', 'Nhập Mã HĐ và Tên Khách Hàng!', 'warning'); }
+        
+        btn.innerHTML = "⏳ ĐANG LƯU..."; btn.disabled = true;
+        const res = await reqGAS({ action: "add", contract: data });
+        if (res?.success) { 
+            Swal.fire({ icon: 'success', title: 'Thành công!', text: res.message, timer: 2000, showConfirmButton: false });
+            document.getElementById("contractForm").reset(); document.getElementById("itemsBody").innerHTML = ""; addItemRow(); calculateTotal(); 
+            loadAllContracts(); 
+        } else { Swal.fire('Lỗi', res?.message, 'error'); }
+        btn.innerHTML = "LƯU HỢP ĐỒNG NÀY"; btn.disabled = false;
+    }
+
+    async function loadAllContracts() {
+        document.getElementById("listBody").innerHTML = "";
+        document.getElementById("loadingText").classList.remove("hidden");
+        
+        const res = await reqGAS({ action: "getAll" });
+        if (res?.success) { 
+            globalContracts = res.data; 
+            applyFilters(); 
+        } else { Swal.fire('Lỗi', res?.message || 'Không thể tải dữ liệu', 'error'); }
+        
+        document.getElementById("loadingText").classList.add("hidden");
+    }
+
+    // --- TRẠNG THÁI ---
+    function getStatusDetails(r) {
+        let trangThai = getSafeVal(r, ['TrangThai', 'Trạng Thái']);
+        let ngayLeVal = getSafeVal(r, ['NgayLe', 'Ngày Lễ']);
+        let isCompleted = (trangThai === "Hoàn thành");
+        let isOverdue = false; let canComplete = false;
+        let today = new Date(); today.setHours(0,0,0,0);
+        
+        if (ngayLeVal) {
+            let dLe = new Date(ngayLeVal); dLe.setHours(0,0,0,0);
+            if (!isCompleted && today > dLe) isOverdue = true; 
+            if (today >= dLe) canComplete = true; 
+        } else { canComplete = true; } 
+        
+        let score = 2; if (isCompleted) score = 3; else if (isOverdue) score = 1;
+        return { isCompleted, isOverdue, canComplete, score };
+    }
+
+    // --- ENGINE TÌM KIẾM VÀ SẮP XẾP CAO CẤP ---
+    function toggleSort(col) {
+        if (currentSort.col === col) { currentSort.asc = !currentSort.asc; } 
+        else { currentSort.col = col; currentSort.asc = true; }
+        
+        document.querySelectorAll('.sort-icon').forEach(el => { el.innerHTML = '↕'; el.classList.remove('active'); });
+        const icon = document.getElementById('sort-' + col);
+        if(icon) { icon.innerHTML = currentSort.asc ? '↑' : '↓'; icon.classList.add('active'); }
+        
+        applyFilters();
+    }
+
+    function applyFilters() {
+        const textStr = document.getElementById("searchBox").value.toLowerCase().trim();
+        const cleanSearchText = textStr.replace(/[\s\.\-\+]/g, ''); // THUẬT TOÁN TÌM SĐT THÔNG MINH
+
+        const field = document.getElementById("filterField").value; 
+        const product = document.getElementById("filterProduct").value;
+        const filterDate = document.getElementById("filterDate").value;
+        const filterMonth = document.getElementById("filterMonth").value; 
+        
+        // 1. LỌC (FILTERING)
+        let filtered = globalContracts.filter(r => {
+            let rMaHD = String(getSafeVal(r, ['MaHD', 'Mã HĐ']));
+            let rTenKH = String(getSafeVal(r, ['TenKhachHang', 'Tên Khách Hàng']));
+            let rSDT = String(getSafeVal(r, ['SoDienThoai', 'SĐT', 'SDT']));
+            
+            // Xử lý thông minh SĐT (bỏ khoảng trắng, thêm 0)
+            if(rSDT.length > 0 && rSDT.length <= 10 && !rSDT.startsWith('0')) rSDT = '0' + rSDT;
+            let cleanSDT = rSDT.replace(/[\s\.\-\+]/g, '');
+            
+            let matchText = true;
+            if (textStr !== "") { 
+                if (field === "all") { matchText = rMaHD.toLowerCase().includes(textStr) || rTenKH.toLowerCase().includes(textStr) || cleanSDT.includes(cleanSearchText) || String(r.ChiTietDichVu||"").toLowerCase().includes(textStr); } 
+                else if (field === "TenKhachHang") { let regex = new RegExp('(^|\\s)' + textStr, 'i'); matchText = regex.test(rTenKH); }
+                else if (field === "MaHD") { matchText = rMaHD.toLowerCase().includes(textStr); }
+                else if (field === "SoDienThoai") { matchText = cleanSDT.includes(cleanSearchText); }
             }
-            addItemRow(); document.getElementById('ngayTao').valueAsDate = new Date();
+            
+            let matchProduct = true;
+            if (product !== "all") { 
+                if(product === "khác") { matchProduct = !String(r.ChiTietDichVu||"").toLowerCase().includes("nhân sự") && !String(r.ChiTietDichVu||"").toLowerCase().includes("áo dài"); } 
+                else { matchProduct = String(r.ChiTietDichVu||"").toLowerCase().includes(product); } 
+            }
+            
+            let matchDate = true;
+            let rDateVal = getSafeVal(r, ['NgayLe', 'Ngày Lễ']); 
+            if (filterDate || filterMonth) { 
+                if (!rDateVal) { matchDate = false; } else { 
+                    let rDate = new Date(rDateVal);
+                    if(!isNaN(rDate.getTime())) {
+                        if (filterDate) {
+                            let rDateStr = `${rDate.getFullYear()}-${String(rDate.getMonth()+1).padStart(2,'0')}-${String(rDate.getDate()).padStart(2,'0')}`;
+                            if (rDateStr !== filterDate) matchDate = false;
+                        }
+                        if (filterMonth) {
+                            let rMonthStr = `${rDate.getFullYear()}-${String(rDate.getMonth()+1).padStart(2,'0')}`;
+                            if (rMonthStr !== filterMonth) matchDate = false;
+                        }
+                    } else { matchDate = false; }
+                } 
+            }
+            return matchText && matchProduct && matchDate;
         });
 
-        let appUrl = localStorage.getItem("crmApi"); let appPass = localStorage.getItem("crmPass");
-        let globalContracts = []; let currentSort = { col: '', asc: true };
-
-        if (appUrl && appPass) { document.getElementById("loginScreen").classList.add("hidden"); document.getElementById("mainApp").classList.remove("hidden"); loadAllContracts(); }
-
-        function login() { const u = document.getElementById("apiUrl").value.trim(); const p = document.getElementById("adminPass").value.trim(); if (!u || !p) return Swal.fire('Lỗi', 'Thiếu thông tin!', 'error'); localStorage.setItem("crmApi", u); localStorage.setItem("crmPass", p); window.location.reload(); }
-        function logout() { localStorage.clear(); window.location.reload(); }
-
-        async function reqGAS(payload) {
-            payload.password = localStorage.getItem("crmPass");
-            try {
-                const res = await fetch(localStorage.getItem("crmApi"), { method: "POST", body: JSON.stringify(payload) });
-                const result = await res.json();
-                if (!result.success && result.message === "Sai mật khẩu bảo mật!") { Swal.fire('Lỗi', 'Mật khẩu sai!', 'error').then(() => logout()); }
-                return result;
-            } catch (e) { Swal.fire('Lỗi', 'Không kết nối được server!', 'error'); }
-        }
-
-        // --- CÁC HÀM TIỆN ÍCH CHUẨN HÓA DỮ LIỆU ---
-        function formatCurrency(num) { return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, "."); }
-        function parseCurrency(str) { return parseInt(str.toString().replace(/\./g, '').replace(/,/g, '')) || 0; }
-        function formatCurrencyInput(input) { let val = parseCurrency(input.value); input.value = val === 0 ? "0" : formatCurrency(val); }
-
-        function getSafeVal(record, keys) {
-            const normKeys = keys.map(k => String(k).toLowerCase().replace(/\s/g, ''));
-            for (let key in record) {
-                let nk = String(key).toLowerCase().replace(/\s/g, '');
-                if (normKeys.includes(nk)) { let val = record[key]; return (val !== null && val !== undefined) ? val : ""; }
-            } return "";
-        }
-
-        function formatDateView(val) {
-            if (!val) return ""; let str = String(val);
-            if (str.match(/^\d{1,2}\/\d{1,2}\/\d{4}$/)) return str;
-            let d = new Date(val); if (isNaN(d.getTime())) return str;
-            return `${String(d.getDate()).padStart(2, '0')}/${String(d.getMonth() + 1).padStart(2, '0')}/${d.getFullYear()}`;
-        }
-
-        function setPText(id, txt) { let el = document.getElementById(id); if (el) el.innerText = txt || ""; }
-
-        // --- TÍNH TOÁN FORM ---
-        function addItemRow() {
-            const tbody = document.getElementById("itemsBody"); const tr = document.createElement("tr");
-            tr.innerHTML = `<td><input type="text" class="form-control i-ten" placeholder="SP..."></td><td><input type="number" class="form-control text-center i-sl" value="1" min="1" oninput="calcRow(this)"></td><td><input type="text" class="form-control text-end i-gia" placeholder="0" onkeyup="formatCurrencyInput(this); calcRow(this)"></td><td><input type="text" class="form-control text-end i-tt bg-light" readonly value="0"></td><td class="text-center"><button type="button" class="btn btn-sm btn-outline-danger fw-bold fs-5" style="border:none; padding:10px;" onclick="this.closest('tr').remove(); calculateTotal()">×</button></td>`;
-            tbody.appendChild(tr);
-        }
-
-        function calcRow(el) {
-            const tr = el.closest('tr'); const sl = parseInt(tr.querySelector('.i-sl').value) || 0; const gia = parseCurrency(tr.querySelector('.i-gia').value);
-            tr.querySelector('.i-tt').value = formatCurrency(sl * gia); calculateTotal();
-        }
-
-        function calculateTotal() {
-            let tong = 0; document.querySelectorAll('.i-tt').forEach(inp => { tong += parseCurrency(inp.value); });
-            document.getElementById('tongTien').value = formatCurrency(tong);
-            let coc = parseCurrency(document.getElementById('tienCoc').value);
-            document.getElementById('conLai').value = formatCurrency(tong - coc);
-        }
-
-        // --- GIAO TIẾP VỚI SERVER ---
-        async function submitContract() {
-            const btn = document.getElementById("btnLuu");
-            let items = [];
-            document.querySelectorAll('#itemsBody tr').forEach(tr => {
-                let ten = tr.querySelector('.i-ten').value.trim();
-                if (ten) items.push({ ten: ten, sl: tr.querySelector('.i-sl').value, gia: parseCurrency(tr.querySelector('.i-gia').value), tt: parseCurrency(tr.querySelector('.i-tt').value) });
+        // 2. SẮP XẾP (SORTING)
+        if (currentSort.col !== '') {
+            filtered.sort((a, b) => {
+                let valA = 0, valB = 0;
+                if (currentSort.col === 'mahd') {
+                    valA = String(getSafeVal(a, ['MaHD', 'Mã HĐ'])).toLowerCase();
+                    valB = String(getSafeVal(b, ['MaHD', 'Mã HĐ'])).toLowerCase();
+                    return currentSort.asc ? valA.localeCompare(valB) : valB.localeCompare(valA);
+                }
+                else if (currentSort.col === 'ngayle') {
+                    let d1 = new Date(getSafeVal(a, ['NgayLe', 'Ngày Lễ']));
+                    let d2 = new Date(getSafeVal(b, ['NgayLe', 'Ngày Lễ']));
+                    valA = isNaN(d1.getTime()) ? 0 : d1.getTime();
+                    valB = isNaN(d2.getTime()) ? 0 : d2.getTime();
+                    if(valA === 0 && valB === 0) return 0;
+                    if(valA === 0) return 1; 
+                    if(valB === 0) return -1;
+                    return currentSort.asc ? valA - valB : valB - valA;
+                }
+                else if (currentSort.col === 'conlai') {
+                    valA = parseCurrency(getSafeVal(a, ['ConLai', 'Còn Lại']));
+                    valB = parseCurrency(getSafeVal(b, ['ConLai', 'Còn Lại']));
+                    return currentSort.asc ? valA - valB : valB - valA;
+                }
+                else if (currentSort.col === 'trangthai') {
+                    valA = getStatusDetails(a).score;
+                    valB = getStatusDetails(b).score;
+                    return currentSort.asc ? valA - valB : valB - valA;
+                }
+                return 0;
             });
-            const data = {
-                maHD: document.getElementById("maHD").value, ngayTao: document.getElementById("ngayTao").value, tenKH: document.getElementById("tenKH").value, sdt: document.getElementById("sdt").value,
-                diaChi: document.getElementById("diaChi").value, ngayLe: document.getElementById("ngayLe").value, gioCoMat: document.getElementById("gioCoMat").value, ngayLay: document.getElementById("ngayLay").value,
-                ngayTra: document.getElementById("ngayTra").value, ghiChu: document.getElementById("ghiChu").value, chiTiet: JSON.stringify(items), tongTien: parseCurrency(document.getElementById("tongTien").value),
-                tienCoc: parseCurrency(document.getElementById("tienCoc").value), conLai: parseCurrency(document.getElementById("conLai").value)
-            };
-            if (!data.maHD || !data.tenKH) { return Swal.fire('Cảnh báo', 'Nhập Mã HĐ và Tên Khách Hàng!', 'warning'); }
-
-            btn.innerHTML = "⏳ ĐANG LƯU..."; btn.disabled = true;
-            const res = await reqGAS({ action: "add", contract: data });
-            if (res?.success) {
-                Swal.fire({ icon: 'success', title: 'Thành công!', text: res.message, timer: 2000, showConfirmButton: false });
-                document.getElementById("contractForm").reset(); document.getElementById("itemsBody").innerHTML = ""; addItemRow(); calculateTotal();
-                loadAllContracts(); // Tự tải lại dữ liệu ngầm cho Tab 2
-            } else { Swal.fire('Lỗi', res?.message, 'error'); }
-            btn.innerHTML = "LƯU HỢP ĐỒNG NÀY"; btn.disabled = false;
         }
 
-        async function loadAllContracts() {
-            // Sử dụng Inline Loading thay vì Swal để không chặn hiệu ứng chuyển Tab
-            document.getElementById("listBody").innerHTML = "";
-            document.getElementById("loadingText").classList.remove("hidden");
+        renderList(filtered); updateCount(filtered.length);
+    }
+    
+    function resetFilters() { 
+        document.getElementById("filterField").value = "all"; document.getElementById("searchBox").value = ""; 
+        document.getElementById("filterProduct").value = "all"; document.getElementById("filterDate").value = ""; document.getElementById("filterMonth").value = ""; 
+        currentSort = { col: '', asc: true };
+        document.querySelectorAll('.sort-icon').forEach(el => { el.innerHTML = '↕'; el.classList.remove('active'); });
+        applyFilters(); 
+    }
+    function updateCount(num) { const badge = document.getElementById("countResult"); badge.innerText = `${num} hợp đồng`; badge.classList.remove("hidden"); }
 
-            const res = await reqGAS({ action: "getAll" });
-            if (res?.success) {
-                globalContracts = res.data;
-                applyFilters();
-            } else { Swal.fire('Lỗi', res?.message || 'Không thể tải dữ liệu', 'error'); }
-
-            document.getElementById("loadingText").classList.add("hidden");
-        }
-
-        // --- XÁC ĐỊNH TRẠNG THÁI VÀ ƯU TIÊN SẮP XẾP ---
-        function getStatusDetails(r) {
-            let trangThai = getSafeVal(r, ['TrangThai', 'Trạng Thái']);
+    // --- RENDER BẢNG DANH SÁCH ---
+    function renderList(dataArray) {
+        const tbody = document.getElementById("listBody");
+        if(dataArray.length === 0) { tbody.innerHTML = "<tr><td colspan='7' class='text-center text-muted p-4 fw-bold fs-5'>Không có dữ liệu phù hợp.</td></tr>"; return; }
+        tbody.innerHTML = "";
+        
+        dataArray.forEach(r => {
+            let maHD = String(getSafeVal(r, ['MaHD', 'Mã HĐ']));
+            let tenKH = String(getSafeVal(r, ['TenKhachHang', 'Tên Khách Hàng']));
+            let sdt = String(getSafeVal(r, ['SoDienThoai', 'SĐT', 'SDT']));
+            if(sdt.length > 0 && sdt.length <= 10 && !sdt.startsWith('0')) sdt = '0' + sdt;
+            let conLai = getSafeVal(r, ['ConLai', 'Còn Lại']);
             let ngayLeVal = getSafeVal(r, ['NgayLe', 'Ngày Lễ']);
-            let isCompleted = (trangThai === "Hoàn thành");
-            let isOverdue = false; let canComplete = false;
-            let today = new Date(); today.setHours(0, 0, 0, 0);
+            
+            let status = getStatusDetails(r);
+            let badgeHtml = "";
+            if (status.isCompleted) badgeHtml = `<span class="badge-status badge-hoanthanh">Đã hoàn thành</span>`;
+            else if (status.isOverdue) badgeHtml = `<span class="badge-status badge-quahan">Quá hạn</span>`;
+            else badgeHtml = `<span class="badge-status badge-dangxuly">Đang xử lý</span>`;
 
-            if (ngayLeVal) {
-                let dLe = new Date(ngayLeVal); dLe.setHours(0, 0, 0, 0);
-                if (!isCompleted && today > dLe) isOverdue = true;
-                if (today >= dLe) canComplete = true;
-            } else { canComplete = true; }
+            let btnComplete = !status.isCompleted ? `<button class="btn-action btn-xong mb-1 me-1" ${!status.canComplete ? 'disabled title="Chưa đến ngày lễ"' : ''} onclick="confirmComplete('${maHD}', '${tenKH}')"><svg width="14" height="14" fill="currentColor" viewBox="0 0 16 16"><path d="M12.736 3.97a.733.733 0 0 1 1.047 0c.286.289.29.756.01 1.05L7.88 12.01a.733.733 0 0 1-1.065.02L3.217 8.384a.757.757 0 0 1 0-1.06.733.733 0 0 1 1.047 0l3.052 3.093 5.4-6.425a.247.247 0 0 1 .02-.022Z"/></svg> Xong</button>` : '';
 
-            // Priority Score (Để Sắp xếp)
-            let score = 2; if (isCompleted) score = 3; else if (isOverdue) score = 1;
-            return { isCompleted, isOverdue, canComplete, score };
-        }
-
-        // --- ENGINE TÌM KIẾM VÀ SẮP XẾP CAO CẤP ---
-        function toggleSort(col) {
-            if (currentSort.col === col) { currentSort.asc = !currentSort.asc; }
-            else { currentSort.col = col; currentSort.asc = true; }
-
-            document.querySelectorAll('.sort-icon').forEach(el => { el.innerHTML = '↕'; el.classList.remove('active'); });
-            const icon = document.getElementById('sort-' + col);
-            if (icon) { icon.innerHTML = currentSort.asc ? '↑' : '↓'; icon.classList.add('active'); }
-
-            applyFilters();
-        }
-
-        function applyFilters() {
-            const textStr = document.getElementById("searchBox").value.toLowerCase().trim();
-            const field = document.getElementById("filterField").value;
-            const product = document.getElementById("filterProduct").value;
-            const filterDate = document.getElementById("filterDate").value;
-            const filterMonth = document.getElementById("filterMonth").value;
-
-            // 1. LỌC (FILTERING)
-            let filtered = globalContracts.filter(r => {
-                let rMaHD = String(getSafeVal(r, ['MaHD', 'Mã HĐ']));
-                let rTenKH = String(getSafeVal(r, ['TenKhachHang', 'Tên Khách Hàng']));
-                let rSDT = String(getSafeVal(r, ['SoDienThoai', 'SĐT']));
-
-                let matchText = true;
-                if (textStr !== "") {
-                    if (field === "all") { matchText = rMaHD.toLowerCase().includes(textStr) || rTenKH.toLowerCase().includes(textStr) || rSDT.includes(textStr) || String(r.ChiTietDichVu || "").toLowerCase().includes(textStr); }
-                    else if (field === "TenKhachHang") { let regex = new RegExp('(^|\\s)' + textStr, 'i'); matchText = regex.test(rTenKH); }
-                    else if (field === "MaHD") { matchText = rMaHD.toLowerCase().includes(textStr); }
-                    else if (field === "SoDienThoai") { matchText = rSDT.includes(textStr); }
-                }
-
-                let matchProduct = true;
-                if (product !== "all") {
-                    if (product === "khác") { matchProduct = !String(r.ChiTietDichVu || "").toLowerCase().includes("nhân sự") && !String(r.ChiTietDichVu || "").toLowerCase().includes("áo dài"); }
-                    else { matchProduct = String(r.ChiTietDichVu || "").toLowerCase().includes(product); }
-                }
-
-                let matchDate = true;
-                let rDateVal = getSafeVal(r, ['NgayLe', 'Ngày Lễ']);
-                if (filterDate || filterMonth) {
-                    if (!rDateVal) { matchDate = false; } else {
-                        let rDate = new Date(rDateVal);
-                        if (!isNaN(rDate.getTime())) {
-                            if (filterDate) {
-                                let rDateStr = `${rDate.getFullYear()}-${String(rDate.getMonth() + 1).padStart(2, '0')}-${String(rDate.getDate()).padStart(2, '0')}`;
-                                if (rDateStr !== filterDate) matchDate = false;
-                            }
-                            if (filterMonth) {
-                                let rMonthStr = `${rDate.getFullYear()}-${String(rDate.getMonth() + 1).padStart(2, '0')}`;
-                                if (rMonthStr !== filterMonth) matchDate = false;
-                            }
-                        } else { matchDate = false; }
-                    }
-                }
-                return matchText && matchProduct && matchDate;
-            });
-
-            // 2. SẮP XẾP (SORTING) - ĐÃ FIX LỖI THIẾU NGÀY THÁNG
-            if (currentSort.col !== '') {
-                filtered.sort((a, b) => {
-                    let valA = 0, valB = 0;
-
-                    if (currentSort.col === 'mahd') {
-                        valA = String(getSafeVal(a, ['MaHD', 'Mã HĐ'])).toLowerCase();
-                        valB = String(getSafeVal(b, ['MaHD', 'Mã HĐ'])).toLowerCase();
-                        return currentSort.asc ? valA.localeCompare(valB) : valB.localeCompare(valA);
-                    }
-                    else if (currentSort.col === 'ngayle') {
-                        let d1 = new Date(getSafeVal(a, ['NgayLe', 'Ngày Lễ']));
-                        let d2 = new Date(getSafeVal(b, ['NgayLe', 'Ngày Lễ']));
-                        valA = isNaN(d1.getTime()) ? 0 : d1.getTime();
-                        valB = isNaN(d2.getTime()) ? 0 : d2.getTime();
-
-                        if (valA === 0 && valB === 0) return 0;
-                        if (valA === 0) return 1; // HĐ Không có ngày -> xếp xuống cuối
-                        if (valB === 0) return -1;
-                        return currentSort.asc ? valA - valB : valB - valA;
-                    }
-                    else if (currentSort.col === 'conlai') {
-                        valA = parseCurrency(getSafeVal(a, ['ConLai', 'Còn Lại']));
-                        valB = parseCurrency(getSafeVal(b, ['ConLai', 'Còn Lại']));
-                        return currentSort.asc ? valA - valB : valB - valA;
-                    }
-                    else if (currentSort.col === 'trangthai') {
-                        valA = getStatusDetails(a).score;
-                        valB = getStatusDetails(b).score;
-                        return currentSort.asc ? valA - valB : valB - valA;
-                    }
-                    return 0;
-                });
-            }
-
-            renderList(filtered); updateCount(filtered.length);
-        }
-
-        function resetFilters() {
-            document.getElementById("filterField").value = "all"; document.getElementById("searchBox").value = "";
-            document.getElementById("filterProduct").value = "all"; document.getElementById("filterDate").value = ""; document.getElementById("filterMonth").value = "";
-            currentSort = { col: '', asc: true };
-            document.querySelectorAll('.sort-icon').forEach(el => { el.innerHTML = '↕'; el.classList.remove('active'); });
-            applyFilters();
-        }
-        function updateCount(num) { const badge = document.getElementById("countResult"); badge.innerText = `${num} hợp đồng`; badge.classList.remove("hidden"); }
-
-        // --- RENDER BẢNG DANH SÁCH (ĐÃ SỬA LẠI CỘT PHẲNG PHIU) ---
-        function renderList(dataArray) {
-            const tbody = document.getElementById("listBody");
-            if (dataArray.length === 0) { tbody.innerHTML = "<tr><td colspan='7' class='text-center text-muted p-4 fw-bold fs-5'>Không có dữ liệu phù hợp.</td></tr>"; return; }
-            tbody.innerHTML = "";
-
-            dataArray.forEach(r => {
-                let maHD = String(getSafeVal(r, ['MaHD', 'Mã HĐ']));
-                let tenKH = String(getSafeVal(r, ['TenKhachHang', 'Tên Khách Hàng']));
-                let sdt = String(getSafeVal(r, ['SoDienThoai', 'SĐT', 'SDT']));
-                if (sdt.length > 0 && sdt.length <= 10 && !sdt.startsWith('0')) sdt = '0' + sdt;
-                let conLai = getSafeVal(r, ['ConLai', 'Còn Lại']);
-                let ngayLeVal = getSafeVal(r, ['NgayLe', 'Ngày Lễ']);
-
-                let status = getStatusDetails(r);
-                let badgeHtml = "";
-                if (status.isCompleted) badgeHtml = `<span class="badge-status badge-hoanthanh">Đã hoàn thành</span>`;
-                else if (status.isOverdue) badgeHtml = `<span class="badge-status badge-quahan">Quá hạn</span>`;
-                else badgeHtml = `<span class="badge-status badge-dangxuly">Đang xử lý</span>`;
-
-                // Nút bấm SVG đẹp mắt
-                let btnComplete = !status.isCompleted ? `<button class="btn-action btn-xong mb-1 me-1" ${!status.canComplete ? 'disabled title="Chưa đến ngày lễ"' : ''} onclick="confirmComplete('${maHD}', '${tenKH}')"><svg width="14" height="14" fill="currentColor" viewBox="0 0 16 16"><path d="M12.736 3.97a.733.733 0 0 1 1.047 0c.286.289.29.756.01 1.05L7.88 12.01a.733.733 0 0 1-1.065.02L3.217 8.384a.757.757 0 0 1 0-1.06.733.733 0 0 1 1.047 0l3.052 3.093 5.4-6.425a.247.247 0 0 1 .02-.022Z"/></svg> Xong</button>` : '';
-
-                const tr = document.createElement("tr");
-                tr.innerHTML = `
+            const tr = document.createElement("tr");
+            tr.innerHTML = `
                 <td><strong style="color: var(--primary); font-size: 0.95rem;">${maHD}</strong></td>
                 <td class="fw-bold" style="color: var(--text-dark);">${tenKH}</td>
                 <td class="text-secondary fw-semibold">${sdt}</td>
                 <td class="text-secondary fw-semibold">${formatDateView(ngayLeVal)}</td>
                 <td class="text-center">${badgeHtml}</td>
-                <td class="text-end text-danger fw-bold">${formatCurrency(conLai || 0)}đ</td>
+                <td class="text-end text-danger fw-bold">${formatCurrency(conLai||0)}đ</td>
                 <td class="text-center" style="white-space: nowrap;">
                     ${btnComplete}
                     <button class="btn-action btn-in mb-1 me-1 print-btn"><svg width="14" height="14" fill="currentColor" viewBox="0 0 16 16"><path d="M5 1a2 2 0 0 0-2 2v1h10V3a2 2 0 0 0-2-2H5zm6 8H5a1 1 0 0 0-1 1v3a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1v-3a1 1 0 0 0-1-1z"/><path d="M0 7a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2h-1v-2a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v2H2a2 2 0 0 1-2-2V7zm2.5 1a.5.5 0 1 0 0-1 .5.5 0 0 0 0 1z"/></svg> In</button>
                     <button class="btn-action btn-xoa mb-1 delete-btn"><svg width="14" height="14" fill="currentColor" viewBox="0 0 16 16"><path d="M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5ZM11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H2.506a.58.58 0 0 0-.01 0H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1h-.995a.59.59 0 0 0-.01 0H11Zm1.813 1-.867 10.836a1 1 0 0 1-.997.916H4.885a1 1 0 0 1-.997-.916L3.023 3.5h9.79Z"/></svg> Xóa</button>
                 </td>`;
-
-                tr.querySelector('.print-btn').onclick = () => triggerPrint(r);
-                tr.querySelector('.delete-btn').onclick = () => confirmDelete(maHD, tenKH);
-                tbody.appendChild(tr);
-            });
-        }
-
-        // --- HÀM THAO TÁC (SWEET ALERT) ---
-        async function confirmComplete(maHD, tenKH) {
-            const result = await Swal.fire({ title: 'Xác nhận hoàn thành?', html: `Đơn của <b>${tenKH}</b> (${maHD}) sẽ chuyển sang <b>Hoàn Thành</b>.`, icon: 'question', showCancelButton: true, confirmButtonColor: '#10b981', cancelButtonColor: '#64748b', confirmButtonText: 'Đồng ý', cancelButtonText: 'Hủy' });
-            if (result.isConfirmed) {
-                Swal.fire({ title: 'Đang xử lý...', allowOutsideClick: false, didOpen: () => { Swal.showLoading() } });
-                const res = await reqGAS({ action: "complete", maHD: maHD });
-                if (res?.success) { Swal.fire('Thành công', 'Đã cập nhật trạng thái!', 'success'); loadAllContracts(); } else { Swal.fire('Lỗi', res?.message, 'error'); }
-            }
-        }
-
-        async function confirmDelete(maHD, tenKH) {
-            const result = await Swal.fire({ title: 'Xóa vĩnh viễn?', html: `Đang xóa HĐ <b>${maHD}</b> của <b>${tenKH}</b>.<br>Không thể hoàn tác!`, icon: 'warning', showCancelButton: true, confirmButtonColor: '#ef4444', cancelButtonColor: '#64748b', confirmButtonText: 'Xóa ngay', cancelButtonText: 'Hủy' });
-            if (result.isConfirmed) {
-                Swal.fire({ title: 'Đang xóa...', allowOutsideClick: false, didOpen: () => { Swal.showLoading() } });
-                const res = await reqGAS({ action: "delete", maHD: maHD });
-                if (res?.success) { Swal.fire('Đã xóa', 'Hợp đồng đã bị xóa!', 'success'); loadAllContracts(); } else { Swal.fire('Lỗi', res?.message, 'error'); }
-            }
-        }
-
-        // --- IN ẤN ---
-        function triggerPrint(r) {
-            let maHD = String(getSafeVal(r, ['MaHD', 'Mã HĐ'])); let tenKH = String(getSafeVal(r, ['TenKhachHang', 'Tên Khách Hàng']));
-            let sdt = String(getSafeVal(r, ['SoDienThoai', 'SĐT', 'SDT'])); if (sdt.length > 0 && sdt.length <= 10 && !sdt.startsWith('0')) sdt = '0' + sdt;
-            let diaChi = String(getSafeVal(r, ['DiaChi', 'Địa chỉ'])); let gioCoMat = String(getSafeVal(r, ['GioCoMat', 'Giờ Có Mặt']));
-            let ngayLe = String(getSafeVal(r, ['NgayLe', 'Ngày Lễ'])); let ngayLay = String(getSafeVal(r, ['NgayLay', 'Ngày Lấy Đồ']));
-            let ngayTra = String(getSafeVal(r, ['NgayTra', 'Ngày Trả Đồ'])); let ngayTao = String(getSafeVal(r, ['NgayTao', 'Ngày Lập HĐ']));
-            let gc = String(getSafeVal(r, ['GhiChu', 'Ghi chú'])); let chiTiet = String(getSafeVal(r, ['ChiTietDichVu', 'Sản phẩm']));
-
-            setPText("p-mahd", maHD || ".........");
-            let dTao = new Date(ngayTao);
-            if (!isNaN(dTao.getTime())) { setPText("p-d", String(dTao.getDate()).padStart(2, '0')); setPText("p-m", String(dTao.getMonth() + 1).padStart(2, '0')); setPText("p-y", dTao.getFullYear()); }
-            else { setPText("p-d", ".."); setPText("p-m", ".."); setPText("p-y", "...."); }
-
-            setPText("p-tenkh", tenKH); setPText("p-diachi", diaChi); setPText("p-sdt", sdt); setPText("p-thoigianle", ""); setPText("p-giocomat", gioCoMat);
-            setPText("p-ngayle", formatDateView(ngayLe)); setPText("p-ngaylay", formatDateView(ngayLay)); setPText("p-ngaytra", formatDateView(ngayTra));
-
-            if (gc === "undefined") gc = "";
-            if (gc.length > 50) { setPText("p-ghichu1", gc.substring(0, 50)); setPText("p-ghichu2", gc.substring(50)); } else { setPText("p-ghichu1", gc); setPText("p-ghichu2", ""); }
-
-            const pItems = document.getElementById("p-items"); if (pItems) pItems.innerHTML = "";
-            let itemsArr = []; try { itemsArr = JSON.parse(chiTiet); } catch (e) { itemsArr = [{ ten: chiTiet, sl: "", gia: "", tt: "" }]; }
-
-            let rowCount = 0;
-            if (Array.isArray(itemsArr) && pItems) {
-                itemsArr.forEach((item, idx) => {
-                    pItems.innerHTML += `<tr><td class="center">${idx + 1}</td><td>${item.ten || ""}</td><td class="center">${item.sl || ""}</td><td class="center">${item.gia ? formatCurrency(item.gia) + "đ" : ""}</td><td class="center">${item.tt ? formatCurrency(item.tt) + "đ" : ""}</td></tr>`;
-                    rowCount++;
-                });
-            }
-            if (pItems) { for (let i = rowCount; i < 4; i++) { pItems.innerHTML += `<tr><td>&nbsp;</td><td></td><td></td><td></td><td></td></tr>`; } }
-
-            setPText("p-tongtien", formatCurrency(getSafeVal(r, ['TongTien', 'Tổng Tiền']) || 0) + "đ");
-            setPText("p-tiencoc", formatCurrency(getSafeVal(r, ['TienCoc', 'Tiền Cọc']) || 0) + "đ");
-            setPText("p-conlai", formatCurrency(getSafeVal(r, ['ConLai', 'Còn Lại']) || 0) + "đ");
-
-            setTimeout(() => { window.print(); }, 300);
-        }
-    </script>
-    <!-- BỘ MÃ BẢO VỆ CHỐNG F12 & COPY -->
-<script>
-    // 1. Chặn chuột phải
-    document.addEventListener('contextmenu', event => event.preventDefault());
-
-    // 2. Chặn các phím tắt F12, Ctrl+Shift+I, Ctrl+Shift+J, Ctrl+U
-    document.onkeydown = function(e) {
-        if(e.keyCode == 123) { return false; } // F12
-        if(e.ctrlKey && e.shiftKey && e.keyCode == 'I'.charCodeAt(0)) { return false; }
-        if(e.ctrlKey && e.shiftKey && e.keyCode == 'C'.charCodeAt(0)) { return false; }
-        if(e.ctrlKey && e.shiftKey && e.keyCode == 'J'.charCodeAt(0)) { return false; }
-        if(e.ctrlKey && e.keyCode == 'U'.charCodeAt(0)) { return false; } // Ctrl+U
+            
+            tr.querySelector('.print-btn').onclick = () => triggerPrint(r);
+            tr.querySelector('.delete-btn').onclick = () => confirmDelete(maHD, tenKH);
+            tbody.appendChild(tr);
+        });
     }
 
-    // 3. Bẫy Anti-Debugger (Làm treo F12 nếu ai đó cố tình mở)
-    setInterval(function() {
-        check();
-    }, 1000);
-    var check = function() {
-        function doCheck(a) {
-            if (("" + a / a)["length"] !== 1 || a % 20 === 0) {
-                (function() {}["constructor"]("debugger")());
-            } else {
-                (function() {}["constructor"]("debugger")());
-            }
-            doCheck(++a);
+    // --- HÀM THAO TÁC (SWEET ALERT) ---
+    async function confirmComplete(maHD, tenKH) {
+        const result = await Swal.fire({ title: 'Xác nhận hoàn thành?', html: `Đơn của <b>${tenKH}</b> (${maHD}) sẽ chuyển sang <b>Hoàn Thành</b>.`, icon: 'question', showCancelButton: true, confirmButtonColor: '#10b981', cancelButtonColor: '#64748b', confirmButtonText: 'Đồng ý', cancelButtonText: 'Hủy' });
+        if (result.isConfirmed) {
+            Swal.fire({ title: 'Đang xử lý...', allowOutsideClick: false, didOpen: () => { Swal.showLoading() } });
+            const res = await reqGAS({ action: "complete", maHD: maHD });
+            if (res?.success) { Swal.fire('Thành công', 'Đã cập nhật trạng thái!', 'success'); loadAllContracts(); } else { Swal.fire('Lỗi', res?.message, 'error'); }
         }
-        try { doCheck(0) } catch (err) {}
-    };
-    check();
+    }
+
+    async function confirmDelete(maHD, tenKH) {
+        const result = await Swal.fire({ title: 'Xóa vĩnh viễn?', html: `Đang xóa HĐ <b>${maHD}</b> của <b>${tenKH}</b>.<br>Không thể hoàn tác!`, icon: 'warning', showCancelButton: true, confirmButtonColor: '#ef4444', cancelButtonColor: '#64748b', confirmButtonText: 'Xóa ngay', cancelButtonText: 'Hủy' });
+        if (result.isConfirmed) {
+            Swal.fire({ title: 'Đang xóa...', allowOutsideClick: false, didOpen: () => { Swal.showLoading() } });
+            const res = await reqGAS({ action: "delete", maHD: maHD });
+            if (res?.success) { Swal.fire('Đã xóa', 'Hợp đồng đã bị xóa!', 'success'); loadAllContracts(); } else { Swal.fire('Lỗi', res?.message, 'error'); }
+        }
+    }
+
+    // --- IN ẤN ---
+    function triggerPrint(r) {
+        let maHD = String(getSafeVal(r, ['MaHD', 'Mã HĐ'])); let tenKH = String(getSafeVal(r, ['TenKhachHang', 'Tên Khách Hàng']));
+        let sdt = String(getSafeVal(r, ['SoDienThoai', 'SĐT', 'SDT'])); if(sdt.length > 0 && sdt.length <= 10 && !sdt.startsWith('0')) sdt = '0' + sdt;
+        let diaChi = String(getSafeVal(r, ['DiaChi', 'Địa chỉ'])); let gioCoMat = String(getSafeVal(r, ['GioCoMat', 'Giờ Có Mặt']));
+        let ngayLe = String(getSafeVal(r, ['NgayLe', 'Ngày Lễ'])); let ngayLay = String(getSafeVal(r, ['NgayLay', 'Ngày Lấy Đồ']));
+        let ngayTra = String(getSafeVal(r, ['NgayTra', 'Ngày Trả Đồ'])); let ngayTao = String(getSafeVal(r, ['NgayTao', 'Ngày Lập HĐ']));
+        let gc = String(getSafeVal(r, ['GhiChu', 'Ghi chú'])); let chiTiet = String(getSafeVal(r, ['ChiTietDichVu', 'Sản phẩm']));
+        
+        setPText("p-mahd", maHD || ".........");
+        let dTao = new Date(ngayTao);
+        if(!isNaN(dTao.getTime())) { setPText("p-d", String(dTao.getDate()).padStart(2, '0')); setPText("p-m", String(dTao.getMonth() + 1).padStart(2, '0')); setPText("p-y", dTao.getFullYear()); } 
+        else { setPText("p-d", ".."); setPText("p-m", ".."); setPText("p-y", "...."); }
+
+        setPText("p-tenkh", tenKH); setPText("p-diachi", diaChi); setPText("p-sdt", sdt); setPText("p-thoigianle", ""); setPText("p-giocomat", gioCoMat);
+        setPText("p-ngayle", formatDateView(ngayLe)); setPText("p-ngaylay", formatDateView(ngayLay)); setPText("p-ngaytra", formatDateView(ngayTra));
+
+        if (gc === "undefined") gc = "";
+        if (gc.length > 50) { setPText("p-ghichu1", gc.substring(0, 50)); setPText("p-ghichu2", gc.substring(50)); } else { setPText("p-ghichu1", gc); setPText("p-ghichu2", ""); }
+
+        const pItems = document.getElementById("p-items"); if(pItems) pItems.innerHTML = "";
+        let itemsArr = []; try { itemsArr = JSON.parse(chiTiet); } catch(e) { itemsArr = [{ ten: chiTiet, sl: "", gia: "", tt: "" }]; }
+        
+        let rowCount = 0;
+        if(Array.isArray(itemsArr) && pItems) {
+            itemsArr.forEach((item, idx) => {
+                pItems.innerHTML += `<tr><td class="center">${idx + 1}</td><td>${item.ten || ""}</td><td class="center">${item.sl || ""}</td><td class="center">${item.gia ? formatCurrency(item.gia) + "đ" : ""}</td><td class="center">${item.tt ? formatCurrency(item.tt) + "đ" : ""}</td></tr>`;
+                rowCount++;
+            });
+        }
+        if (pItems) { for(let i = rowCount; i < 4; i++){ pItems.innerHTML += `<tr><td>&nbsp;</td><td></td><td></td><td></td><td></td></tr>`; } }
+
+        setPText("p-tongtien", formatCurrency(getSafeVal(r, ['TongTien', 'Tổng Tiền'])||0) + "đ");
+        setPText("p-tiencoc", formatCurrency(getSafeVal(r, ['TienCoc', 'Tiền Cọc'])||0) + "đ");
+        setPText("p-conlai", formatCurrency(getSafeVal(r, ['ConLai', 'Còn Lại'])||0) + "đ");
+
+        setTimeout(() => { window.print(); }, 300);
+    }
 </script>
 </body>
-
 </html>
