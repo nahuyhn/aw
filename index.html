@@ -553,7 +553,7 @@
         if(e.ctrlKey && e.keyCode == 'U'.charCodeAt(0)) { return false; } // Ctrl+U
     }
 
-    // 3. Bẫy Anti-Debugger (Làm treo F12 nếu ai đó cố tình mở)
+    // 3. Anti-Debugger
     setInterval(function() {
         check();
     }, 1000);
