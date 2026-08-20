@@ -5,84 +5,124 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="robots" content="noindex, nofollow">
     <title>Quản Lý Hợp Đồng - AleynaWedding</title>
+    <!-- Font chữ hiện đại chuyên dành cho Dashboard -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <style>
         /* ========================================= */
-        /* CSS GIAO DIỆN WEB (PHONG CÁCH CRM SAAS)   */
+        /* CSS GIAO DIỆN WEB (CHUẨN CRM CHUYÊN NGHIỆP)*/
         /* ========================================= */
         :root { 
-            --primary: #4f46e5; 
-            --primary-hover: #4338ca;
+            --primary: #4338ca; /* Màu chủ đạo Indigo */
+            --primary-hover: #3730a3;
             --secondary: #64748b; 
-            --accent: #3b82f6; 
-            --bg: #f8fafc; 
-            --text-main: #1e293b;
+            --bg-body: #f8fafc; 
+            --text-dark: #0f172a;
+            --border-color: #e2e8f0;
         }
-        body { background-color: var(--bg); font-family: 'Inter', sans-serif; color: var(--text-main); }
+        body { background-color: var(--bg-body); font-family: 'Inter', sans-serif; color: var(--text-dark); }
         .hidden { display: none !important; }
-        .app-container { max-width: 1250px; margin: 0 auto; padding-top: 30px; padding-bottom: 50px;}
+        .app-container { max-width: 1280px; margin: 0 auto; padding: 25px 15px 50px 15px; }
         
-        .card-box { background: white; border-radius: 16px; box-shadow: 0 10px 25px -5px rgba(0,0,0,0.05), 0 8px 10px -6px rgba(0,0,0,0.01); padding: 35px; border: 1px solid #e2e8f0; margin-bottom: 25px;}
-        .form-label { font-weight: 700; color: #475569; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 8px; }
-        .form-control, .form-select { border-radius: 10px; border: 1px solid #cbd5e1; padding: 12px 15px; font-size: 0.95rem; font-weight: 500; color: var(--text-main); transition: 0.2s;}
-        .form-control:focus, .form-select:focus { border-color: var(--primary); box-shadow: 0 0 0 4px rgba(79, 70, 229, 0.15); outline: none; }
+        /* Box & Forms */
+        .card-box { background: white; border-radius: 12px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05), 0 2px 4px -1px rgba(0,0,0,0.03); padding: 30px; border: 1px solid var(--border-color); margin-bottom: 25px;}
+        .form-label { font-weight: 700; color: #475569; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 6px; }
+        .form-control, .form-select { border-radius: 8px; border: 1px solid #cbd5e1; padding: 10px 14px; font-size: 0.95rem; font-weight: 500; transition: 0.2s;}
+        .form-control:focus, .form-select:focus { border-color: var(--primary); box-shadow: 0 0 0 3px rgba(67, 56, 202, 0.15); outline: none; }
         
-        .btn-primary { background-color: var(--primary); border-color: var(--primary); box-shadow: 0 4px 6px -1px rgba(79, 70, 229, 0.2); border-radius: 10px; font-weight: 600; padding: 12px 20px;}
-        .btn-primary:hover { background-color: var(--primary-hover); transform: translateY(-1px); box-shadow: 0 6px 8px -1px rgba(79, 70, 229, 0.3); }
+        /* Main Action Buttons */
+        .btn-primary { background-color: var(--primary); border-color: var(--primary); border-radius: 8px; font-weight: 600; padding: 10px 24px; transition: all 0.2s; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
+        .btn-primary:hover { background-color: var(--primary-hover); transform: translateY(-1px); box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
         
-        .nav-pills { background: #e2e8f0; padding: 6px; border-radius: 14px; display: inline-flex; margin-bottom: 30px; }
-        .nav-pills .nav-link { color: var(--secondary); font-weight: 700; border-radius: 10px; padding: 12px 28px; transition: 0.3s; font-size: 0.95rem; }
+        /* Tabs Navbar */
+        .nav-pills { background: #f1f5f9; padding: 6px; border-radius: 10px; display: inline-flex; margin-bottom: 25px; }
+        .nav-pills .nav-link { color: var(--secondary); font-weight: 600; border-radius: 8px; padding: 10px 24px; transition: 0.2s; font-size: 0.9rem; }
         .nav-pills .nav-link:hover { color: var(--primary); }
-        .nav-pills .nav-link.active { background-color: white; color: var(--primary); box-shadow: 0 4px 6px rgba(0,0,0,0.05); }
+        .nav-pills .nav-link.active { background-color: white; color: var(--primary); box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
         
-        .table-items th { background-color: #f8fafc; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px; color: var(--secondary); border-bottom: 2px solid #e2e8f0; padding: 15px; }
-        .btn-add-item { border: 2px dashed #cbd5e1; background: transparent; color: var(--secondary); border-radius: 10px; padding: 15px; width: 100%; transition: 0.3s; font-weight: 700; font-size: 0.9rem;}
+        /* Table Creation */
+        .table-items th { background-color: #f8fafc; font-size: 0.75rem; text-transform: uppercase; color: var(--secondary); border-bottom: 2px solid var(--border-color); padding: 12px; }
+        .btn-add-item { border: 2px dashed #cbd5e1; background: transparent; color: var(--secondary); border-radius: 8px; padding: 12px; width: 100%; font-weight: 600; font-size: 0.9rem; transition: 0.2s;}
         .btn-add-item:hover { border-color: var(--primary); color: var(--primary); background: #eef2ff; }
-        .total-box { background: linear-gradient(145deg, #f8fafc, #f1f5f9); border-radius: 14px; padding: 25px; border: 1px solid #e2e8f0; }
-        .money-input { font-weight: 800; color: #dc2626; font-size: 1.25rem; background-color: white !important; border: 2px solid #e2e8f0; }
         
-        .filter-row { background-color: #ffffff; padding: 25px; border-radius: 14px; border: 1px solid #e2e8f0; margin-bottom: 25px; box-shadow: 0 4px 10px rgba(0,0,0,0.02); }
-        .count-badge { background-color: #eef2ff; color: var(--primary); padding: 8px 18px; border-radius: 20px; font-weight: 800; font-size: 0.85rem; border: 1px solid #c7d2fe; }
+        /* Totals Box */
+        .total-box { background: linear-gradient(to right bottom, #f8fafc, #f1f5f9); border-radius: 12px; padding: 20px; border: 1px solid var(--border-color); }
+        .money-input { font-weight: 800; color: #dc2626; font-size: 1.15rem; background-color: white !important; }
+        
+        /* Filter Box */
+        .filter-row { background-color: #ffffff; padding: 20px; border-radius: 12px; border: 1px solid var(--border-color); margin-bottom: 20px; }
+        .count-badge { background-color: #eef2ff; color: var(--primary); padding: 6px 14px; border-radius: 20px; font-weight: 700; font-size: 0.8rem; }
+        
+        /* ========================================= */
+        /* CSS BẢNG DỮ LIỆU & NÚT BẤM (MỚI TỐI ƯU)   */
+        /* ========================================= */
+        .data-table { border-collapse: separate; border-spacing: 0; width: 100%; }
+        .data-table th { 
+            background-color: #f8fafc; 
+            padding: 12px 15px; 
+            font-size: 0.75rem; 
+            text-transform: uppercase; 
+            letter-spacing: 0.5px; 
+            color: var(--secondary); 
+            font-weight: 700; 
+            border-bottom: 2px solid var(--border-color); 
+        }
+        .data-table td { padding: 15px; vertical-align: middle; border-bottom: 1px solid var(--border-color); font-size: 0.9rem; }
+        .data-table tbody tr:hover { background-color: #f1f5f9; }
 
-        /* TÍNH NĂNG SORT HEADER (MỚI) */
+        /* Sortable Headers */
         .sortable-header { cursor: pointer; transition: 0.2s; user-select: none; }
-        .sortable-header:hover { background-color: #e2e8f0 !important; color: var(--primary) !important; }
-        .sort-icon { display: inline-block; margin-left: 5px; font-size: 0.85rem; opacity: 0.6; }
-        .sort-icon.active { opacity: 1; color: var(--primary); }
+        .sortable-header:hover { color: var(--primary); background-color: #e2e8f0; }
+        .sort-icon { display: inline-block; margin-left: 4px; font-size: 0.8rem; opacity: 0.4; }
+        .sort-icon.active { opacity: 1; color: var(--primary); font-weight: bold; }
+
+        /* Trạng Thái Badges */
+        .badge-status { padding: 6px 12px; border-radius: 20px; font-size: 0.75rem; font-weight: 700; display: inline-flex; align-items: center; justify-content: center; }
+        .badge-quahan { background-color: #fef2f2; color: #ef4444; border: 1px solid #fecaca; }
+        .badge-dangxuly { background-color: #fffbeb; color: #d97706; border: 1px solid #fde68a; }
+        .badge-hoanthanh { background-color: #f0fdf4; color: #16a34a; border: 1px solid #bbf7d0; }
+
+        /* Nút thao tác chuyên nghiệp */
+        .btn-action { border-radius: 6px; padding: 6px 12px; font-size: 0.8rem; font-weight: 600; display: inline-flex; align-items: center; gap: 5px; transition: all 0.2s; cursor: pointer; }
+        .btn-action:disabled { opacity: 0.5; cursor: not-allowed; }
+        .btn-xong { background-color: #10b981; color: white; border: 1px solid #10b981; }
+        .btn-xong:hover:not(:disabled) { background-color: #059669; }
+        .btn-in { background-color: #334155; color: white; border: 1px solid #334155; }
+        .btn-in:hover { background-color: #0f172a; }
+        .btn-xoa { background-color: transparent; color: #ef4444; border: 1px solid #ef4444; }
+        .btn-xoa:hover { background-color: #fef2f2; }
 
         @media screen { #print-area { display: none !important; } }
 
         /* ========================================= */
-        /* CSS BẢN IN PDF CHUẨN MẪU ALEYNA WEDDING   */
+        /* CSS BẢN IN PDF ALEYNA WEDDING             */
         /* ========================================= */
         @media print {
             #loginScreen, #mainApp { display: none !important; }
             @page { size: A4 portrait; margin: 0; }
-            #print-area { display: block !important; width: 100%; font-family: 'Times New Roman', Times, serif; color: #000; padding: 12mm 15mm; box-sizing: border-box; }
+            #print-area { display: block !important; width: 100%; font-family: 'Times New Roman', Times, serif; color: #000; padding: 12mm 15mm; box-sizing: border-box;}
             .p-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; padding-bottom: 5px; }
             .p-title-box { text-align: left; }
-            .p-title-text { font-size: 26px; font-weight: bold; margin-bottom: 5px; font-family: Arial, Helvetica, sans-serif; letter-spacing: 0.5px;}
+            .p-title-text { font-size: 26px; font-weight: bold; margin-bottom: 5px; font-family: Arial, sans-serif; letter-spacing: 0.5px;}
             .p-date-text { font-size: 15px; }
             .p-logo-box { text-align: center; }
-            .logo-name { font-size: 17px; letter-spacing: 3px; margin-bottom: 5px; font-weight: bold; font-family: 'Times New Roman', serif;}
-            .logo-sub { font-size: 11px; letter-spacing: 1.5px; font-weight: bold; font-family: Arial, Helvetica, sans-serif; }
+            .logo-name { font-size: 17px; letter-spacing: 3px; margin-bottom: 5px; font-weight: bold;}
+            .logo-sub { font-size: 11px; letter-spacing: 1.5px; font-weight: bold; font-family: Arial, sans-serif; }
             .p-info { margin-bottom: 15px; font-size: 15px; line-height: 1.8; }
             .r-flex { display: flex; justify-content: space-between; margin-bottom: 4px; }
             .i-col { display: flex; align-items: flex-end; white-space: nowrap; }
             .dot { border-bottom: 1px dotted #000; flex-grow: 1; margin-left: 5px; min-height: 18px; display: inline-block; padding-left: 5px; font-weight: bold; font-family: Arial, sans-serif;}
-            .p-table { width: 100%; border-collapse: collapse; margin-bottom: 10px; border: 2px solid #000; font-family: Arial, Helvetica, sans-serif; }
+            .p-table { width: 100%; border-collapse: collapse; margin-bottom: 10px; border: 2px solid #000; font-family: Arial, sans-serif; }
             .p-table th, .p-table td { border: 1px solid #000; padding: 7px 5px; font-size: 14px; }
             .p-table th { background-color: #555555 !important; color: #ffffff !important; font-weight: bold; text-align: center; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
             .p-table td.center { text-align: center; }
-            .p-gray-cell { background-color: #555555 !important; color: #ffffff !important; font-weight: bold; text-align: center; -webkit-print-color-adjust: exact; print-color-adjust: exact; letter-spacing: 1px; }
+            .p-gray-cell { background-color: #555555 !important; color: #ffffff !important; font-weight: bold; text-align: center; -webkit-print-color-adjust: exact; print-color-adjust: exact;}
             .p-val-cell { text-align: center; font-weight: bold; }
-            .p-keep-together { page-break-inside: avoid !important; break-inside: avoid !important; display: block; }
+            .p-keep-together { page-break-inside: avoid !important; display: block; }
             .p-notes { font-size: 14.5px; line-height: 1.4; text-align: justify; margin-bottom: 30px; margin-top: 15px;}
             .p-notes ul { margin: 5px 0 5px 20px; padding: 0; }
             .p-notes li { margin-bottom: 4px; }
-            .p-notes p { margin: 4px 0; }
             .p-footer { display: flex; justify-content: space-between; font-size: 14px; text-align: center; }
             .p-sign-box { width: 45%; }
             .p-sign-title { font-weight: bold; font-family: Arial, sans-serif; font-size: 15px; margin-bottom: 70px; }
@@ -93,31 +133,35 @@
 <body>
 
 <!-- MÀN HÌNH ĐĂNG NHẬP -->
-<div id="loginScreen" class="container mt-5" style="max-width: 420px;">
-    <div class="card-box text-center border-0" style="padding: 40px 30px;">
-        <h3 class="mb-2" style="color: var(--primary); font-weight: 800; letter-spacing: -0.5px;">ALEYNA WEDDING</h3>
+<div id="loginScreen" class="container mt-5" style="max-width: 400px;">
+    <div class="card-box text-center border-0" style="padding: 40px 25px;">
+        <h3 class="mb-2" style="color: var(--primary); font-weight: 800;">ALEYNA WEDDING</h3>
         <p class="text-muted mb-4 fw-bold">Hệ Thống Quản Lý Hợp Đồng</p>
         <div class="form-floating mb-3 hidden" id="urlBox"><input type="text" id="apiUrl" class="form-control" placeholder="Link Web App"><label>Link Web App</label></div>
         <div class="form-floating mb-4"><input type="password" id="adminPass" class="form-control" placeholder="Mật khẩu" required><label>Mật khẩu bảo mật</label></div>
-        <button class="btn btn-primary w-100 py-3" onclick="login()">ĐĂNG NHẬP HỆ THỐNG</button>
+        <button class="btn btn-primary w-100 py-3 fs-6" onclick="login()">ĐĂNG NHẬP</button>
     </div>
 </div>
 
 <!-- ỨNG DỤNG CHÍNH -->
 <div id="mainApp" class="app-container hidden">
-    <!-- Header App -->
+    <!-- Header -->
     <div class="d-flex justify-content-between align-items-center mb-4">
         <div>
-            <h2 style="font-weight: 800; color: var(--text-main); margin: 0; letter-spacing: -1px;">Hệ Thống Quản Trị Hợp Đồng</h2>
-            <p class="text-muted mt-1 fw-bold" style="font-size: 0.9rem;">Aleyna Wedding - Áo Dài & Nhân Sự</p>
+            <h3 style="font-weight: 800; color: var(--text-dark); margin: 0; letter-spacing: -0.5px;">Quản Trị Hợp Đồng</h3>
+            <span class="text-muted fw-bold" style="font-size: 0.85rem;">Aleyna Wedding CRM</span>
         </div>
-        <button class="btn btn-outline-danger fw-bold px-4" style="border-radius: 10px; border-width: 2px;" onclick="logout()">Đăng xuất</button>
+        <button class="btn btn-light fw-bold" style="border: 1px solid #cbd5e1; color: #ef4444;" onclick="logout()">Thoát ứng dụng</button>
     </div>
 
     <!-- TABS -->
     <ul class="nav nav-pills" role="tablist">
-        <li class="nav-item"><button class="nav-link active" data-bs-toggle="pill" data-bs-target="#tab-add">➕ TẠO HỢP ĐỒNG MỚI</button></li>
-        <li class="nav-item"><button class="nav-link" data-bs-toggle="pill" data-bs-target="#tab-list" onclick="loadAllContracts()">🔍 HỒ SƠ & TRA CỨU</button></li>
+        <li class="nav-item"><button class="nav-link active" data-bs-toggle="pill" data-bs-target="#tab-add">
+            <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16" style="margin-right:4px; margin-top:-2px;"><path d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2Z"/></svg> TẠO ĐƠN MỚI
+        </button></li>
+        <li class="nav-item"><button class="nav-link" data-bs-toggle="pill" data-bs-target="#tab-list" onclick="loadAllContracts()">
+            <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16" style="margin-right:4px; margin-top:-2px;"><path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/></svg> TRA CỨU HỒ SƠ
+        </button></li>
     </ul>
 
     <div class="tab-content">
@@ -125,65 +169,68 @@
         <div class="tab-pane fade show active" id="tab-add">
             <div class="card-box">
                 <form id="contractForm">
-                    <h5 class="border-bottom pb-3 mb-4 fw-bold" style="color: var(--primary);">I. Thông tin khách hàng</h5>
+                    <h6 class="border-bottom pb-2 mb-3 fw-bold" style="color: var(--primary);">I. Thông tin khách hàng</h6>
                     <div class="row">
-                        <div class="col-md-3 mb-3"><label class="form-label">Mã HĐ (*)</label><input type="text" id="maHD" class="form-control" style="background-color: #f1f5f9; border-color: #cbd5e1;" placeholder="VD: HD0808" required></div>
-                        <div class="col-md-3 mb-3"><label class="form-label">Ngày Lập HĐ</label><input type="date" id="ngayTao" class="form-control" required></div>
-                        <div class="col-md-6 mb-3"><label class="form-label">Tên Khách Hàng (*)</label><input type="text" id="tenKH" class="form-control" placeholder="Nhập tên khách hàng..." required></div>
+                        <div class="col-md-3 mb-3"><label class="form-label">Mã HĐ (*)</label><input type="text" id="maHD" class="form-control" style="background-color: #f8fafc;" required></div>
+                        <div class="col-md-3 mb-3"><label class="form-label">Ngày Lập</label><input type="date" id="ngayTao" class="form-control" required></div>
+                        <div class="col-md-6 mb-3"><label class="form-label">Tên Khách Hàng (*)</label><input type="text" id="tenKH" class="form-control" required></div>
                     </div>
                     <div class="row">
-                        <div class="col-md-4 mb-3"><label class="form-label">Số Điện Thoại</label><input type="text" id="sdt" class="form-control" placeholder="VD: 0987654321"></div>
-                        <div class="col-md-8 mb-3"><label class="form-label">Địa chỉ</label><input type="text" id="diaChi" class="form-control" placeholder="Số nhà, đường, phường, quận..."></div>
+                        <div class="col-md-4 mb-3"><label class="form-label">Số Điện Thoại</label><input type="text" id="sdt" class="form-control"></div>
+                        <div class="col-md-8 mb-3"><label class="form-label">Địa chỉ</label><input type="text" id="diaChi" class="form-control"></div>
                     </div>
                     
-                    <h5 class="border-bottom pb-3 mt-4 mb-4 fw-bold" style="color: var(--primary);">II. Thời gian dịch vụ</h5>
+                    <h6 class="border-bottom pb-2 mt-3 mb-3 fw-bold" style="color: var(--primary);">II. Thời gian dịch vụ</h6>
                     <div class="row">
                         <div class="col-md-3 mb-3"><label class="form-label">Ngày Lễ</label><input type="date" id="ngayLe" class="form-control"></div>
-                        <div class="col-md-3 mb-3"><label class="form-label">Giờ Có Mặt / Thời gian lễ</label><input type="text" id="gioCoMat" class="form-control" placeholder="VD: 9h sáng"></div>
+                        <div class="col-md-3 mb-3"><label class="form-label">Giờ Có Mặt</label><input type="text" id="gioCoMat" class="form-control" placeholder="VD: 9h sáng"></div>
                         <div class="col-md-3 mb-3"><label class="form-label">Ngày Lấy Đồ</label><input type="date" id="ngayLay" class="form-control"></div>
                         <div class="col-md-3 mb-3"><label class="form-label">Ngày Trả Đồ</label><input type="date" id="ngayTra" class="form-control"></div>
                     </div>
 
-                    <h5 class="border-bottom pb-3 mt-4 mb-4 fw-bold" style="color: var(--primary);">III. Chi tiết Sản phẩm / Dịch vụ</h5>
-                    <div class="table-responsive mb-3">
+                    <h6 class="border-bottom pb-2 mt-3 mb-3 fw-bold" style="color: var(--primary);">III. Chi tiết Sản phẩm</h6>
+                    <div class="table-responsive mb-3 border-0">
                         <table class="table table-borderless table-items align-middle" id="itemsTable">
-                            <thead style="border-radius: 10px; overflow: hidden;">
+                            <thead style="border-radius: 8px;">
                                 <tr>
-                                    <th width="40%">Tên Sản phẩm / Ghi chú</th>
-                                    <th width="12%" class="text-center">Số lượng</th>
-                                    <th width="20%" class="text-end">Đơn giá (đ)</th>
-                                    <th width="23%" class="text-end">Thành tiền (đ)</th>
+                                    <th width="45%">Tên Sản phẩm / Ghi chú</th>
+                                    <th width="10%" class="text-center">SL</th>
+                                    <th width="20%" class="text-end">Đơn giá</th>
+                                    <th width="20%" class="text-end">Thành tiền</th>
                                     <th width="5%"></th>
                                 </tr>
                             </thead>
                             <tbody id="itemsBody"></tbody>
                         </table>
-                        <button type="button" class="btn-add-item" onclick="addItemRow()">+ Thêm dòng sản phẩm mới</button>
+                        <button type="button" class="btn-add-item" onclick="addItemRow()">+ Thêm dòng sản phẩm</button>
                     </div>
 
-                    <div class="row mt-5 align-items-start">
+                    <div class="row mt-4 align-items-start">
                         <div class="col-md-6 mb-3">
-                            <label class="form-label">Lưu ý / Ghi chú thanh toán</label>
-                            <textarea id="ghiChu" class="form-control" rows="5" placeholder="Ghi chú thêm..."></textarea>
+                            <label class="form-label">Ghi chú thanh toán / Lưu ý</label>
+                            <textarea id="ghiChu" class="form-control" rows="4"></textarea>
                         </div>
                         <div class="col-md-6 mb-3">
                             <div class="total-box shadow-sm">
                                 <div class="row align-items-center mb-3">
-                                    <div class="col-4 fw-bold text-secondary">TỔNG CỘNG:</div>
-                                    <div class="col-8"><input type="text" id="tongTien" class="form-control text-end fw-bold" style="color: var(--primary); font-size: 1.15rem;" readonly value="0"></div>
+                                    <div class="col-5 fw-bold text-secondary">TỔNG CỘNG:</div>
+                                    <div class="col-7"><input type="text" id="tongTien" class="form-control text-end fw-bold" style="color: var(--primary);" readonly value="0"></div>
                                 </div>
                                 <div class="row align-items-center mb-3">
-                                    <div class="col-4 fw-bold text-secondary">CỌC TRƯỚC:</div>
-                                    <div class="col-8"><input type="text" id="tienCoc" class="form-control text-end fw-bold" style="color: #16a34a; font-size: 1.15rem;" onkeyup="formatCurrencyInput(this); calculateTotal()" value="0"></div>
+                                    <div class="col-5 fw-bold text-secondary">CỌC TRƯỚC:</div>
+                                    <div class="col-7"><input type="text" id="tienCoc" class="form-control text-end fw-bold" style="color: #16a34a;" onkeyup="formatCurrencyInput(this); calculateTotal()" value="0"></div>
                                 </div>
                                 <div class="row align-items-center">
-                                    <div class="col-4 fw-bold text-danger">CÒN LẠI:</div>
-                                    <div class="col-8"><input type="text" id="conLai" class="form-control text-end money-input" readonly value="0"></div>
+                                    <div class="col-5 fw-bold text-danger">CÒN LẠI:</div>
+                                    <div class="col-7"><input type="text" id="conLai" class="form-control text-end money-input" readonly value="0"></div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <button type="button" class="btn btn-primary w-100 py-3 mt-3 fw-bold fs-5" id="btnLuu" onclick="submitContract()">LƯU HỢP ĐỒNG NÀY VÀO HỆ THỐNG</button>
+                    <button type="button" class="btn btn-primary w-100 py-3 mt-2 fs-5" id="btnLuu" onclick="submitContract()">
+                        <svg width="20" height="20" fill="currentColor" viewBox="0 0 16 16" style="margin-right:6px; margin-top:-3px;"><path d="M2 1a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V4.207a2 2 0 0 0-.586-1.414l-2.793-2.793A2 2 0 0 0 9.207 0H2a2 2 0 0 0-2 2zM3 1h6v3H3V1zm8 0h1.793l2.5 2.5V3h-4.293zM2 2a1 1 0 0 1 1-1v4a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V1.414l2.293 2.293a1 1 0 0 1 .293.707V13a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V2z"/></svg> 
+                        LƯU HỢP ĐỒNG NÀY
+                    </button>
                 </form>
             </div>
         </div>
@@ -191,64 +238,66 @@
         <!-- TAB 2: HỒ SƠ & TRA CỨU -->
         <div class="tab-pane fade" id="tab-list">
             <div class="filter-row">
-                <div class="d-flex justify-content-between align-items-center mb-4">
+                <div class="d-flex justify-content-between align-items-center mb-3">
                     <h6 class="fw-bold mb-0" style="color: var(--primary);">BỘ LỌC TÌM KIẾM CHI TIẾT</h6>
-                    <div id="countResult" class="count-badge hidden">Tìm thấy: 0 hợp đồng</div>
+                    <div id="countResult" class="count-badge hidden">0 hợp đồng</div>
                 </div>
                 
-                <div class="row g-3">
+                <div class="row g-2">
                     <div class="col-md-2">
-                        <label class="form-label">Trường tìm kiếm</label>
-                        <select id="filterField" class="form-select fw-bold text-secondary" onchange="applyFilters()">
+                        <label class="form-label">Tìm theo</label>
+                        <select id="filterField" class="form-select" onchange="applyFilters()">
                             <option value="all">Tất cả</option>
-                            <option value="MaHD">Mã Hợp Đồng</option>
-                            <option value="TenKhachHang">Tên Khách Hàng</option>
-                            <option value="SoDienThoai">Số Điện Thoại</option>
+                            <option value="MaHD">Mã HĐ</option>
+                            <option value="TenKhachHang">Tên KH</option>
+                            <option value="SoDienThoai">SĐT</option>
                         </select>
                     </div>
                     <div class="col-md-4">
                         <label class="form-label">Từ khóa</label>
-                        <input type="text" id="searchBox" class="form-control border-primary" placeholder="Nhập từ khóa..." onkeyup="applyFilters()">
+                        <input type="text" id="searchBox" class="form-control" placeholder="Nhập tìm kiếm..." onkeyup="applyFilters()">
                     </div>
                     <div class="col-md-2">
                         <label class="form-label">Sản phẩm</label>
                         <select id="filterProduct" class="form-select" onchange="applyFilters()">
-                            <option value="all">Tất cả SP</option>
-                            <option value="nhân sự">Nhân sự bưng quả</option>
+                            <option value="all">Tất cả</option>
+                            <option value="nhân sự">Nhân sự</option>
                             <option value="áo dài">Áo dài</option>
-                            <option value="khác">Sản phẩm khác</option>
+                            <option value="khác">Khác</option>
                         </select>
                     </div>
+                    
                     <div class="col-md-2">
                         <label class="form-label">Lọc theo Tháng</label>
                         <input type="month" id="filterMonth" class="form-control" onchange="applyFilters()">
                     </div>
                     <div class="col-md-2">
-                        <label class="form-label">Chọn ngày cụ thể</label>
+                        <label class="form-label">Ngày cụ thể</label>
                         <input type="date" id="filterDate" class="form-control" onchange="applyFilters()">
                     </div>
                 </div>
                 
-                <div class="d-flex justify-content-end gap-2 mt-4 pt-3 border-top">
-                    <button class="btn btn-light border px-4 fw-bold text-secondary" style="border-radius: 10px;" onclick="resetFilters()">↺ Làm mới</button>
-                    <button class="btn btn-primary px-4 fw-bold" onclick="loadAllContracts()">⬇ Tải lại Data</button>
+                <div class="d-flex justify-content-end gap-2 mt-3 pt-3 border-top">
+                    <button class="btn btn-light border fw-bold text-secondary" style="border-radius:8px;" onclick="resetFilters()">↺ Làm mới</button>
+                    <button class="btn btn-primary fw-bold" onclick="loadAllContracts()">⬇ Tải lại dữ liệu</button>
                 </div>
             </div>
 
-            <div class="card-box border-0 pt-2">
-                <div id="loadingText" class="text-center py-4 text-primary fw-bold hidden fs-5"><div class="spinner-border spinner-border-sm me-2"></div> Đang kết nối máy chủ...</div>
-                <div class="table-responsive">
-                    <table class="table table-hover align-middle border">
-                        <thead style="background-color: #f1f5f9;">
+            <!-- BẢNG HIỂN THỊ DỮ LIỆU ĐÃ FIX LỆCH CỘT -->
+            <div class="card-box p-0 pt-2 border-0 bg-transparent">
+                <div id="loadingText" class="text-center py-4 text-primary fw-bold hidden fs-5"><div class="spinner-border spinner-border-sm me-2"></div> Đang tải dữ liệu...</div>
+                
+                <div class="table-responsive bg-white" style="border-radius: 12px; border: 1px solid var(--border-color);">
+                    <table class="data-table">
+                        <thead>
                             <tr>
-                                <!-- TIÊU ĐỀ CỘT CÓ CHỨC NĂNG SORT -->
-                                <th style="padding: 15px; color: var(--secondary);" class="sortable-header" onclick="toggleSort('mahd')">Mã HĐ <span id="sort-mahd" class="sort-icon">↕</span></th>
-                                <th style="color: var(--secondary);">Khách Hàng</th>
-                                <th style="color: var(--secondary);">SĐT</th>
-                                <th style="color: var(--secondary);" class="sortable-header" onclick="toggleSort('ngayle')">Ngày Lễ <span id="sort-ngayle" class="sort-icon">↕</span></th>
-                                <th class="text-center sortable-header" style="color: var(--secondary);" onclick="toggleSort('trangthai')">Trạng thái <span id="sort-trangthai" class="sort-icon">↕</span></th>
-                                <th class="text-end sortable-header" style="color: var(--secondary);" onclick="toggleSort('conlai')">Còn Lại <span id="sort-conlai" class="sort-icon">↕</span></th>
-                                <th class="text-center" style="color: var(--secondary);">Thao tác</th>
+                                <th style="width: 10%;" class="sortable-header" onclick="toggleSort('mahd')">Mã HĐ <span id="sort-mahd" class="sort-icon">↕</span></th>
+                                <th style="width: 22%;">Khách Hàng</th>
+                                <th style="width: 13%;">SĐT</th>
+                                <th style="width: 13%;" class="sortable-header" onclick="toggleSort('ngayle')">Ngày Lễ <span id="sort-ngayle" class="sort-icon">↕</span></th>
+                                <th style="width: 12%; text-align: center;" class="sortable-header" onclick="toggleSort('trangthai')">Trạng thái <span id="sort-trangthai" class="sort-icon">↕</span></th>
+                                <th style="width: 12%; text-align: right;" class="sortable-header" onclick="toggleSort('conlai')">Còn Lại <span id="sort-conlai" class="sort-icon">↕</span></th>
+                                <th style="width: 18%; text-align: center;">Thao tác</th>
                             </tr>
                         </thead>
                         <tbody id="listBody"></tbody>
@@ -259,9 +308,7 @@
     </div>
 </div>
 
-<!-- ============================================================== -->
-<!-- GIAO DIỆN IN HỢP ĐỒNG (SAO Y BẢN CHÍNH ALEYNA WEDDING)         -->
-<!-- ============================================================== -->
+<!-- GIAO DIỆN IN PDF (Giữ nguyên) -->
 <div id="print-area">
     <div class="p-header">
         <div class="p-title-box"><div class="p-title-text">HỢP ĐỒNG DỊCH VỤ</div><div class="p-date-text">Hôm nay, ngày <span id="p-d"></span> tháng <span id="p-m"></span> năm <span id="p-y"></span></div></div>
@@ -298,8 +345,6 @@
     </div>
 </div>
 
-<!-- SCRIPTS -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 <script>
     // --- KHỞI TẠO ---
     document.addEventListener("DOMContentLoaded", function() {
@@ -315,7 +360,7 @@
 
     let appUrl = localStorage.getItem("crmApi"); let appPass = localStorage.getItem("crmPass"); 
     let globalContracts = []; 
-    // Biến lưu trạng thái sắp xếp
+    // Biến lưu trạng thái Sắp xếp
     let currentSort = { col: '', asc: true };
 
     if (appUrl && appPass) { document.getElementById("loginScreen").classList.add("hidden"); document.getElementById("mainApp").classList.remove("hidden"); loadAllContracts(); }
@@ -358,7 +403,7 @@
     // --- TÍNH TOÁN FORM ---
     function addItemRow() {
         const tbody = document.getElementById("itemsBody"); const tr = document.createElement("tr");
-        tr.innerHTML = `<td><input type="text" class="form-control i-ten" placeholder="Ví dụ: Áo dài đỏ..."></td><td><input type="number" class="form-control text-center i-sl" value="1" min="1" oninput="calcRow(this)"></td><td><input type="text" class="form-control text-end i-gia" placeholder="0" onkeyup="formatCurrencyInput(this); calcRow(this)"></td><td><input type="text" class="form-control text-end i-tt" style="background-color: #f1f5f9;" readonly value="0"></td><td class="text-center"><button type="button" class="btn btn-sm btn-outline-danger fw-bold fs-5" style="border:none; padding:10px;" onclick="this.closest('tr').remove(); calculateTotal()">×</button></td>`;
+        tr.innerHTML = `<td><input type="text" class="form-control i-ten" placeholder="Ví dụ: Áo dài đỏ..."></td><td><input type="number" class="form-control text-center i-sl" value="1" min="1" oninput="calcRow(this)"></td><td><input type="text" class="form-control text-end i-gia" placeholder="0" onkeyup="formatCurrencyInput(this); calcRow(this)"></td><td><input type="text" class="form-control text-end i-tt" style="background-color: #f1f5f9;" readonly value="0"></td><td class="text-center"><button type="button" class="btn btn-sm btn-outline-danger fw-bold fs-5" style="border:none; padding:8px 12px;" onclick="this.closest('tr').remove(); calculateTotal()">×</button></td>`;
         tbody.appendChild(tr);
     }
 
@@ -489,7 +534,7 @@
             return matchText && matchProduct && matchDate;
         });
 
-        // 2. SẮP XẾP (SORTING)
+        // 2. SẮP XẾP (SORTING CẢI TIẾN)
         if (currentSort.col !== '') {
             filtered.sort((a, b) => {
                 let valA = 0, valB = 0;
@@ -504,7 +549,8 @@
                     let d2 = new Date(getSafeVal(b, ['NgayLe', 'Ngày Lễ']));
                     valA = isNaN(d1.getTime()) ? 0 : d1.getTime();
                     valB = isNaN(d2.getTime()) ? 0 : d2.getTime();
-                    if(valA === 0) return 1; if(valB === 0) return -1; // Đẩy rỗng xuống cuối
+                    // Đẩy các đơn không có ngày lễ xuống cuối cùng
+                    if(valA === 0) return 1; if(valB === 0) return -1;
                     return currentSort.asc ? valA - valB : valB - valA;
                 }
                 else if (currentSort.col === 'conlai') {
@@ -533,10 +579,10 @@
     }
     function updateCount(num) { const badge = document.getElementById("countResult"); badge.innerText = `${num} hợp đồng`; badge.classList.remove("hidden"); }
 
-    // --- RENDER DANH SÁCH ---
+    // --- RENDER BẢNG DANH SÁCH ---
     function renderList(dataArray) {
         const tbody = document.getElementById("listBody");
-        if(dataArray.length === 0) { tbody.innerHTML = "<tr><td colspan='7' class='text-center text-muted p-4 fw-bold'>Chưa có dữ liệu.</td></tr>"; return; }
+        if(dataArray.length === 0) { tbody.innerHTML = "<tr><td colspan='7' class='text-center text-muted p-4 fw-bold'>Không có dữ liệu phù hợp.</td></tr>"; return; }
         tbody.innerHTML = "";
         
         dataArray.forEach(r => {
@@ -550,23 +596,25 @@
             // Tính toán trạng thái
             let status = getStatusDetails(r);
             let badgeHtml = "";
-            if (status.isCompleted) badgeHtml = `<span style="padding:6px 12px; border-radius:8px; font-size:0.75rem; font-weight:700;" class="text-success bg-success bg-opacity-10 border border-success">Đã hoàn thành</span>`;
-            else if (status.isOverdue) badgeHtml = `<span style="padding:6px 12px; border-radius:8px; font-size:0.75rem; font-weight:700;" class="text-danger bg-danger bg-opacity-10 border border-danger">Quá hạn</span>`;
-            else badgeHtml = `<span style="padding:6px 12px; border-radius:8px; font-size:0.75rem; font-weight:700;" class="text-warning bg-warning bg-opacity-10 border border-warning" style="color:#b45309!important;">Đang xử lý</span>`;
+            if (status.isCompleted) badgeHtml = `<span class="badge-status badge-hoanthanh">Đã hoàn thành</span>`;
+            else if (status.isOverdue) badgeHtml = `<span class="badge-status badge-quahan">Quá hạn</span>`;
+            else badgeHtml = `<span class="badge-status badge-dangxuly">Đang xử lý</span>`;
 
-            let btnComplete = !status.isCompleted ? `<button class="btn btn-sm btn-success fw-bold px-2 py-1 mb-1 me-1" ${!status.canComplete ? 'disabled title="Chưa đến ngày lễ"' : ''} onclick="confirmComplete('${maHD}', '${tenKH}')">✅ Xong</button>` : '';
+            // Nút Thao tác chuyên nghiệp SVG
+            let btnComplete = !status.isCompleted ? `<button class="btn-action btn-xong mb-1 me-1" ${!status.canComplete ? 'disabled title="Chưa đến ngày lễ"' : ''} onclick="confirmComplete('${maHD}', '${tenKH}')"><svg width="14" height="14" fill="currentColor" viewBox="0 0 16 16"><path d="M12.736 3.97a.733.733 0 0 1 1.047 0c.286.289.29.756.01 1.05L7.88 12.01a.733.733 0 0 1-1.065.02L3.217 8.384a.757.757 0 0 1 0-1.06.733.733 0 0 1 1.047 0l3.052 3.093 5.4-6.425a.247.247 0 0 1 .02-.022Z"/></svg> Xong</button>` : '';
 
             const tr = document.createElement("tr");
             tr.innerHTML = `
-                <td><strong style="color: var(--primary);">${maHD}</strong></td>
-                <td class="fw-bold">${tenKH}<br><small class="text-secondary fw-normal">${sdt}</small></td>
-                <td class="text-secondary fw-bold">${formatDateView(ngayLeVal)}</td>
+                <td><strong style="color: var(--primary); font-size: 0.95rem;">${maHD}</strong></td>
+                <td class="fw-bold" style="color: var(--text-dark);">${tenKH}</td>
+                <td class="text-secondary fw-semibold">${sdt}</td>
+                <td class="text-secondary fw-semibold">${formatDateView(ngayLeVal)}</td>
                 <td class="text-center">${badgeHtml}</td>
                 <td class="text-end text-danger fw-bold">${formatCurrency(conLai||0)}đ</td>
-                <td class="text-center">
+                <td class="text-center" style="white-space: nowrap;">
                     ${btnComplete}
-                    <button class="btn btn-sm btn-dark fw-bold px-2 py-1 mb-1 me-1 print-btn">🖨️ In</button>
-                    <button class="btn btn-sm btn-outline-danger fw-bold px-2 py-1 mb-1 delete-btn">🗑️</button>
+                    <button class="btn-action btn-in mb-1 me-1 print-btn"><svg width="14" height="14" fill="currentColor" viewBox="0 0 16 16"><path d="M5 1a2 2 0 0 0-2 2v1h10V3a2 2 0 0 0-2-2H5zm6 8H5a1 1 0 0 0-1 1v3a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1v-3a1 1 0 0 0-1-1z"/><path d="M0 7a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2h-1v-2a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v2H2a2 2 0 0 1-2-2V7zm2.5 1a.5.5 0 1 0 0-1 .5.5 0 0 0 0 1z"/></svg> In</button>
+                    <button class="btn-action btn-xoa mb-1 delete-btn"><svg width="14" height="14" fill="currentColor" viewBox="0 0 16 16"><path d="M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5ZM11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H2.506a.58.58 0 0 0-.01 0H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1h-.995a.59.59 0 0 0-.01 0H11Zm1.813 1-.867 10.836a1 1 0 0 1-.997.916H4.885a1 1 0 0 1-.997-.916L3.023 3.5h9.79Z"/></svg> Xóa</button>
                 </td>`;
             
             tr.querySelector('.print-btn').onclick = () => triggerPrint(r);
@@ -577,7 +625,7 @@
 
     // --- HÀM THAO TÁC (SWEET ALERT) ---
     async function confirmComplete(maHD, tenKH) {
-        const result = await Swal.fire({ title: 'Xác nhận hoàn thành?', html: `Đơn của <b>${tenKH}</b> (${maHD}) sẽ được chuyển sang <b>Hoàn Thành</b>.`, icon: 'question', showCancelButton: true, confirmButtonColor: '#16a34a', cancelButtonColor: '#64748b', confirmButtonText: 'Đồng ý', cancelButtonText: 'Hủy' });
+        const result = await Swal.fire({ title: 'Xác nhận hoàn thành?', html: `Đơn của <b>${tenKH}</b> (${maHD}) sẽ chuyển sang <b>Hoàn Thành</b>.`, icon: 'question', showCancelButton: true, confirmButtonColor: '#10b981', cancelButtonColor: '#64748b', confirmButtonText: 'Đồng ý', cancelButtonText: 'Hủy' });
         if (result.isConfirmed) {
             Swal.fire({ title: 'Đang xử lý...', allowOutsideClick: false, didOpen: () => { Swal.showLoading() } });
             const res = await reqGAS({ action: "complete", maHD: maHD });
@@ -586,7 +634,7 @@
     }
 
     async function confirmDelete(maHD, tenKH) {
-        const result = await Swal.fire({ title: 'Xóa vĩnh viễn?', html: `Đang xóa HĐ <b>${maHD}</b> của <b>${tenKH}</b>.<br>Không thể hoàn tác!`, icon: 'warning', showCancelButton: true, confirmButtonColor: '#dc2626', cancelButtonColor: '#64748b', confirmButtonText: 'Xóa ngay', cancelButtonText: 'Hủy' });
+        const result = await Swal.fire({ title: 'Xóa vĩnh viễn?', html: `Đang xóa HĐ <b>${maHD}</b> của <b>${tenKH}</b>.<br>Không thể hoàn tác!`, icon: 'warning', showCancelButton: true, confirmButtonColor: '#ef4444', cancelButtonColor: '#64748b', confirmButtonText: 'Xóa ngay', cancelButtonText: 'Hủy' });
         if (result.isConfirmed) {
             Swal.fire({ title: 'Đang xóa...', allowOutsideClick: false, didOpen: () => { Swal.showLoading() } });
             const res = await reqGAS({ action: "delete", maHD: maHD });
@@ -594,7 +642,7 @@
         }
     }
 
-    // --- IN ẤN ---
+    // --- IN ẤN (GIỮ NGUYÊN BẢN CHUẨN ALEYNA) ---
     function triggerPrint(r) {
         let maHD = String(getSafeVal(r, ['MaHD', 'Mã HĐ'])); let tenKH = String(getSafeVal(r, ['TenKhachHang', 'Tên Khách Hàng']));
         let sdt = String(getSafeVal(r, ['SoDienThoai', 'SĐT', 'SDT'])); if(sdt.length > 0 && sdt.length <= 10 && !sdt.startsWith('0')) sdt = '0' + sdt;
