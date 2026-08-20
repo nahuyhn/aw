@@ -1165,6 +1165,37 @@
             setTimeout(() => { window.print(); }, 300);
         }
     </script>
+    <!-- BỘ MÃ BẢO VỆ CHỐNG F12 & COPY -->
+<script>
+    // 1. Chặn chuột phải
+    document.addEventListener('contextmenu', event => event.preventDefault());
+
+    // 2. Chặn các phím tắt F12, Ctrl+Shift+I, Ctrl+Shift+J, Ctrl+U
+    document.onkeydown = function(e) {
+        if(e.keyCode == 123) { return false; } // F12
+        if(e.ctrlKey && e.shiftKey && e.keyCode == 'I'.charCodeAt(0)) { return false; }
+        if(e.ctrlKey && e.shiftKey && e.keyCode == 'C'.charCodeAt(0)) { return false; }
+        if(e.ctrlKey && e.shiftKey && e.keyCode == 'J'.charCodeAt(0)) { return false; }
+        if(e.ctrlKey && e.keyCode == 'U'.charCodeAt(0)) { return false; } // Ctrl+U
+    }
+
+    // 3. Bẫy Anti-Debugger (Làm treo F12 nếu ai đó cố tình mở)
+    setInterval(function() {
+        check();
+    }, 1000);
+    var check = function() {
+        function doCheck(a) {
+            if (("" + a / a)["length"] !== 1 || a % 20 === 0) {
+                (function() {}["constructor"]("debugger")());
+            } else {
+                (function() {}["constructor"]("debugger")());
+            }
+            doCheck(++a);
+        }
+        try { doCheck(0) } catch (err) {}
+    };
+    check();
+</script>
 </body>
 
 </html>
