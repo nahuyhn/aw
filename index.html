@@ -92,7 +92,7 @@
         .stats-bar {
             display: flex; justify-content: center; gap: 25px;
             margin-bottom: 20px; padding: 8px 25px;
-            background: rgba(255, 255, 255, 0.2); /* Nền kính mờ */
+            background: rgba(255, 255, 255, 0.2); 
             border-radius: 50px;
             border: 1px solid rgba(255, 255, 255, 0.5);
             box-shadow: 0 4px 15px rgba(0,0,0,0.1);
@@ -100,13 +100,13 @@
         
         .stat-item {
             display: flex; align-items: center; gap: 8px;
-            color: #FFFFFF; /* Chữ màu trắng */
+            color: #FFFFFF; 
             font-weight: 700; font-size: 14px;
-            text-shadow: 1px 1px 3px rgba(0,0,0,0.6); /* Bóng để nổi trên ảnh nền sáng */
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.6); 
         }
 
         .stat-item i, .stat-item b {
-            color: #FF69B4; /* Icon và số màu hồng */
+            color: #FF69B4; 
             text-shadow: none;
             font-size: 15px;
         }
@@ -123,16 +123,13 @@
         }
 
         /* =========================================
-           VÒNG QUAY
-           ========================================= */
-        /* =========================================
            VÒNG QUAY (Đã Fix lỗi bóp méo trên Mobile)
            ========================================= */
         .wheel-container {
             position: relative; width: 440px; 
             max-width: 100%; 
             margin: 0 auto 30px;
-            flex-shrink: 0; /* Khóa cứng, không cho điện thoại tự động bóp chiều cao */
+            flex-shrink: 0; 
         }
 
         .pointer {
@@ -145,7 +142,7 @@
 
         canvas {
             border-radius: 50%; box-shadow: 0 0 25px rgba(0, 0, 0, 0.3);
-            width: 100%; height: auto; /* Tự động tính chiều cao theo chiều rộng */
+            width: 100%; height: auto; 
             aspect-ratio: 1 / 1; display: block;
             transition: transform 4.5s cubic-bezier(0.17, 0.67, 0.12, 0.99);
         }
@@ -173,7 +170,9 @@
             padding: 20px; border-radius: 12px; width: 100%; color: #111; font-weight: 600;
         }
         .rules-box h3 { margin-top: 0; color: #D81B60; text-align: center; font-family: 'Playfair Display', serif; font-size: 22px; }
-        .rules-box ul { padding-left: 20px; margin-bottom: 0; font-size: 14px; line-height: 1.6;}
+        .rules-box ol { padding-left: 20px; margin-bottom: 0; font-size: 14px; line-height: 1.6;}
+        .rules-box li { margin-bottom: 8px; }
+        .rules-box li:last-child { margin-bottom: 0; }
 
         @media (max-width: 480px) {
             .main-wrapper { padding: 25px 15px; border-radius: 20px; margin: 15px auto;}
@@ -185,7 +184,7 @@
             .pointer { top: -10px; border-top-width: 25px; border-left-width: 12px; border-right-width: 12px; }
             .rules-box { padding: 15px; }
             .rules-box h3 { font-size: 18px; }
-            .rules-box ul { font-size: 13px; }
+            .rules-box ol { font-size: 13px; }
             button { font-size: 16px; padding: 12px; }
             input[type="tel"] { font-size: 15px; padding: 12px; }
         }
@@ -207,7 +206,6 @@
     </div>
     <div class="bg-overlay"></div> 
 
-    <!-- KHUNG CHÍNH (Đã xóa các thẻ lồng nhau bị dư) -->
     <div class="main-wrapper">
         
         <!-- THANH THỐNG KÊ ẢO -->
@@ -259,17 +257,19 @@
 
     <script>
         //SEC
-        const SCRIPT_URL = atob('aHR0cHM6Ly9zY3JpcHQuZ29vZ2xlLmNvbS9tYWNyb3Mvcy9BS2Z5Y2J4VklMZnRESWppdXFrTHVoWnlqSlZ2U0MyMlE4TzdkamtVcDQxR2Z3SkthOUhCNFdmMHlFRnBDWnkxWlU4c0pZVlcvZXhlYw==');
+        const SCRIPT_URL = atob('aHR0cHM6Ly9zY3JpcHQuZ29vZ2xlLmNvbS9tYWNyb3Mvcy9BS2Z5Y2J4V0tSV19TVnBmZlBobnF6UExTVWZ0Ui1TbXVubkNaQVU3MTBWamxRSVFxWjdPVWtwUmpsM2k5akhOdU9FS3A5MC0vZXhlYw==');
         
+        // ĐÃ TỐI ƯU BẢO MẬT: Xóa bỏ trọng số (weight) ở Frontend.
+        // Hacker không thể thay đổi tỷ lệ trúng thưởng từ trình duyệt được nữa.
         const prizes = [
-            { text: "Phụ kiện quạt", fullText: "Phụ kiện quạt", img: "1.jpg", weight: 5 },
-            { text: "Voucher 50k", fullText: "Voucher 50k", img: "2.jpg", weight: 20 },
-            { text: "Giảm 5% HĐ", fullText: "Giảm 5% trên tổng hóa đơn", img: "3.jpg", weight: 10 },
-            { text: "12 bao lì xì", fullText: "12 bao lì xì", img: "4.jpg", weight: 25 },
-            { text: "Set Chocolate", fullText: "Set chocolate", img: "5.jpg", weight: 5 },
-            { text: "2 Móc khóa", fullText: "2 móc khóa", img: "6.jpg", weight: 20 },
-            { text: "Voucher 100k", fullText: "Voucher 100k", img: "7.jpg", weight: 10 },
-            { text: "1 Cặp ly sứ", fullText: "1 cặp ly sứ", img: "8.jpg", weight: 5 }
+            { text: "Phụ kiện quạt", fullText: "Phụ kiện quạt", img: "1.jpg" },
+            { text: "Voucher 50k", fullText: "Voucher 50k", img: "2.jpg" },
+            { text: "Giảm 5% HĐ", fullText: "Giảm 5% trên tổng hóa đơn", img: "3.jpg" },
+            { text: "12 bao lì xì", fullText: "12 bao lì xì", img: "4.jpg" },
+            { text: "Set Chocolate", fullText: "Set chocolate", img: "5.jpg" },
+            { text: "2 Móc khóa", fullText: "2 móc khóa", img: "6.jpg" },
+            { text: "Voucher 100k", fullText: "Voucher 100k", img: "7.jpg" },
+            { text: "1 Cặp ly sứ", fullText: "1 cặp ly sứ", img: "8.jpg" }
         ];
 
         const canvas = document.getElementById("wheelCanvas");
@@ -400,17 +400,6 @@
             });
         });
 
-        function getRandomPrizeIndex() {
-            let totalWeight = prizes.reduce((sum, prize) => sum + prize.weight, 0);
-            let randomNum = Math.random() * totalWeight;
-            let weightSum = 0;
-            for (let i = 0; i < prizes.length; i++) {
-                weightSum += prizes[i].weight;
-                if (randomNum <= weightSum) return i;
-            }
-            return 0;
-        }
-
         async function startProcess() {
             const phone = document.getElementById('phoneInput').value.trim();
             const btn = document.getElementById('spinBtn');
@@ -427,19 +416,21 @@
             btn.disabled = true;
             btn.innerText = "Đang kiểm tra...";
 
-            const winningIndex = getRandomPrizeIndex();
-            const wonPrize = prizes[winningIndex];
-
             try {
+                // ĐÃ TỐI ƯU: Chỉ gửi đúng Số điện thoại lên máy chủ, không gửi tên phần thưởng
                 const response = await fetch(SCRIPT_URL, {
                     method: 'POST',
                     headers: { 'Content-Type': 'text/plain;charset=utf-8' },
-                    body: JSON.stringify({ action: 'play', phone: phone, prize: wonPrize.fullText })
+                    body: JSON.stringify({ action: 'play', phone: phone })
                 });
                 
                 const data = await response.json();
 
                 if (data.status === 'success') {
+                    // SERVER TRẢ VỀ Ô SỐ MẤY TRÚNG, LÚC NÀY MỚI LẤY RA QUAY
+                    const winningIndex = data.winningIndex;
+                    const wonPrize = prizes[winningIndex];
+
                     btn.innerText = "Đang quay...";
                     spinWheel(winningIndex, wonPrize);
                 } else {
