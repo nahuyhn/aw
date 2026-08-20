@@ -5,38 +5,51 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="robots" content="noindex, nofollow">
     <title>Quản Lý Hợp Đồng - AleynaWedding</title>
+    <!-- Font Inter hiện đại -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
         /* ========================================= */
-        /* CSS GIAO DIỆN WEB (QUẢN TRỊ CAO CẤP)      */
+        /* CSS GIAO DIỆN WEB (PHONG CÁCH CRM SAAS)   */
         /* ========================================= */
-        :root { --primary: #1e3a8a; --secondary: #475569; --accent: #2563eb; --bg: #f8fafc; }
-        body { background-color: var(--bg); font-family: 'Segoe UI', system-ui, sans-serif; color: #334155; }
+        :root { 
+            --primary: #4f46e5; /* Indigo 600 */
+            --primary-hover: #4338ca;
+            --secondary: #64748b; 
+            --accent: #3b82f6; 
+            --bg: #f8fafc; 
+            --text-main: #1e293b;
+        }
+        body { background-color: var(--bg); font-family: 'Inter', sans-serif; color: var(--text-main); }
         .hidden { display: none !important; }
-        .app-container { max-width: 1250px; margin: 0 auto; padding-top: 20px; }
+        .app-container { max-width: 1250px; margin: 0 auto; padding-top: 30px; padding-bottom: 50px;}
         
         /* Box & Form */
-        .card-box { background: white; border-radius: 16px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05), 0 2px 4px -2px rgba(0,0,0,0.05); padding: 30px; margin-bottom: 25px; border: 1px solid #e2e8f0; }
-        .form-label { font-weight: 600; color: var(--secondary); font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 6px; }
-        .form-control, .form-select { border-radius: 8px; border: 1px solid #cbd5e1; padding: 10px 15px; font-size: 0.95rem; }
-        .form-control:focus, .form-select:focus { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15); }
+        .card-box { background: white; border-radius: 16px; box-shadow: 0 10px 25px -5px rgba(0,0,0,0.05), 0 8px 10px -6px rgba(0,0,0,0.01); padding: 35px; border: 1px solid #e2e8f0; margin-bottom: 25px;}
+        .form-label { font-weight: 700; color: #475569; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 8px; }
+        .form-control, .form-select { border-radius: 10px; border: 1px solid #cbd5e1; padding: 12px 15px; font-size: 0.95rem; font-weight: 500; color: var(--text-main); transition: 0.2s;}
+        .form-control:focus, .form-select:focus { border-color: var(--primary); box-shadow: 0 0 0 4px rgba(79, 70, 229, 0.15); outline: none; }
         
-        /* Tabs */
-        .nav-pills .nav-link { color: var(--secondary); font-weight: 600; border-radius: 8px; padding: 12px 24px; margin-right: 10px; transition: all 0.2s; }
-        .nav-pills .nav-link:hover { background-color: #f1f5f9; }
-        .nav-pills .nav-link.active { background-color: var(--primary); color: white; box-shadow: 0 4px 6px -1px rgba(30, 58, 138, 0.2); }
+        /* Buttons */
+        .btn-primary { background-color: var(--primary); border-color: var(--primary); box-shadow: 0 4px 6px -1px rgba(79, 70, 229, 0.2); border-radius: 10px; font-weight: 600; padding: 12px 20px;}
+        .btn-primary:hover { background-color: var(--primary-hover); transform: translateY(-1px); box-shadow: 0 6px 8px -1px rgba(79, 70, 229, 0.3); }
         
-        /* Table Web */
-        .table-items th { background-color: #f1f5f9; font-size: 0.8rem; text-transform: uppercase; color: var(--secondary); border-bottom-width: 2px; }
-        .btn-add-item { border: 2px dashed #cbd5e1; background: transparent; color: #64748b; border-radius: 8px; padding: 12px; width: 100%; transition: 0.3s; font-weight: 600; }
-        .btn-add-item:hover { border-color: var(--accent); color: var(--accent); background: #eff6ff; }
-        .total-box { background: #f8fafc; border-radius: 12px; padding: 20px; border: 1px solid #e2e8f0; }
-        .money-input { font-weight: 800; color: #dc2626; font-size: 1.2rem; background-color: white !important; }
+        /* Tabs Custom */
+        .nav-pills { background: #e2e8f0; padding: 6px; border-radius: 14px; display: inline-flex; margin-bottom: 30px; }
+        .nav-pills .nav-link { color: var(--secondary); font-weight: 700; border-radius: 10px; padding: 12px 28px; transition: 0.3s; font-size: 0.95rem; }
+        .nav-pills .nav-link:hover { color: var(--primary); }
+        .nav-pills .nav-link.active { background-color: white; color: var(--primary); box-shadow: 0 4px 6px rgba(0,0,0,0.05); }
         
-        /* Filter */
-        .filter-row { background-color: #ffffff; padding: 25px; border-radius: 12px; border: 1px solid #e2e8f0; margin-bottom: 25px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.02); }
-        .count-badge { background-color: #eff6ff; color: #1d4ed8; padding: 6px 16px; border-radius: 20px; font-weight: 700; font-size: 0.85rem; border: 1px solid #bfdbfe; }
-        .table-hover tbody tr:hover { background-color: #f8fafc; }
+        /* Tables & Extras */
+        .table-items th { background-color: #f8fafc; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px; color: var(--secondary); border-bottom: 2px solid #e2e8f0; padding: 15px; }
+        .btn-add-item { border: 2px dashed #cbd5e1; background: transparent; color: var(--secondary); border-radius: 10px; padding: 15px; width: 100%; transition: 0.3s; font-weight: 700; font-size: 0.9rem;}
+        .btn-add-item:hover { border-color: var(--primary); color: var(--primary); background: #eef2ff; }
+        .total-box { background: linear-gradient(145deg, #f8fafc, #f1f5f9); border-radius: 14px; padding: 25px; border: 1px solid #e2e8f0; }
+        .money-input { font-weight: 800; color: #dc2626; font-size: 1.25rem; background-color: white !important; border: 2px solid #e2e8f0; }
+        
+        /* Filter Box */
+        .filter-row { background-color: #ffffff; padding: 25px; border-radius: 14px; border: 1px solid #e2e8f0; margin-bottom: 25px; box-shadow: 0 4px 10px rgba(0,0,0,0.02); }
+        .count-badge { background-color: #eef2ff; color: var(--primary); padding: 8px 18px; border-radius: 20px; font-weight: 800; font-size: 0.85rem; border: 1px solid #c7d2fe; }
 
         @media screen { #print-area { display: none !important; } }
 
@@ -46,7 +59,7 @@
         @media print {
             #loginScreen, #mainApp { display: none !important; }
             
-            /* Margin 0 giúp xóa Header/Footer mặc định nếu user quên tắt */
+            /* Lệnh này xóa sạch Header/Footer mặc định của Chrome */
             @page { size: A4 portrait; margin: 0; }
             
             #print-area { 
@@ -58,32 +71,32 @@
                 box-sizing: border-box;
             }
             
-            .p-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; padding-bottom: 10px; }
+            .p-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; padding-bottom: 5px; }
             .p-title-box { text-align: left; }
-            .p-title-text { font-size: 26px; font-weight: bold; margin-bottom: 5px; font-family: Arial, Helvetica, sans-serif; }
+            .p-title-text { font-size: 26px; font-weight: bold; margin-bottom: 5px; font-family: Arial, Helvetica, sans-serif; letter-spacing: 0.5px;}
             .p-date-text { font-size: 15px; }
             
             .p-logo-box { text-align: center; }
-            .logo-name { font-size: 17px; letter-spacing: 3px; margin-bottom: 5px; font-weight: bold; }
-            .logo-sub { font-size: 11px; letter-spacing: 1px; font-weight: bold; font-family: Arial, Helvetica, sans-serif; }
+            .logo-name { font-size: 17px; letter-spacing: 3px; margin-bottom: 5px; font-weight: bold; font-family: 'Times New Roman', serif;}
+            .logo-sub { font-size: 11px; letter-spacing: 1.5px; font-weight: bold; font-family: Arial, Helvetica, sans-serif; }
 
-            .p-info { margin-bottom: 20px; font-size: 15px; line-height: 1.8; }
+            .p-info { margin-bottom: 15px; font-size: 15px; line-height: 1.8; }
             .r-flex { display: flex; justify-content: space-between; margin-bottom: 4px; }
             .i-col { display: flex; align-items: flex-end; white-space: nowrap; }
             .dot { border-bottom: 1px dotted #000; flex-grow: 1; margin-left: 5px; min-height: 18px; display: inline-block; padding-left: 5px; font-weight: bold; font-family: Arial, sans-serif;}
 
-            .p-table { width: 100%; border-collapse: collapse; margin-bottom: 15px; border: 2px solid #000; font-family: Arial, Helvetica, sans-serif; }
-            .p-table th, .p-table td { border: 1px solid #000; padding: 8px 5px; font-size: 14px; }
+            .p-table { width: 100%; border-collapse: collapse; margin-bottom: 10px; border: 2px solid #000; font-family: Arial, Helvetica, sans-serif; }
+            .p-table th, .p-table td { border: 1px solid #000; padding: 7px 5px; font-size: 14px; }
             .p-table th { background-color: #555555 !important; color: #ffffff !important; font-weight: bold; text-align: center; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
             .p-table td.center { text-align: center; }
             
             .p-gray-cell { background-color: #555555 !important; color: #ffffff !important; font-weight: bold; text-align: center; -webkit-print-color-adjust: exact; print-color-adjust: exact; letter-spacing: 1px; }
             .p-val-cell { text-align: center; font-weight: bold; }
             
-            /* Đóng gói khối Lưu ý và Chữ ký để không bị tách trang */
-            .p-keep-together { page-break-inside: avoid; }
+            /* Ép khối chữ ký không bị tách trang */
+            .p-keep-together { page-break-inside: avoid !important; break-inside: avoid !important; display: block; }
 
-            .p-notes { font-size: 14.5px; line-height: 1.4; text-align: justify; margin-bottom: 40px; margin-top: 20px;}
+            .p-notes { font-size: 14.5px; line-height: 1.4; text-align: justify; margin-bottom: 30px; margin-top: 15px;}
             .p-notes ul { margin: 5px 0 5px 20px; padding: 0; }
             .p-notes li { margin-bottom: 4px; }
             .p-notes p { margin: 4px 0; }
@@ -91,56 +104,57 @@
             .p-footer { display: flex; justify-content: space-between; font-size: 14px; text-align: center; }
             .p-sign-box { width: 45%; }
             .p-sign-title { font-weight: bold; font-family: Arial, sans-serif; font-size: 15px; margin-bottom: 70px; }
-            .p-footer-info { margin-top: 20px; line-height: 1.5; }
+            .p-footer-info { margin-top: 15px; line-height: 1.5; }
         }
     </style>
 </head>
 <body>
 
-<!-- ĐĂNG NHẬP -->
+<!-- MÀN HÌNH ĐĂNG NHẬP -->
 <div id="loginScreen" class="container mt-5" style="max-width: 420px;">
-    <div class="card-box text-center border-0" style="box-shadow: 0 10px 25px rgba(0,0,0,0.1);">
+    <div class="card-box text-center border-0" style="padding: 40px 30px;">
         <h3 class="mb-2" style="color: var(--primary); font-weight: 800; letter-spacing: -0.5px;">ALEYNA WEDDING</h3>
         <p class="text-muted mb-4 fw-bold">Hệ Thống Quản Lý Hợp Đồng</p>
         <div class="form-floating mb-3 hidden" id="urlBox"><input type="text" id="apiUrl" class="form-control" placeholder="Link Web App"><label>Link Web App</label></div>
         <div class="form-floating mb-4"><input type="password" id="adminPass" class="form-control" placeholder="Mật khẩu" required><label>Mật khẩu bảo mật</label></div>
-        <button class="btn btn-primary w-100 py-3" style="font-weight: 700; font-size: 1.1rem; border-radius: 8px; background-color: var(--primary);" onclick="login()">ĐĂNG NHẬP HỆ THỐNG</button>
+        <button class="btn btn-primary w-100 py-3" onclick="login()">ĐĂNG NHẬP HỆ THỐNG</button>
     </div>
 </div>
 
 <!-- ỨNG DỤNG CHÍNH -->
 <div id="mainApp" class="app-container hidden">
-    <div class="d-flex justify-content-between align-items-center mb-4 px-3">
-        <h2 style="font-weight: 800; color: var(--primary); margin: 0; display: flex; align-items: center; gap: 10px;">
-            <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="currentColor" class="bi bi-file-earmark-text" viewBox="0 0 16 16"><path d="M5.5 7a.5.5 0 0 0 0 1h5a.5.5 0 0 0 0-1zM5 9.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5m0 2a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 0 1h-2a.5.5 0 0 1-.5-.5"/><path d="M9.5 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V4.5zm0 1v2.5a1 1 0 0 0 1 1h2.5zM3 2a1 1 0 0 1 1-1h5.5v2a2 2 0 0 0 2 2h2v10a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1z"/></svg>
-            Quản Lý Hợp Đồng
-        </h2>
-        <button class="btn btn-outline-danger fw-bold px-4" onclick="logout()">Đăng xuất</button>
+    <!-- Header App -->
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <div>
+            <h2 style="font-weight: 800; color: var(--text-main); margin: 0; letter-spacing: -1px;">Hệ Thống Quản Trị Hợp Đồng</h2>
+            <p class="text-muted mt-1 fw-bold" style="font-size: 0.9rem;">Aleyna Wedding - Áo Dài & Nhân Sự</p>
+        </div>
+        <button class="btn btn-outline-danger fw-bold px-4" style="border-radius: 10px; border-width: 2px;" onclick="logout()">Đăng xuất</button>
     </div>
 
     <!-- TABS -->
-    <ul class="nav nav-pills mb-4 px-3" role="tablist">
+    <ul class="nav nav-pills" role="tablist">
         <li class="nav-item"><button class="nav-link active" data-bs-toggle="pill" data-bs-target="#tab-add">➕ TẠO HỢP ĐỒNG MỚI</button></li>
         <li class="nav-item"><button class="nav-link" data-bs-toggle="pill" data-bs-target="#tab-list" onclick="loadAllContracts()">🔍 HỒ SƠ & TRA CỨU</button></li>
     </ul>
 
-    <div class="tab-content px-3">
+    <div class="tab-content">
         <!-- TAB 1: FORM TẠO HỢP ĐỒNG -->
         <div class="tab-pane fade show active" id="tab-add">
-            <div class="card-box border-0">
+            <div class="card-box">
                 <form id="contractForm">
-                    <h5 class="border-bottom pb-2 mb-4 fw-bold" style="color: var(--primary);">I. Thông tin chung</h5>
+                    <h5 class="border-bottom pb-3 mb-4 fw-bold" style="color: var(--primary);">I. Thông tin khách hàng</h5>
                     <div class="row">
-                        <div class="col-md-3 mb-3"><label class="form-label">Mã HĐ (*)</label><input type="text" id="maHD" class="form-control" style="background-color: #f8fafc;" placeholder="VD: HD0808" required></div>
+                        <div class="col-md-3 mb-3"><label class="form-label">Mã HĐ (*)</label><input type="text" id="maHD" class="form-control" style="background-color: #f1f5f9; border-color: #cbd5e1;" placeholder="VD: HD0808" required></div>
                         <div class="col-md-3 mb-3"><label class="form-label">Ngày Lập HĐ</label><input type="date" id="ngayTao" class="form-control" required></div>
                         <div class="col-md-6 mb-3"><label class="form-label">Tên Khách Hàng (*)</label><input type="text" id="tenKH" class="form-control" placeholder="Nhập tên khách hàng..." required></div>
                     </div>
                     <div class="row">
-                        <div class="col-md-4 mb-3"><label class="form-label">Số Điện Thoại</label><input type="text" id="sdt" class="form-control" placeholder="VD: 0987654321..."></div>
+                        <div class="col-md-4 mb-3"><label class="form-label">Số Điện Thoại</label><input type="text" id="sdt" class="form-control" placeholder="VD: 0987654321"></div>
                         <div class="col-md-8 mb-3"><label class="form-label">Địa chỉ</label><input type="text" id="diaChi" class="form-control" placeholder="Số nhà, đường, phường, quận..."></div>
                     </div>
                     
-                    <h5 class="border-bottom pb-2 mt-4 mb-4 fw-bold" style="color: var(--primary);">II. Thời gian dịch vụ</h5>
+                    <h5 class="border-bottom pb-3 mt-4 mb-4 fw-bold" style="color: var(--primary);">II. Thời gian dịch vụ</h5>
                     <div class="row">
                         <div class="col-md-3 mb-3"><label class="form-label">Ngày Lễ</label><input type="date" id="ngayLe" class="form-control"></div>
                         <div class="col-md-3 mb-3"><label class="form-label">Giờ Có Mặt / Thời gian lễ</label><input type="text" id="gioCoMat" class="form-control" placeholder="VD: 9h sáng"></div>
@@ -148,15 +162,15 @@
                         <div class="col-md-3 mb-3"><label class="form-label">Ngày Trả Đồ</label><input type="date" id="ngayTra" class="form-control"></div>
                     </div>
 
-                    <h5 class="border-bottom pb-2 mt-4 mb-4 fw-bold" style="color: var(--primary);">III. Chi tiết Sản phẩm / Dịch vụ</h5>
+                    <h5 class="border-bottom pb-3 mt-4 mb-4 fw-bold" style="color: var(--primary);">III. Chi tiết Sản phẩm / Dịch vụ</h5>
                     <div class="table-responsive mb-3">
-                        <table class="table table-bordered table-items align-middle" id="itemsTable">
-                            <thead>
+                        <table class="table table-borderless table-items align-middle" id="itemsTable">
+                            <thead style="border-radius: 10px; overflow: hidden;">
                                 <tr>
-                                    <th width="40%">Tên Sản phẩm / Ghi chú chi tiết</th>
-                                    <th width="15%" class="text-center">Số lượng</th>
+                                    <th width="40%">Tên Sản phẩm / Ghi chú</th>
+                                    <th width="12%" class="text-center">Số lượng</th>
                                     <th width="20%" class="text-end">Đơn giá (đ)</th>
-                                    <th width="20%" class="text-end">Thành tiền (đ)</th>
+                                    <th width="23%" class="text-end">Thành tiền (đ)</th>
                                     <th width="5%"></th>
                                 </tr>
                             </thead>
@@ -171,23 +185,23 @@
                             <textarea id="ghiChu" class="form-control" rows="5" placeholder="Ghi chú thêm..."></textarea>
                         </div>
                         <div class="col-md-6 mb-3">
-                            <div class="total-box">
+                            <div class="total-box shadow-sm">
                                 <div class="row align-items-center mb-3">
                                     <div class="col-4 fw-bold text-secondary">TỔNG CỘNG:</div>
-                                    <div class="col-8"><input type="text" id="tongTien" class="form-control form-control-lg text-end fw-bold" style="color: var(--primary);" readonly value="0"></div>
+                                    <div class="col-8"><input type="text" id="tongTien" class="form-control text-end fw-bold" style="color: var(--primary); font-size: 1.15rem;" readonly value="0"></div>
                                 </div>
                                 <div class="row align-items-center mb-3">
                                     <div class="col-4 fw-bold text-secondary">CỌC TRƯỚC:</div>
-                                    <div class="col-8"><input type="text" id="tienCoc" class="form-control form-control-lg text-end fw-bold" style="color: #16a34a;" onkeyup="formatCurrencyInput(this); calculateTotal()" value="0"></div>
+                                    <div class="col-8"><input type="text" id="tienCoc" class="form-control text-end fw-bold" style="color: #16a34a; font-size: 1.15rem;" onkeyup="formatCurrencyInput(this); calculateTotal()" value="0"></div>
                                 </div>
                                 <div class="row align-items-center">
-                                    <div class="col-4 fw-bold text-danger fs-5">CÒN LẠI:</div>
-                                    <div class="col-8"><input type="text" id="conLai" class="form-control form-control-lg text-end money-input text-danger" readonly value="0"></div>
+                                    <div class="col-4 fw-bold text-danger">CÒN LẠI:</div>
+                                    <div class="col-8"><input type="text" id="conLai" class="form-control text-end money-input" readonly value="0"></div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <button type="button" class="btn btn-primary w-100 py-3 mt-4 fw-bold fs-5 shadow-sm" id="btnLuu" onclick="submitContract()">LƯU HỢP ĐỒNG NÀY VÀO HỆ THỐNG</button>
+                    <button type="button" class="btn btn-primary w-100 py-3 mt-3 fw-bold fs-5" id="btnLuu" onclick="submitContract()">LƯU HỢP ĐỒNG NÀY VÀO HỆ THỐNG</button>
                     <div id="addResult" class="mt-3 text-center fw-bold fs-5"></div>
                 </form>
             </div>
@@ -197,15 +211,15 @@
         <div class="tab-pane fade" id="tab-list">
             <div class="filter-row">
                 <div class="d-flex justify-content-between align-items-center mb-4">
-                    <h5 class="fw-bold mb-0" style="color: var(--primary);"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-funnel-fill me-2" viewBox="0 0 16 16"><path d="M1.5 1.5A.5.5 0 0 1 2 1h12a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-.128.334L10 8.692V13.5a.5.5 0 0 1-.342.474l-3 1A.5.5 0 0 1 6 14.5V8.692L1.628 3.834A.5.5 0 0 1 1.5 3.5z"/></svg>BỘ LỌC TÌM KIẾM</h5>
+                    <h6 class="fw-bold mb-0" style="color: var(--primary);">BỘ LỌC TÌM KIẾM CHI TIẾT</h6>
                     <div id="countResult" class="count-badge hidden">Tìm thấy: 0 hợp đồng</div>
                 </div>
                 
                 <div class="row g-3">
                     <div class="col-md-2">
                         <label class="form-label">Trường tìm kiếm</label>
-                        <select id="filterField" class="form-select fw-bold text-secondary" onchange="applyFilters()">
-                            <option value="all">Tất cả</option>
+                        <select id="filterField" class="form-select" onchange="applyFilters()">
+                            <option value="all">Tất cả thông tin</option>
                             <option value="MaHD">Mã Hợp Đồng</option>
                             <option value="TenKhachHang">Tên Khách Hàng</option>
                             <option value="SoDienThoai">Số Điện Thoại</option>
@@ -216,16 +230,16 @@
                         <input type="text" id="searchBox" class="form-control border-primary" placeholder="Nhập từ khóa..." onkeyup="applyFilters()">
                     </div>
                     <div class="col-md-2">
-                        <label class="form-label">Loại Sản phẩm</label>
+                        <label class="form-label">Sản phẩm</label>
                         <select id="filterProduct" class="form-select" onchange="applyFilters()">
                             <option value="all">Tất cả SP</option>
                             <option value="nhân sự">Nhân sự bưng quả</option>
                             <option value="áo dài">Áo dài</option>
-                            <option value="khác">Sản phẩm khác</option>
+                            <option value="khác">Khác</option>
                         </select>
                     </div>
                     <div class="col-md-2">
-                        <label class="form-label">Lọc theo Thời gian</label>
+                        <label class="form-label">Lọc thời gian</label>
                         <select id="filterDateType" class="form-select" onchange="applyFilters()">
                             <option value="NgayLe">Ngày Lễ</option>
                             <option value="NgayTao">Ngày Lập HĐ</option>
@@ -239,18 +253,24 @@
                 </div>
                 
                 <div class="d-flex justify-content-end gap-2 mt-4 pt-3 border-top">
-                    <button class="btn btn-light border px-4 fw-bold text-secondary" onclick="resetFilters()">↺ Làm mới</button>
-                    <button class="btn btn-primary px-4 fw-bold" onclick="loadAllContracts()">⬇ Tải lại Data</button>
+                    <button class="btn btn-light border px-4 fw-bold text-secondary" style="border-radius: 10px;" onclick="resetFilters()">Làm mới</button>
+                    <button class="btn btn-primary px-4 fw-bold" onclick="loadAllContracts()">Tải lại dữ liệu</button>
                 </div>
             </div>
 
-            <div class="card-box border-0 pt-2">
+            <div class="card-box pt-2">
                 <div id="loadingText" class="text-center py-4 text-primary fw-bold hidden fs-5"><div class="spinner-border spinner-border-sm me-2"></div> Đang tải dữ liệu...</div>
                 <div class="table-responsive">
                     <table class="table table-hover align-middle border">
-                        <thead class="table-dark" style="--bs-table-bg: var(--secondary);">
+                        <thead style="background-color: #f1f5f9;">
                             <tr>
-                                <th>Mã HĐ</th><th>Khách Hàng</th><th>SĐT</th><th>Ngày Lễ</th><th class="text-end">Tổng Tiền</th><th class="text-end">Còn Lại</th><th class="text-center">Thao tác</th>
+                                <th style="padding: 15px; color: var(--secondary);">Mã HĐ</th>
+                                <th style="color: var(--secondary);">Khách Hàng</th>
+                                <th style="color: var(--secondary);">SĐT</th>
+                                <th style="color: var(--secondary);">Ngày Lễ</th>
+                                <th class="text-end" style="color: var(--secondary);">Tổng Tiền</th>
+                                <th class="text-end" style="color: var(--secondary);">Còn Lại</th>
+                                <th class="text-center" style="color: var(--secondary);">Thao tác</th>
                             </tr>
                         </thead>
                         <tbody id="listBody"></tbody>
@@ -272,7 +292,6 @@
             <div class="p-date-text">Hôm nay, ngày <span id="p-d"></span> tháng <span id="p-m"></span> năm <span id="p-y"></span></div>
         </div>
         <div class="p-logo-box">
-            <!-- Đổi Logo chuẩn Aleyna -->
             <div class="logo-name">A L E Y N A &nbsp; W E D D I N G</div>
             <div class="logo-sub">ÁO DÀI & NHÂN SỰ</div>
         </div>
@@ -330,9 +349,8 @@
         </tfoot>
     </table>
 
-    <!-- Khối Lưu ý và Chữ ký được giữ nguyên trang -->
+    <!-- Khối Lưu ý và Chữ ký được đóng gói chung để không bị tách trang -->
     <div class="p-keep-together">
-        <!-- Lưu ý -->
         <div class="p-notes">
             <strong>NHỮNG LƯU Ý NHỎ NHÀ ALEYNA :</strong>
             <ul>
@@ -347,7 +365,6 @@
             </ul>
         </div>
 
-        <!-- Chữ ký -->
         <div class="p-footer">
             <div class="p-sign-box">
                 <div class="p-sign-title">KHÁCH HÀNG</div>
@@ -386,31 +403,37 @@
         } catch (e) { alert("Lỗi kết nối Server!"); }
     }
 
-    // Các hàm tính toán
     function formatCurrency(num) { return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, "."); }
     function parseCurrency(str) { return parseInt(str.toString().replace(/\./g, '').replace(/,/g, '')) || 0; }
     function formatCurrencyInput(input) { let val = parseCurrency(input.value); input.value = val === 0 ? "0" : formatCurrency(val); }
 
-    // Xử lý Ngày tháng Việt Nam
-    function formatDateView(isoString) {
-        if (!isoString) return "";
-        let d = new Date(isoString);
-        if (isNaN(d.getTime())) return isoString; 
-        return `${String(d.getDate()).padStart(2, '0')}/${String(d.getMonth() + 1).padStart(2, '0')}/${d.getFullYear()}`;
-    }
-    
-    // Hàm lấy giá trị an toàn (Chống lỗi sai tên cột Mã HĐ trong Google Sheets)
+    // HÀM CHUẨN HÓA LẤY DỮ LIỆU TỪ GOOGLE SHEETS (Chống lỗi sai tên cột)
     function getSafeVal(record, keys) {
-        for (let k of keys) {
-            if (record[k] !== undefined && record[k] !== null) return record[k];
+        const normKeys = keys.map(k => String(k).toLowerCase().replace(/\s/g, ''));
+        for (let key in record) {
+            let nk = String(key).toLowerCase().replace(/\s/g, '');
+            if (normKeys.includes(nk)) {
+                let val = record[key];
+                return (val !== null && val !== undefined) ? val : "";
+            }
         }
         return "";
+    }
+
+    // XỬ LÝ NGÀY THÁNG VIỆT NAM (Chống lỗi mất format)
+    function formatDateView(val) {
+        if (!val) return "";
+        let str = String(val);
+        if (str.match(/^\d{1,2}\/\d{1,2}\/\d{4}$/)) return str;
+        let d = new Date(val);
+        if (isNaN(d.getTime())) return str; 
+        return `${String(d.getDate()).padStart(2, '0')}/${String(d.getMonth() + 1).padStart(2, '0')}/${d.getFullYear()}`;
     }
 
     function addItemRow() {
         const tbody = document.getElementById("itemsBody");
         const tr = document.createElement("tr");
-        tr.innerHTML = `<td><input type="text" class="form-control i-ten" placeholder="Nhân sự / Áo dài..."></td><td><input type="number" class="form-control text-center i-sl" value="1" min="1" oninput="calcRow(this)"></td><td><input type="text" class="form-control text-end i-gia" placeholder="0" onkeyup="formatCurrencyInput(this); calcRow(this)"></td><td><input type="text" class="form-control text-end i-tt bg-light" readonly value="0"></td><td class="text-center"><button type="button" class="btn btn-sm btn-outline-danger border-0 fw-bold" onclick="this.closest('tr').remove(); calculateTotal()">X</button></td>`;
+        tr.innerHTML = `<td><input type="text" class="form-control i-ten" placeholder="Nhân sự / Áo dài..."></td><td><input type="number" class="form-control text-center i-sl" value="1" min="1" oninput="calcRow(this)"></td><td><input type="text" class="form-control text-end i-gia" placeholder="0" onkeyup="formatCurrencyInput(this); calcRow(this)"></td><td><input type="text" class="form-control text-end i-tt" style="background-color: #f1f5f9;" readonly value="0"></td><td class="text-center"><button type="button" class="btn btn-sm btn-outline-danger fw-bold" style="border:none; padding:10px;" onclick="this.closest('tr').remove(); calculateTotal()">X</button></td>`;
         tbody.appendChild(tr);
     }
 
@@ -466,41 +489,35 @@
         const filterDate = document.getElementById("filterDate").value;
         
         let filtered = globalContracts.filter(r => {
-            // Chuẩn hóa lấy dữ liệu chống lỗi cột Google Sheets
-            let rMaHD = getSafeVal(r, ['MaHD', 'Mã HĐ', 'Mã HD', 'maHD']);
-            let rTenKH = getSafeVal(r, ['TenKhachHang', 'Tên Khách Hàng', 'Tên KH']);
-            let rSDT = getSafeVal(r, ['SoDienThoai', 'Số Điện Thoại', 'SĐT', 'SDT']);
+            let rMaHD = String(getSafeVal(r, ['MaHD', 'Mã HĐ', 'Mã HD', 'maHD', 'Mã Hợp Đồng']));
+            let rTenKH = String(getSafeVal(r, ['TenKhachHang', 'Tên Khách Hàng', 'Tên KH', 'Khách Hàng']));
+            let rSDT = String(getSafeVal(r, ['SoDienThoai', 'Số Điện Thoại', 'SĐT', 'SDT']));
             
-            // 1. Text Filter (Tìm Tên khách hàng theo từ khóa chính xác hơn)
+            // Lọc Text Độc lập (Xử lý chữ An không dính vào Thanh Kiên)
             let matchText = true;
             if (textStr !== "") { 
                 if (field === "all") { 
-                    matchText = rMaHD.toString().toLowerCase().includes(textStr) || 
-                                rTenKH.toString().toLowerCase().includes(textStr) || 
-                                rSDT.toString().includes(textStr) || 
-                                (r.ChiTietDichVu||"").toLowerCase().includes(textStr); 
+                    matchText = rMaHD.toLowerCase().includes(textStr) || rTenKH.toLowerCase().includes(textStr) || rSDT.includes(textStr) || String(r.ChiTietDichVu||"").toLowerCase().includes(textStr); 
                 } 
                 else if (field === "TenKhachHang") {
-                    // Fix lỗi gõ "An" ra "Thanh" bằng Regex độc lập từ
                     let regex = new RegExp('(^|\\s)' + textStr, 'i');
-                    matchText = regex.test(rTenKH.toString());
+                    matchText = regex.test(rTenKH);
                 }
-                else if (field === "MaHD") { matchText = rMaHD.toString().toLowerCase().includes(textStr); }
-                else if (field === "SoDienThoai") { matchText = rSDT.toString().includes(textStr); }
+                else if (field === "MaHD") { matchText = rMaHD.toLowerCase().includes(textStr); }
+                else if (field === "SoDienThoai") { matchText = rSDT.includes(textStr); }
             }
             
-            // 2. Product Filter
             let matchProduct = true;
             if (product !== "all") { 
-                if(product === "khác") { matchProduct = !(r.ChiTietDichVu||"").toLowerCase().includes("nhân sự") && !(r.ChiTietDichVu||"").toLowerCase().includes("áo dài"); } 
-                else { matchProduct = (r.ChiTietDichVu||"").toLowerCase().includes(product); } 
+                if(product === "khác") { matchProduct = !String(r.ChiTietDichVu||"").toLowerCase().includes("nhân sự") && !String(r.ChiTietDichVu||"").toLowerCase().includes("áo dài"); } 
+                else { matchProduct = String(r.ChiTietDichVu||"").toLowerCase().includes(product); } 
             }
             
-            // 3. Date Filter
             let matchDate = true;
             if (filterDate) { 
-                if (!r[dateType]) { matchDate = false; } else { 
-                    let rDate = new Date(r[dateType]);
+                let rDateVal = getSafeVal(r, [dateType]);
+                if (!rDateVal) { matchDate = false; } else { 
+                    let rDate = new Date(rDateVal);
                     if(!isNaN(rDate.getTime())) {
                         let rDateStr = `${rDate.getFullYear()}-${String(rDate.getMonth()+1).padStart(2,'0')}-${String(rDate.getDate()).padStart(2,'0')}`;
                         if (rDateStr !== filterDate) matchDate = false;
@@ -523,19 +540,20 @@
 
     function renderList(dataArray) {
         const tbody = document.getElementById("listBody");
-        if(dataArray.length === 0) { tbody.innerHTML = "<tr><td colspan='7' class='text-center text-muted p-4 fs-5'>Không tìm thấy hợp đồng nào phù hợp.</td></tr>"; return; }
+        if(dataArray.length === 0) { tbody.innerHTML = "<tr><td colspan='7' class='text-center text-muted p-4 fs-5 fw-bold'>Không tìm thấy hợp đồng nào.</td></tr>"; return; }
         tbody.innerHTML = "";
         dataArray.forEach(r => {
-            // Lấy giá trị an toàn
-            let maHD = getSafeVal(r, ['MaHD', 'Mã HĐ', 'Mã HD', 'maHD']);
-            let tenKH = getSafeVal(r, ['TenKhachHang', 'Tên Khách Hàng', 'Tên KH']);
-            let sdt = getSafeVal(r, ['SoDienThoai', 'Số Điện Thoại', 'SĐT', 'SDT']).toString();
+            let maHD = String(getSafeVal(r, ['MaHD', 'Mã HĐ', 'Mã HD', 'maHD', 'Mã Hợp Đồng']));
+            let tenKH = String(getSafeVal(r, ['TenKhachHang', 'Tên Khách Hàng', 'Tên KH', 'Khách Hàng']));
+            let sdt = String(getSafeVal(r, ['SoDienThoai', 'Số Điện Thoại', 'SĐT', 'SDT']));
+            let ngayLe = String(getSafeVal(r, ['NgayLe', 'Ngày Lễ', 'Ngay Le']));
+            let tongTien = getSafeVal(r, ['TongTien', 'Tổng Tiền', 'Tổng Cộng']);
+            let conLai = getSafeVal(r, ['ConLai', 'Còn Lại', 'Con Lai']);
             
-            // Fix lỗi mất số 0 ở SĐT
             if(sdt.length > 0 && sdt.length <= 10 && !sdt.startsWith('0')) sdt = '0' + sdt;
 
             const tr = document.createElement("tr");
-            tr.innerHTML = `<td><strong class="text-primary">${maHD}</strong></td><td class="fw-bold">${tenKH}</td><td>${sdt}</td><td>${formatDateView(r.NgayLe)}</td><td class="text-end fw-bold">${formatCurrency(r.TongTien||0)}đ</td><td class="text-end text-danger fw-bold">${formatCurrency(r.ConLai||0)}đ</td><td class="text-center"><button class="btn btn-sm btn-dark text-white print-btn me-1">🖨️ In HĐ</button><button class="btn btn-sm btn-outline-danger delete-btn">🗑️ Xóa</button></td>`;
+            tr.innerHTML = `<td><strong style="color: var(--primary);">${maHD}</strong></td><td class="fw-bold">${tenKH}</td><td class="fw-bold text-secondary">${sdt}</td><td class="text-secondary fw-bold">${formatDateView(ngayLe)}</td><td class="text-end fw-bold" style="color: var(--text-main);">${formatCurrency(tongTien||0)}đ</td><td class="text-end text-danger fw-bold">${formatCurrency(conLai||0)}đ</td><td class="text-center"><button class="btn btn-sm btn-primary me-1 px-3 fw-bold print-btn">🖨️ In HĐ</button><button class="btn btn-sm btn-outline-danger fw-bold delete-btn">🗑️ Xóa</button></td>`;
             tr.querySelector('.print-btn').onclick = () => triggerPrint(r);
             tr.querySelector('.delete-btn').onclick = () => confirmDelete(maHD, tenKH);
             tbody.appendChild(tr);
@@ -543,24 +561,37 @@
     }
 
     async function confirmDelete(maHD, tenKH) {
-        if (!confirm(`CẢNH BÁO ⚠️\nXóa vĩnh viễn hợp đồng của:\nKH: ${tenKH} - Mã: ${maHD}\nKhông thể khôi phục. Xóa?`)) return; 
+        if (!confirm(`CẢNH BÁO NGUY HIỂM ⚠️\n\nXóa vĩnh viễn hợp đồng của:\n👤 Khách hàng: ${tenKH}\n🏷️ Mã: ${maHD}\n\nDữ liệu sẽ KHÔNG THỂ KHÔI PHỤC. Có chắc chắn xóa?`)) return; 
         document.getElementById("loadingText").classList.remove("hidden");
         const res = await reqGAS({ action: "delete", maHD: maHD });
-        if (res?.success) { alert("✅ Đã xóa!"); loadAllContracts(); } else { alert("❌ Lỗi: " + res?.message); }
+        if (res?.success) { alert("✅ Đã xóa thành công!"); loadAllContracts(); } else { alert("❌ Lỗi: " + res?.message); }
         document.getElementById("loadingText").classList.add("hidden");
     }
 
-    // ÁNH XẠ DỮ LIỆU SANG BẢN IN PDF ALEYNA WEDDING
+    // ÁNH XẠ DỮ LIỆU SANG BẢN IN PDF
     function triggerPrint(r) {
-        // Lấy lại giá trị an toàn cho bản in
-        let maHD = getSafeVal(r, ['MaHD', 'Mã HĐ', 'Mã HD', 'maHD']);
-        let tenKH = getSafeVal(r, ['TenKhachHang', 'Tên Khách Hàng', 'Tên KH']);
-        let sdt = getSafeVal(r, ['SoDienThoai', 'Số Điện Thoại', 'SĐT', 'SDT']).toString();
+        // Trích xuất an toàn mọi trường dữ liệu (Chống lỗi Crash web)
+        let maHD = String(getSafeVal(r, ['MaHD', 'Mã HĐ', 'Mã HD', 'maHD', 'Mã Hợp Đồng']));
+        let tenKH = String(getSafeVal(r, ['TenKhachHang', 'Tên Khách Hàng', 'Tên KH', 'Khách Hàng']));
+        let sdt = String(getSafeVal(r, ['SoDienThoai', 'Số Điện Thoại', 'SĐT', 'SDT']));
         if(sdt.length > 0 && sdt.length <= 10 && !sdt.startsWith('0')) sdt = '0' + sdt;
+        
+        let diaChi = String(getSafeVal(r, ['DiaChi', 'Địa chỉ', 'Dia Chi']));
+        let gioCoMat = String(getSafeVal(r, ['GioCoMat', 'Giờ Có Mặt', 'Thời gian lễ']));
+        let ngayLe = String(getSafeVal(r, ['NgayLe', 'Ngày Lễ', 'Ngay Le']));
+        let ngayLay = String(getSafeVal(r, ['NgayLay', 'Ngày Lấy Đồ', 'Ngày Lấy']));
+        let ngayTra = String(getSafeVal(r, ['NgayTra', 'Ngày Trả Đồ', 'Ngày Trả']));
+        let ngayTao = String(getSafeVal(r, ['NgayTao', 'Ngày Lập HĐ', 'Ngày tạo', 'Ngày Tạo']));
+        let gc = String(getSafeVal(r, ['GhiChu', 'Ghi chú', 'Lưu ý', 'Ghi chu']));
+        
+        let chiTiet = String(getSafeVal(r, ['ChiTietDichVu', 'Chi Tiết Dịch Vụ', 'Sản phẩm', 'Chi tiết']));
+        let tongTien = getSafeVal(r, ['TongTien', 'Tổng Tiền', 'Tổng Cộng']);
+        let tienCoc = getSafeVal(r, ['TienCoc', 'Tiền Cọc', 'Cọc trước', 'Cọc']);
+        let conLai = getSafeVal(r, ['ConLai', 'Còn Lại', 'Con Lai']);
 
         document.getElementById("p-mahd").innerText = maHD || ".........";
         
-        let dTao = new Date(r.NgayTao);
+        let dTao = new Date(ngayTao);
         if(!isNaN(dTao.getTime())) {
             document.getElementById("p-d").innerText = String(dTao.getDate()).padStart(2, '0');
             document.getElementById("p-m").innerText = String(dTao.getMonth() + 1).padStart(2, '0');
@@ -568,23 +599,21 @@
         } else { document.getElementById("p-d").innerText = ".."; document.getElementById("p-m").innerText = ".."; document.getElementById("p-y").innerText = "...."; }
 
         document.getElementById("p-tenkh").innerText = tenKH;
-        document.getElementById("p-diachi").innerText = getSafeVal(r, ['DiaChi', 'Địa chỉ', 'Dia Chi']);
+        document.getElementById("p-diachi").innerText = diaChi;
         document.getElementById("p-sdt").innerText = sdt;
         document.getElementById("p-thoigianle").innerText = ""; 
-        document.getElementById("p-giocomat").innerText = getSafeVal(r, ['GioCoMat', 'Giờ Có Mặt']);
+        document.getElementById("p-giocomat").innerText = gioCoMat;
         
-        document.getElementById("p-ngayle").innerText = formatDateView(r.NgayLe);
-        document.getElementById("p-ngaylay").innerText = formatDateView(r.NgayLay);
-        document.getElementById("p-ngaytra").innerText = formatDateView(r.NgayTra);
+        document.getElementById("p-ngayle").innerText = formatDateView(ngayLe);
+        document.getElementById("p-ngaylay").innerText = formatDateView(ngayLay);
+        document.getElementById("p-ngaytra").innerText = formatDateView(ngayTra);
 
-        let gc = getSafeVal(r, ['GhiChu', 'Ghi chú', 'Lưu ý']);
-        if (gc === "undefined") gc = "";
         if (gc.length > 50) { document.getElementById("p-ghichu1").innerText = gc.substring(0, 50); document.getElementById("p-ghichu2").innerText = gc.substring(50); } 
         else { document.getElementById("p-ghichu1").innerText = gc; document.getElementById("p-ghichu2").innerText = ""; }
 
         const pItems = document.getElementById("p-items"); pItems.innerHTML = "";
         let itemsArr = [];
-        try { itemsArr = JSON.parse(r.ChiTietDichVu); } catch(e) { itemsArr = [{ ten: r.ChiTietDichVu, sl: "", gia: "", tt: "" }]; }
+        try { itemsArr = JSON.parse(chiTiet); } catch(e) { itemsArr = [{ ten: chiTiet, sl: "", gia: "", tt: "" }]; }
         
         let rowCount = 0;
         if(Array.isArray(itemsArr)) {
@@ -593,14 +622,17 @@
                 rowCount++;
             });
         }
-        for(let i = rowCount; i < 8; i++){ pItems.innerHTML += `<tr><td>&nbsp;</td><td></td><td></td><td></td><td></td></tr>`; }
+        // Giảm số dòng trống xuống 4 để tránh tràn trang tách chữ ký
+        for(let i = rowCount; i < 4; i++){ pItems.innerHTML += `<tr><td>&nbsp;</td><td></td><td></td><td></td><td></td></tr>`; }
 
-        document.getElementById("p-tongtien").innerText = formatCurrency(r.TongTien||0) + "đ";
-        document.getElementById("p-tiencoc").innerText = formatCurrency(r.TienCoc||0) + "đ";
-        document.getElementById("p-conlai").innerText = formatCurrency(r.ConLai||0) + "đ";
+        document.getElementById("p-tongtien").innerText = formatCurrency(tongTien||0) + "đ";
+        document.getElementById("p-tiencoc").innerText = formatCurrency(tienCoc||0) + "đ";
+        document.getElementById("p-conlai").innerText = formatCurrency(conLai||0) + "đ";
 
-        // Tự động In
-        setTimeout(() => { window.print(); }, 300);
+        // Bật cửa sổ nhắc nhở cách in
+        setTimeout(() => { 
+            window.print(); 
+        }, 300);
     }
 </script>
 </body>
