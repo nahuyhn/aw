@@ -5,102 +5,71 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="robots" content="noindex, nofollow">
     <title>Quản Lý Hợp Đồng - AleynaWedding</title>
-    <!-- Font Inter hiện đại -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Thư viện SweetAlert2 cho Popup đẹp -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <style>
-        /* ========================================= */
-        /* CSS GIAO DIỆN WEB (PHONG CÁCH CRM SAAS)   */
-        /* ========================================= */
-        :root { 
-            --primary: #4f46e5; /* Indigo 600 */
-            --primary-hover: #4338ca;
-            --secondary: #64748b; 
-            --accent: #3b82f6; 
-            --bg: #f8fafc; 
-            --text-main: #1e293b;
-        }
+        :root { --primary: #4f46e5; --primary-hover: #4338ca; --secondary: #64748b; --bg: #f8fafc; --text-main: #1e293b; }
         body { background-color: var(--bg); font-family: 'Inter', sans-serif; color: var(--text-main); }
         .hidden { display: none !important; }
-        .app-container { max-width: 1250px; margin: 0 auto; padding-top: 30px; padding-bottom: 50px;}
+        .app-container { max-width: 1300px; margin: 0 auto; padding: 20px 15px 50px 15px; }
         
-        /* Box & Form */
-        .card-box { background: white; border-radius: 16px; box-shadow: 0 10px 25px -5px rgba(0,0,0,0.05), 0 8px 10px -6px rgba(0,0,0,0.01); padding: 35px; border: 1px solid #e2e8f0; margin-bottom: 25px;}
-        .form-label { font-weight: 700; color: #475569; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 8px; }
-        .form-control, .form-select { border-radius: 10px; border: 1px solid #cbd5e1; padding: 12px 15px; font-size: 0.95rem; font-weight: 500; color: var(--text-main); transition: 0.2s;}
+        .card-box { background: white; border-radius: 16px; box-shadow: 0 10px 25px -5px rgba(0,0,0,0.05); padding: 25px; border: 1px solid #e2e8f0; margin-bottom: 25px;}
+        @media (min-width: 768px) { .card-box { padding: 35px; } }
+        
+        .form-label { font-weight: 700; color: #475569; font-size: 0.8rem; text-transform: uppercase; margin-bottom: 8px; }
+        .form-control, .form-select { border-radius: 10px; border: 1px solid #cbd5e1; padding: 12px 15px; font-size: 0.95rem; font-weight: 500; transition: 0.2s;}
         .form-control:focus, .form-select:focus { border-color: var(--primary); box-shadow: 0 0 0 4px rgba(79, 70, 229, 0.15); outline: none; }
         
-        /* Buttons */
-        .btn-primary { background-color: var(--primary); border-color: var(--primary); box-shadow: 0 4px 6px -1px rgba(79, 70, 229, 0.2); border-radius: 10px; font-weight: 600; padding: 12px 20px;}
-        .btn-primary:hover { background-color: var(--primary-hover); transform: translateY(-1px); box-shadow: 0 6px 8px -1px rgba(79, 70, 229, 0.3); }
+        .btn-primary { background-color: var(--primary); border-color: var(--primary); box-shadow: 0 4px 6px -1px rgba(79, 70, 229, 0.2); border-radius: 10px; font-weight: 600; padding: 10px 20px;}
+        .btn-primary:hover { background-color: var(--primary-hover); transform: translateY(-1px); }
         
-        /* Tabs Custom */
-        .nav-pills { background: #e2e8f0; padding: 6px; border-radius: 14px; display: inline-flex; margin-bottom: 30px; }
-        .nav-pills .nav-link { color: var(--secondary); font-weight: 700; border-radius: 10px; padding: 12px 28px; transition: 0.3s; font-size: 0.95rem; }
-        .nav-pills .nav-link:hover { color: var(--primary); }
+        .nav-pills { background: #e2e8f0; padding: 6px; border-radius: 14px; display: inline-flex; margin-bottom: 25px; max-width: 100%; overflow-x: auto; white-space: nowrap;}
+        .nav-pills .nav-link { color: var(--secondary); font-weight: 700; border-radius: 10px; padding: 10px 20px; transition: 0.3s; font-size: 0.9rem; }
         .nav-pills .nav-link.active { background-color: white; color: var(--primary); box-shadow: 0 4px 6px rgba(0,0,0,0.05); }
         
-        /* Tables & Extras */
-        .table-items th { background-color: #f8fafc; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px; color: var(--secondary); border-bottom: 2px solid #e2e8f0; padding: 15px; }
-        .btn-add-item { border: 2px dashed #cbd5e1; background: transparent; color: var(--secondary); border-radius: 10px; padding: 15px; width: 100%; transition: 0.3s; font-weight: 700; font-size: 0.9rem;}
-        .btn-add-item:hover { border-color: var(--primary); color: var(--primary); background: #eef2ff; }
-        .total-box { background: linear-gradient(145deg, #f8fafc, #f1f5f9); border-radius: 14px; padding: 25px; border: 1px solid #e2e8f0; }
-        .money-input { font-weight: 800; color: #dc2626; font-size: 1.25rem; background-color: white !important; border: 2px solid #e2e8f0; }
+        .table-items th { background-color: #f8fafc; font-size: 0.75rem; text-transform: uppercase; color: var(--secondary); border-bottom: 2px solid #e2e8f0; padding: 12px; }
+        .btn-add-item { border: 2px dashed #cbd5e1; background: transparent; color: var(--secondary); border-radius: 10px; padding: 15px; width: 100%; font-weight: 700; }
+        .total-box { background: linear-gradient(145deg, #f8fafc, #f1f5f9); border-radius: 14px; padding: 20px; border: 1px solid #e2e8f0; }
+        .money-input { font-weight: 800; color: #dc2626; font-size: 1.15rem; background-color: white !important; }
         
-        /* Filter Box */
-        .filter-row { background-color: #ffffff; padding: 25px; border-radius: 14px; border: 1px solid #e2e8f0; margin-bottom: 25px; box-shadow: 0 4px 10px rgba(0,0,0,0.02); }
-        .count-badge { background-color: #eef2ff; color: var(--primary); padding: 8px 18px; border-radius: 20px; font-weight: 800; font-size: 0.85rem; border: 1px solid #c7d2fe; }
+        .filter-row { background-color: #ffffff; padding: 20px; border-radius: 14px; border: 1px solid #e2e8f0; margin-bottom: 20px; }
+        .count-badge { background-color: #eef2ff; color: var(--primary); padding: 8px 15px; border-radius: 20px; font-weight: 800; font-size: 0.85rem; }
+        
+        /* Tối ưu bảng trên Mobile */
+        .table-responsive { border-radius: 10px; border: 1px solid #e2e8f0; }
+        .table td { vertical-align: middle; padding: 12px 10px; font-size: 0.9rem; }
+        .status-badge { padding: 6px 12px; border-radius: 8px; font-size: 0.75rem; font-weight: 700; }
 
         @media screen { #print-area { display: none !important; } }
 
-        /* ========================================= */
-        /* CSS BẢN IN PDF CHUẨN MẪU ALEYNA WEDDING   */
-        /* ========================================= */
+        /* BẢN IN PDF ALEYNA */
         @media print {
             #loginScreen, #mainApp { display: none !important; }
-            
-            /* Lệnh này xóa sạch Header/Footer mặc định của Chrome */
             @page { size: A4 portrait; margin: 0; }
-            
-            #print-area { 
-                display: block !important; 
-                width: 100%; 
-                font-family: 'Times New Roman', Times, serif; 
-                color: #000; 
-                padding: 12mm 15mm; 
-                box-sizing: border-box;
-            }
-            
+            #print-area { display: block !important; width: 100%; font-family: 'Times New Roman', Times, serif; color: #000; padding: 12mm 15mm; box-sizing: border-box;}
             .p-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; padding-bottom: 5px; }
             .p-title-box { text-align: left; }
-            .p-title-text { font-size: 26px; font-weight: bold; margin-bottom: 5px; font-family: Arial, Helvetica, sans-serif; letter-spacing: 0.5px;}
+            .p-title-text { font-size: 26px; font-weight: bold; margin-bottom: 5px; font-family: Arial, sans-serif; letter-spacing: 0.5px;}
             .p-date-text { font-size: 15px; }
-            
             .p-logo-box { text-align: center; }
-            .logo-name { font-size: 17px; letter-spacing: 3px; margin-bottom: 5px; font-weight: bold; font-family: 'Times New Roman', serif;}
-            .logo-sub { font-size: 11px; letter-spacing: 1.5px; font-weight: bold; font-family: Arial, Helvetica, sans-serif; }
-
+            .logo-name { font-size: 17px; letter-spacing: 3px; margin-bottom: 5px; font-weight: bold;}
+            .logo-sub { font-size: 11px; letter-spacing: 1.5px; font-weight: bold; font-family: Arial, sans-serif; }
             .p-info { margin-bottom: 15px; font-size: 15px; line-height: 1.8; }
             .r-flex { display: flex; justify-content: space-between; margin-bottom: 4px; }
             .i-col { display: flex; align-items: flex-end; white-space: nowrap; }
             .dot { border-bottom: 1px dotted #000; flex-grow: 1; margin-left: 5px; min-height: 18px; display: inline-block; padding-left: 5px; font-weight: bold; font-family: Arial, sans-serif;}
-
-            .p-table { width: 100%; border-collapse: collapse; margin-bottom: 10px; border: 2px solid #000; font-family: Arial, Helvetica, sans-serif; }
+            .p-table { width: 100%; border-collapse: collapse; margin-bottom: 10px; border: 2px solid #000; font-family: Arial, sans-serif; }
             .p-table th, .p-table td { border: 1px solid #000; padding: 7px 5px; font-size: 14px; }
             .p-table th { background-color: #555555 !important; color: #ffffff !important; font-weight: bold; text-align: center; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
             .p-table td.center { text-align: center; }
-            
-            .p-gray-cell { background-color: #555555 !important; color: #ffffff !important; font-weight: bold; text-align: center; -webkit-print-color-adjust: exact; print-color-adjust: exact; letter-spacing: 1px; }
+            .p-gray-cell { background-color: #555555 !important; color: #ffffff !important; font-weight: bold; text-align: center; -webkit-print-color-adjust: exact; print-color-adjust: exact;}
             .p-val-cell { text-align: center; font-weight: bold; }
-            
-            /* Ép khối chữ ký không bị tách trang */
-            .p-keep-together { page-break-inside: avoid !important; break-inside: avoid !important; display: block; }
-
+            .p-keep-together { page-break-inside: avoid !important; display: block; }
             .p-notes { font-size: 14.5px; line-height: 1.4; text-align: justify; margin-bottom: 30px; margin-top: 15px;}
             .p-notes ul { margin: 5px 0 5px 20px; padding: 0; }
             .p-notes li { margin-bottom: 4px; }
-            .p-notes p { margin: 4px 0; }
-
             .p-footer { display: flex; justify-content: space-between; font-size: 14px; text-align: center; }
             .p-sign-box { width: 45%; }
             .p-sign-title { font-weight: bold; font-family: Arial, sans-serif; font-size: 15px; margin-bottom: 70px; }
@@ -111,31 +80,31 @@
 <body>
 
 <!-- MÀN HÌNH ĐĂNG NHẬP -->
-<div id="loginScreen" class="container mt-5" style="max-width: 420px;">
-    <div class="card-box text-center border-0" style="padding: 40px 30px;">
-        <h3 class="mb-2" style="color: var(--primary); font-weight: 800; letter-spacing: -0.5px;">ALEYNA WEDDING</h3>
+<div id="loginScreen" class="container mt-5" style="max-width: 400px;">
+    <div class="card-box text-center border-0" style="padding: 40px 25px;">
+        <h3 class="mb-2" style="color: var(--primary); font-weight: 800;">ALEYNA WEDDING</h3>
         <p class="text-muted mb-4 fw-bold">Hệ Thống Quản Lý Hợp Đồng</p>
         <div class="form-floating mb-3 hidden" id="urlBox"><input type="text" id="apiUrl" class="form-control" placeholder="Link Web App"><label>Link Web App</label></div>
         <div class="form-floating mb-4"><input type="password" id="adminPass" class="form-control" placeholder="Mật khẩu" required><label>Mật khẩu bảo mật</label></div>
-        <button class="btn btn-primary w-100 py-3" onclick="login()">ĐĂNG NHẬP HỆ THỐNG</button>
+        <button class="btn btn-primary w-100 py-3 fs-6" onclick="login()">ĐĂNG NHẬP</button>
     </div>
 </div>
 
 <!-- ỨNG DỤNG CHÍNH -->
 <div id="mainApp" class="app-container hidden">
-    <!-- Header App -->
-    <div class="d-flex justify-content-between align-items-center mb-4">
+    <!-- Header -->
+    <div class="d-flex justify-content-between align-items-center mb-3">
         <div>
-            <h2 style="font-weight: 800; color: var(--text-main); margin: 0; letter-spacing: -1px;">Hệ Thống Quản Trị Hợp Đồng</h2>
-            <p class="text-muted mt-1 fw-bold" style="font-size: 0.9rem;">Aleyna Wedding - Áo Dài & Nhân Sự</p>
+            <h3 style="font-weight: 800; color: var(--text-main); margin: 0; letter-spacing: -0.5px;">Quản Trị Hợp Đồng</h3>
+            <span class="text-muted fw-bold" style="font-size: 0.85rem;">Aleyna Wedding CRM</span>
         </div>
-        <button class="btn btn-outline-danger fw-bold px-4" style="border-radius: 10px; border-width: 2px;" onclick="logout()">Đăng xuất</button>
+        <button class="btn btn-outline-danger fw-bold" style="border-radius: 10px;" onclick="logout()">Thoát</button>
     </div>
 
     <!-- TABS -->
     <ul class="nav nav-pills" role="tablist">
-        <li class="nav-item"><button class="nav-link active" data-bs-toggle="pill" data-bs-target="#tab-add">➕ TẠO HỢP ĐỒNG MỚI</button></li>
-        <li class="nav-item"><button class="nav-link" data-bs-toggle="pill" data-bs-target="#tab-list" onclick="loadAllContracts()">🔍 HỒ SƠ & TRA CỨU</button></li>
+        <li class="nav-item"><button class="nav-link active" data-bs-toggle="pill" data-bs-target="#tab-add">➕ TẠO ĐƠN MỚI</button></li>
+        <li class="nav-item"><button class="nav-link" data-bs-toggle="pill" data-bs-target="#tab-list" onclick="loadAllContracts()">🔍 TRA CỨU HỒ SƠ</button></li>
     </ul>
 
     <div class="tab-content">
@@ -143,66 +112,66 @@
         <div class="tab-pane fade show active" id="tab-add">
             <div class="card-box">
                 <form id="contractForm">
-                    <h5 class="border-bottom pb-3 mb-4 fw-bold" style="color: var(--primary);">I. Thông tin khách hàng</h5>
+                    <h6 class="border-bottom pb-2 mb-3 fw-bold" style="color: var(--primary);">I. Thông tin khách hàng</h6>
                     <div class="row">
-                        <div class="col-md-3 mb-3"><label class="form-label">Mã HĐ (*)</label><input type="text" id="maHD" class="form-control" style="background-color: #f1f5f9; border-color: #cbd5e1;" placeholder="VD: HD0808" required></div>
-                        <div class="col-md-3 mb-3"><label class="form-label">Ngày Lập HĐ</label><input type="date" id="ngayTao" class="form-control" required></div>
-                        <div class="col-md-6 mb-3"><label class="form-label">Tên Khách Hàng (*)</label><input type="text" id="tenKH" class="form-control" placeholder="Nhập tên khách hàng..." required></div>
+                        <!-- Tối ưu col-6 cho mobile -->
+                        <div class="col-6 col-md-3 mb-3"><label class="form-label">Mã HĐ (*)</label><input type="text" id="maHD" class="form-control" style="background-color: #f1f5f9;" required></div>
+                        <div class="col-6 col-md-3 mb-3"><label class="form-label">Ngày Lập</label><input type="date" id="ngayTao" class="form-control" required></div>
+                        <div class="col-12 col-md-6 mb-3"><label class="form-label">Tên Khách Hàng (*)</label><input type="text" id="tenKH" class="form-control" required></div>
                     </div>
                     <div class="row">
-                        <div class="col-md-4 mb-3"><label class="form-label">Số Điện Thoại</label><input type="text" id="sdt" class="form-control" placeholder="VD: 0987654321"></div>
-                        <div class="col-md-8 mb-3"><label class="form-label">Địa chỉ</label><input type="text" id="diaChi" class="form-control" placeholder="Số nhà, đường, phường, quận..."></div>
+                        <div class="col-12 col-md-4 mb-3"><label class="form-label">Số Điện Thoại</label><input type="text" id="sdt" class="form-control"></div>
+                        <div class="col-12 col-md-8 mb-3"><label class="form-label">Địa chỉ</label><input type="text" id="diaChi" class="form-control"></div>
                     </div>
                     
-                    <h5 class="border-bottom pb-3 mt-4 mb-4 fw-bold" style="color: var(--primary);">II. Thời gian dịch vụ</h5>
+                    <h6 class="border-bottom pb-2 mt-3 mb-3 fw-bold" style="color: var(--primary);">II. Thời gian dịch vụ</h6>
                     <div class="row">
-                        <div class="col-md-3 mb-3"><label class="form-label">Ngày Lễ</label><input type="date" id="ngayLe" class="form-control"></div>
-                        <div class="col-md-3 mb-3"><label class="form-label">Giờ Có Mặt / Thời gian lễ</label><input type="text" id="gioCoMat" class="form-control" placeholder="VD: 9h sáng"></div>
-                        <div class="col-md-3 mb-3"><label class="form-label">Ngày Lấy Đồ</label><input type="date" id="ngayLay" class="form-control"></div>
-                        <div class="col-md-3 mb-3"><label class="form-label">Ngày Trả Đồ</label><input type="date" id="ngayTra" class="form-control"></div>
+                        <div class="col-6 col-md-3 mb-3"><label class="form-label">Ngày Lễ</label><input type="date" id="ngayLe" class="form-control"></div>
+                        <div class="col-6 col-md-3 mb-3"><label class="form-label">Giờ Có Mặt</label><input type="text" id="gioCoMat" class="form-control" placeholder="VD: 9h sáng"></div>
+                        <div class="col-6 col-md-3 mb-3"><label class="form-label">Ngày Lấy Đồ</label><input type="date" id="ngayLay" class="form-control"></div>
+                        <div class="col-6 col-md-3 mb-3"><label class="form-label">Ngày Trả Đồ</label><input type="date" id="ngayTra" class="form-control"></div>
                     </div>
 
-                    <h5 class="border-bottom pb-3 mt-4 mb-4 fw-bold" style="color: var(--primary);">III. Chi tiết Sản phẩm / Dịch vụ</h5>
-                    <div class="table-responsive mb-3">
+                    <h6 class="border-bottom pb-2 mt-3 mb-3 fw-bold" style="color: var(--primary);">III. Chi tiết Sản phẩm</h6>
+                    <div class="table-responsive mb-3 border-0">
                         <table class="table table-borderless table-items align-middle" id="itemsTable">
-                            <thead style="border-radius: 10px; overflow: hidden;">
+                            <thead style="border-radius: 10px;">
                                 <tr>
-                                    <th width="40%">Tên Sản phẩm / Ghi chú</th>
-                                    <th width="12%" class="text-center">Số lượng</th>
-                                    <th width="20%" class="text-end">Đơn giá (đ)</th>
-                                    <th width="23%" class="text-end">Thành tiền (đ)</th>
+                                    <th width="45%" style="min-width: 180px;">Tên Sản phẩm / Ghi chú</th>
+                                    <th width="10%" class="text-center" style="min-width: 70px;">SL</th>
+                                    <th width="20%" class="text-end" style="min-width: 110px;">Đơn giá</th>
+                                    <th width="20%" class="text-end" style="min-width: 110px;">Thành tiền</th>
                                     <th width="5%"></th>
                                 </tr>
                             </thead>
                             <tbody id="itemsBody"></tbody>
                         </table>
-                        <button type="button" class="btn-add-item" onclick="addItemRow()">+ Thêm dòng sản phẩm mới</button>
+                        <button type="button" class="btn-add-item" onclick="addItemRow()">+ Thêm dòng sản phẩm</button>
                     </div>
 
-                    <div class="row mt-5 align-items-start">
-                        <div class="col-md-6 mb-3">
-                            <label class="form-label">Lưu ý / Ghi chú thanh toán</label>
-                            <textarea id="ghiChu" class="form-control" rows="5" placeholder="Ghi chú thêm..."></textarea>
+                    <div class="row mt-4 align-items-start">
+                        <div class="col-12 col-md-6 mb-3">
+                            <label class="form-label">Ghi chú thanh toán / Lưu ý</label>
+                            <textarea id="ghiChu" class="form-control" rows="4"></textarea>
                         </div>
-                        <div class="col-md-6 mb-3">
-                            <div class="total-box shadow-sm">
-                                <div class="row align-items-center mb-3">
-                                    <div class="col-4 fw-bold text-secondary">TỔNG CỘNG:</div>
-                                    <div class="col-8"><input type="text" id="tongTien" class="form-control text-end fw-bold" style="color: var(--primary); font-size: 1.15rem;" readonly value="0"></div>
+                        <div class="col-12 col-md-6 mb-3">
+                            <div class="total-box">
+                                <div class="row align-items-center mb-2">
+                                    <div class="col-5 fw-bold text-secondary">TỔNG CỘNG:</div>
+                                    <div class="col-7"><input type="text" id="tongTien" class="form-control text-end fw-bold" style="color: var(--primary);" readonly value="0"></div>
                                 </div>
-                                <div class="row align-items-center mb-3">
-                                    <div class="col-4 fw-bold text-secondary">CỌC TRƯỚC:</div>
-                                    <div class="col-8"><input type="text" id="tienCoc" class="form-control text-end fw-bold" style="color: #16a34a; font-size: 1.15rem;" onkeyup="formatCurrencyInput(this); calculateTotal()" value="0"></div>
+                                <div class="row align-items-center mb-2">
+                                    <div class="col-5 fw-bold text-secondary">CỌC TRƯỚC:</div>
+                                    <div class="col-7"><input type="text" id="tienCoc" class="form-control text-end fw-bold" style="color: #16a34a;" onkeyup="formatCurrencyInput(this); calculateTotal()" value="0"></div>
                                 </div>
                                 <div class="row align-items-center">
-                                    <div class="col-4 fw-bold text-danger">CÒN LẠI:</div>
-                                    <div class="col-8"><input type="text" id="conLai" class="form-control text-end money-input" readonly value="0"></div>
+                                    <div class="col-5 fw-bold text-danger">CÒN LẠI:</div>
+                                    <div class="col-7"><input type="text" id="conLai" class="form-control text-end money-input" readonly value="0"></div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <button type="button" class="btn btn-primary w-100 py-3 mt-3 fw-bold fs-5" id="btnLuu" onclick="submitContract()">LƯU HỢP ĐỒNG NÀY VÀO HỆ THỐNG</button>
-                    <div id="addResult" class="mt-3 text-center fw-bold fs-5"></div>
+                    <button type="button" class="btn btn-primary w-100 py-3 mt-2 fs-5" id="btnLuu" onclick="submitContract()">LƯU HỢP ĐỒNG NÀY</button>
                 </form>
             </div>
         </div>
@@ -210,67 +179,64 @@
         <!-- TAB 2: HỒ SƠ & TRA CỨU -->
         <div class="tab-pane fade" id="tab-list">
             <div class="filter-row">
-                <div class="d-flex justify-content-between align-items-center mb-4">
-                    <h6 class="fw-bold mb-0" style="color: var(--primary);">BỘ LỌC TÌM KIẾM CHI TIẾT</h6>
-                    <div id="countResult" class="count-badge hidden">Tìm thấy: 0 hợp đồng</div>
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <h6 class="fw-bold mb-0" style="color: var(--primary);">BỘ LỌC TÌM KIẾM</h6>
+                    <div id="countResult" class="count-badge hidden">0 hợp đồng</div>
                 </div>
                 
-                <div class="row g-3">
-                    <div class="col-md-2">
-                        <label class="form-label">Trường tìm kiếm</label>
+                <div class="row g-2">
+                    <div class="col-6 col-md-2">
+                        <label class="form-label">Tìm theo</label>
                         <select id="filterField" class="form-select" onchange="applyFilters()">
-                            <option value="all">Tất cả thông tin</option>
-                            <option value="MaHD">Mã Hợp Đồng</option>
-                            <option value="TenKhachHang">Tên Khách Hàng</option>
-                            <option value="SoDienThoai">Số Điện Thoại</option>
+                            <option value="all">Tất cả</option>
+                            <option value="MaHD">Mã HĐ</option>
+                            <option value="TenKhachHang">Tên KH</option>
+                            <option value="SoDienThoai">SĐT</option>
                         </select>
                     </div>
-                    <div class="col-md-4">
+                    <div class="col-6 col-md-4">
                         <label class="form-label">Từ khóa</label>
-                        <input type="text" id="searchBox" class="form-control border-primary" placeholder="Nhập từ khóa..." onkeyup="applyFilters()">
+                        <input type="text" id="searchBox" class="form-control" placeholder="Nhập tìm kiếm..." onkeyup="applyFilters()">
                     </div>
-                    <div class="col-md-2">
+                    <div class="col-6 col-md-2">
                         <label class="form-label">Sản phẩm</label>
                         <select id="filterProduct" class="form-select" onchange="applyFilters()">
-                            <option value="all">Tất cả SP</option>
-                            <option value="nhân sự">Nhân sự bưng quả</option>
+                            <option value="all">Tất cả</option>
+                            <option value="nhân sự">Nhân sự</option>
                             <option value="áo dài">Áo dài</option>
                             <option value="khác">Khác</option>
                         </select>
                     </div>
-                    <div class="col-md-2">
-                        <label class="form-label">Lọc thời gian</label>
-                        <select id="filterDateType" class="form-select" onchange="applyFilters()">
-                            <option value="NgayLe">Ngày Lễ</option>
-                            <option value="NgayTao">Ngày Lập HĐ</option>
-                            <option value="NgayLay">Ngày Lấy Đồ</option>
-                        </select>
+                    
+                    <!-- LỌC THEO THÁNG MỚI -->
+                    <div class="col-6 col-md-2">
+                        <label class="form-label">Lọc theo Tháng</label>
+                        <input type="month" id="filterMonth" class="form-control border-primary" onchange="applyFilters()">
                     </div>
-                    <div class="col-md-2">
-                        <label class="form-label">Chọn ngày</label>
+                    <!-- Tìm Ngày đích danh -->
+                    <div class="col-6 col-md-2">
+                        <label class="form-label">Ngày cụ thể</label>
                         <input type="date" id="filterDate" class="form-control" onchange="applyFilters()">
                     </div>
                 </div>
                 
-                <div class="d-flex justify-content-end gap-2 mt-4 pt-3 border-top">
-                    <button class="btn btn-light border px-4 fw-bold text-secondary" style="border-radius: 10px;" onclick="resetFilters()">Làm mới</button>
-                    <button class="btn btn-primary px-4 fw-bold" onclick="loadAllContracts()">Tải lại dữ liệu</button>
+                <div class="d-flex justify-content-end gap-2 mt-3 pt-3 border-top">
+                    <button class="btn btn-light border fw-bold text-secondary" onclick="resetFilters()">Làm mới</button>
+                    <button class="btn btn-primary fw-bold" onclick="loadAllContracts()">Tải lại dữ liệu</button>
                 </div>
             </div>
 
-            <div class="card-box pt-2">
-                <div id="loadingText" class="text-center py-4 text-primary fw-bold hidden fs-5"><div class="spinner-border spinner-border-sm me-2"></div> Đang tải dữ liệu...</div>
-                <div class="table-responsive">
-                    <table class="table table-hover align-middle border">
+            <div class="card-box p-0 pt-2 border-0 bg-transparent">
+                <div class="table-responsive bg-white">
+                    <table class="table table-hover align-middle mb-0">
                         <thead style="background-color: #f1f5f9;">
                             <tr>
-                                <th style="padding: 15px; color: var(--secondary);">Mã HĐ</th>
-                                <th style="color: var(--secondary);">Khách Hàng</th>
-                                <th style="color: var(--secondary);">SĐT</th>
-                                <th style="color: var(--secondary);">Ngày Lễ</th>
-                                <th class="text-end" style="color: var(--secondary);">Tổng Tiền</th>
-                                <th class="text-end" style="color: var(--secondary);">Còn Lại</th>
-                                <th class="text-center" style="color: var(--secondary);">Thao tác</th>
+                                <th style="min-width: 80px; color: var(--secondary);">Mã HĐ</th>
+                                <th style="min-width: 130px; color: var(--secondary);">Khách Hàng</th>
+                                <th style="min-width: 100px; color: var(--secondary);">Ngày Lễ</th>
+                                <th style="min-width: 110px; color: var(--secondary);" class="text-center">Trạng thái</th>
+                                <th class="text-end" style="min-width: 100px; color: var(--secondary);">Còn Lại</th>
+                                <th class="text-center" style="min-width: 180px; color: var(--secondary);">Thao tác</th>
                             </tr>
                         </thead>
                         <tbody id="listBody"></tbody>
@@ -281,104 +247,46 @@
     </div>
 </div>
 
-<!-- ============================================================== -->
-<!-- GIAO DIỆN IN HỢP ĐỒNG (SAO Y BẢN CHÍNH ALEYNA WEDDING)         -->
-<!-- ============================================================== -->
+<!-- GIAO DIỆN IN PDF (Giữ nguyên) -->
 <div id="print-area">
-    <!-- Header -->
     <div class="p-header">
         <div class="p-title-box">
             <div class="p-title-text">HỢP ĐỒNG DỊCH VỤ</div>
             <div class="p-date-text">Hôm nay, ngày <span id="p-d"></span> tháng <span id="p-m"></span> năm <span id="p-y"></span></div>
         </div>
-        <div class="p-logo-box">
-            <div class="logo-name">A L E Y N A &nbsp; W E D D I N G</div>
-            <div class="logo-sub">ÁO DÀI & NHÂN SỰ</div>
-        </div>
+        <div class="p-logo-box"><div class="logo-name">A L E Y N A &nbsp; W E D D I N G</div><div class="logo-sub">ÁO DÀI & NHÂN SỰ</div></div>
     </div>
-
-    <!-- Thông tin khách -->
     <div class="p-info">
-        <div class="r-flex">
-            <div class="i-col" style="flex: 5.5;">Tên khách hàng: <span class="dot" id="p-tenkh"></span></div>
-            <div class="i-col" style="flex: 4.5; padding-left: 10px;">Địa chỉ: <span class="dot" id="p-diachi"></span></div>
-        </div>
-        <div class="r-flex">
-            <div class="i-col" style="flex: 5.5;">SĐT: <span class="dot" id="p-sdt"></span></div>
-            <div class="i-col" style="flex: 4.5; padding-left: 10px;">Thời gian lễ: <span class="dot" id="p-thoigianle"></span></div>
-        </div>
-        <div class="r-flex">
-            <div class="i-col" style="flex: 5.5;">Ngày Lễ: <span class="dot" id="p-ngayle"></span></div>
-            <div class="i-col" style="flex: 4.5; padding-left: 10px;">Giờ có mặt: <span class="dot" id="p-giocomat"></span></div>
-        </div>
-        <div class="r-flex">
-            <div class="i-col" style="flex: 5.5;">Ngày lấy: <span class="dot" id="p-ngaylay"></span></div>
-            <div class="i-col" style="flex: 4.5; padding-left: 10px;">Ghi chú: <span class="dot" id="p-ghichu1"></span></div>
-        </div>
-        <div class="r-flex">
-            <div class="i-col" style="flex: 5.5;">Ngày trả: <span class="dot" id="p-ngaytra"></span></div>
-            <div class="i-col" style="flex: 4.5; padding-left: 10px;"><span class="dot" id="p-ghichu2"></span></div>
-        </div>
+        <div class="r-flex"><div class="i-col" style="flex: 5.5;">Tên khách hàng: <span class="dot" id="p-tenkh"></span></div><div class="i-col" style="flex: 4.5; padding-left: 10px;">Địa chỉ: <span class="dot" id="p-diachi"></span></div></div>
+        <div class="r-flex"><div class="i-col" style="flex: 5.5;">SĐT: <span class="dot" id="p-sdt"></span></div><div class="i-col" style="flex: 4.5; padding-left: 10px;">Thời gian lễ: <span class="dot" id="p-thoigianle"></span></div></div>
+        <div class="r-flex"><div class="i-col" style="flex: 5.5;">Ngày Lễ: <span class="dot" id="p-ngayle"></span></div><div class="i-col" style="flex: 4.5; padding-left: 10px;">Giờ có mặt: <span class="dot" id="p-giocomat"></span></div></div>
+        <div class="r-flex"><div class="i-col" style="flex: 5.5;">Ngày lấy: <span class="dot" id="p-ngaylay"></span></div><div class="i-col" style="flex: 4.5; padding-left: 10px;">Ghi chú: <span class="dot" id="p-ghichu1"></span></div></div>
+        <div class="r-flex"><div class="i-col" style="flex: 5.5;">Ngày trả: <span class="dot" id="p-ngaytra"></span></div><div class="i-col" style="flex: 4.5; padding-left: 10px;"><span class="dot" id="p-ghichu2"></span></div></div>
     </div>
-
-    <!-- Bảng -->
     <table class="p-table">
-        <thead>
-            <tr>
-                <th width="7%">STT</th>
-                <th width="43%">SẢN PHẨM</th>
-                <th width="10%">SL</th>
-                <th width="18%">ĐƠN GIÁ</th>
-                <th width="22%">THÀNH TIỀN</th>
-            </tr>
-        </thead>
+        <thead><tr><th width="7%">STT</th><th width="43%">SẢN PHẨM</th><th width="10%">SL</th><th width="18%">ĐƠN GIÁ</th><th width="22%">THÀNH TIỀN</th></tr></thead>
         <tbody id="p-items"></tbody>
         <tfoot>
-            <tr>
-                <td colspan="4" class="p-gray-cell">TỔNG CỘNG</td>
-                <td class="p-val-cell" id="p-tongtien"></td>
-            </tr>
-            <tr>
-                <td colspan="4" class="p-gray-cell">CỌC TRƯỚC</td>
-                <td class="p-val-cell" id="p-tiencoc"></td>
-            </tr>
-            <tr>
-                <td colspan="4" class="p-gray-cell" style="color: #e67e22 !important;">CÒN LẠI</td>
-                <td class="p-val-cell" id="p-conlai" style="color: #e67e22 !important;"></td>
-            </tr>
+            <tr><td colspan="4" class="p-gray-cell">TỔNG CỘNG</td><td class="p-val-cell" id="p-tongtien"></td></tr>
+            <tr><td colspan="4" class="p-gray-cell">CỌC TRƯỚC</td><td class="p-val-cell" id="p-tiencoc"></td></tr>
+            <tr><td colspan="4" class="p-gray-cell" style="color: #e67e22 !important;">CÒN LẠI</td><td class="p-val-cell" id="p-conlai" style="color: #e67e22 !important;"></td></tr>
         </tfoot>
     </table>
-
-    <!-- Khối Lưu ý và Chữ ký được đóng gói chung để không bị tách trang -->
     <div class="p-keep-together">
         <div class="p-notes">
             <strong>NHỮNG LƯU Ý NHỎ NHÀ ALEYNA :</strong>
-            <ul>
-                <li><strong>Thuê nhân sự:</strong> Thời gian tối đa 3 tiếng, nếu phát sinh - tính thêm phí (trao đổi cụ thể)</li>
-                <li><strong>Thuê áo dài:</strong></li>
-            </ul>
+            <ul><li><strong>Thuê nhân sự:</strong> Thời gian tối đa 3 tiếng, nếu phát sinh - tính thêm phí (trao đổi cụ thể)</li><li><strong>Thuê áo dài:</strong></li></ul>
             <p>-- Thời gian giữ đồ 3 ngày (tính từ ngày lấy đến ngày trả - nếu phát sinh thời gian thuê, khách vui lòng báo trước với shop để sắp xếp hợp lý - tính phí cụ thể)</p>
             <p>-- Khách làm hư hỏng áo dài do đổ rượu, ủi cháy hay thay đổi hiện trạng ban đầu của áo sẽ bồi thường toàn bộ giá trị sản phẩm.</p>
-            <ul>
-                <li><strong>Thuê mâm quả:</strong> Giao sáng sớm vào ngày lễ - chưa bao gồm phí vận chuyển (miễn phí vận chuyển trong bán kính 7km)</li>
-                <li><strong>Thuê gia tiên:</strong> Khảo sát nhà Dâu/Rể trước 15 ngày - trang trí trước 1 ngày lễ. Tháo gia tiên sau khi lễ kết thúc (Trao đổi cụ thể với khách)</li>
-            </ul>
+            <ul><li><strong>Thuê mâm quả:</strong> Giao sáng sớm vào ngày lễ - chưa bao gồm phí vận chuyển (miễn phí vận chuyển trong bán kính 7km)</li><li><strong>Thuê gia tiên:</strong> Khảo sát nhà Dâu/Rể trước 15 ngày - trang trí trước 1 ngày lễ. Tháo gia tiên sau khi lễ kết thúc (Trao đổi cụ thể với khách)</li></ul>
         </div>
-
         <div class="p-footer">
-            <div class="p-sign-box">
-                <div class="p-sign-title">KHÁCH HÀNG</div>
-                <div class="p-footer-info">Địa chỉ: 35 đường D11, phường<br>Tây Thạnh, quận Tân Phú<br>Hotline: 0389 446 132</div>
-            </div>
-            <div class="p-sign-box">
-                <div class="p-sign-title">ALEYNA WEDDING</div>
-                <div class="p-footer-info">STK: 9040119999<br>Ngân hàng: Techcombank<br>Chủ TK: Huỳnh Thị Thanh Tuyền</div>
-            </div>
+            <div class="p-sign-box"><div class="p-sign-title">KHÁCH HÀNG</div><div class="p-footer-info">Địa chỉ: 35 đường D11, phường<br>Tây Thạnh, quận Tân Phú<br>Hotline: 0389 446 132</div></div>
+            <div class="p-sign-box"><div class="p-sign-title">ALEYNA WEDDING</div><div class="p-footer-info">STK: 9040119999<br>Ngân hàng: Techcombank<br>Chủ TK: Huỳnh Thị Thanh Tuyền</div></div>
         </div>
     </div>
 </div>
 
-<!-- SCRIPTS -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 <script>
     document.addEventListener("DOMContentLoaded", function() {
@@ -390,7 +298,7 @@
     let appUrl = localStorage.getItem("crmApi"); let appPass = localStorage.getItem("crmPass"); let globalContracts = []; 
     if (appUrl && appPass) { document.getElementById("loginScreen").classList.add("hidden"); document.getElementById("mainApp").classList.remove("hidden"); loadAllContracts(); }
     
-    function login() { const u = document.getElementById("apiUrl").value.trim(); const p = document.getElementById("adminPass").value.trim(); if(!u || !p) return alert("Thiếu thông tin kết nối!"); localStorage.setItem("crmApi", u); localStorage.setItem("crmPass", p); window.location.reload(); }
+    function login() { const u = document.getElementById("apiUrl").value.trim(); const p = document.getElementById("adminPass").value.trim(); if(!u || !p) return Swal.fire('Lỗi', 'Thiếu thông tin kết nối!', 'error'); localStorage.setItem("crmApi", u); localStorage.setItem("crmPass", p); window.location.reload(); }
     function logout() { localStorage.clear(); window.location.reload(); }
 
     async function reqGAS(payload) {
@@ -398,51 +306,41 @@
         try {
             const res = await fetch(localStorage.getItem("crmApi"), { method: "POST", body: JSON.stringify(payload) });
             const result = await res.json();
-            if(!result.success && result.message === "Sai mật khẩu bảo mật!") { alert("Mật khẩu bảo mật sai!"); logout(); }
+            if(!result.success && result.message === "Sai mật khẩu bảo mật!") { Swal.fire('Lỗi', 'Mật khẩu bảo mật sai!', 'error').then(()=>logout()); }
             return result;
-        } catch (e) { alert("Lỗi kết nối Server!"); }
+        } catch (e) { Swal.fire('Lỗi', 'Không thể kết nối đến máy chủ!', 'error'); }
     }
 
     function formatCurrency(num) { return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, "."); }
     function parseCurrency(str) { return parseInt(str.toString().replace(/\./g, '').replace(/,/g, '')) || 0; }
     function formatCurrencyInput(input) { let val = parseCurrency(input.value); input.value = val === 0 ? "0" : formatCurrency(val); }
 
-    // HÀM CHUẨN HÓA LẤY DỮ LIỆU TỪ GOOGLE SHEETS (Chống lỗi sai tên cột)
     function getSafeVal(record, keys) {
         const normKeys = keys.map(k => String(k).toLowerCase().replace(/\s/g, ''));
         for (let key in record) {
             let nk = String(key).toLowerCase().replace(/\s/g, '');
-            if (normKeys.includes(nk)) {
-                let val = record[key];
-                return (val !== null && val !== undefined) ? val : "";
-            }
-        }
-        return "";
+            if (normKeys.includes(nk)) { let val = record[key]; return (val !== null && val !== undefined) ? val : ""; }
+        } return "";
     }
 
-    // XỬ LÝ NGÀY THÁNG VIỆT NAM (Chống lỗi mất format)
     function formatDateView(val) {
-        if (!val) return "";
-        let str = String(val);
+        if (!val) return ""; let str = String(val);
         if (str.match(/^\d{1,2}\/\d{1,2}\/\d{4}$/)) return str;
-        let d = new Date(val);
-        if (isNaN(d.getTime())) return str; 
+        let d = new Date(val); if (isNaN(d.getTime())) return str; 
         return `${String(d.getDate()).padStart(2, '0')}/${String(d.getMonth() + 1).padStart(2, '0')}/${d.getFullYear()}`;
     }
 
+    function setPText(id, txt) { let el = document.getElementById(id); if(el) el.innerText = txt || ""; }
+
     function addItemRow() {
-        const tbody = document.getElementById("itemsBody");
-        const tr = document.createElement("tr");
-        tr.innerHTML = `<td><input type="text" class="form-control i-ten" placeholder="Nhân sự / Áo dài..."></td><td><input type="number" class="form-control text-center i-sl" value="1" min="1" oninput="calcRow(this)"></td><td><input type="text" class="form-control text-end i-gia" placeholder="0" onkeyup="formatCurrencyInput(this); calcRow(this)"></td><td><input type="text" class="form-control text-end i-tt" style="background-color: #f1f5f9;" readonly value="0"></td><td class="text-center"><button type="button" class="btn btn-sm btn-outline-danger fw-bold" style="border:none; padding:10px;" onclick="this.closest('tr').remove(); calculateTotal()">X</button></td>`;
+        const tbody = document.getElementById("itemsBody"); const tr = document.createElement("tr");
+        tr.innerHTML = `<td><input type="text" class="form-control i-ten" placeholder="SP..."></td><td><input type="number" class="form-control text-center i-sl" value="1" min="1" oninput="calcRow(this)"></td><td><input type="text" class="form-control text-end i-gia" placeholder="0" onkeyup="formatCurrencyInput(this); calcRow(this)"></td><td><input type="text" class="form-control text-end i-tt bg-light" readonly value="0"></td><td class="text-center"><button type="button" class="btn btn-sm btn-outline-danger border-0 fw-bold fs-5" onclick="this.closest('tr').remove(); calculateTotal()">×</button></td>`;
         tbody.appendChild(tr);
     }
 
     function calcRow(el) {
-        const tr = el.closest('tr');
-        const sl = parseInt(tr.querySelector('.i-sl').value) || 0;
-        const gia = parseCurrency(tr.querySelector('.i-gia').value);
-        tr.querySelector('.i-tt').value = formatCurrency(sl * gia);
-        calculateTotal();
+        const tr = el.closest('tr'); const sl = parseInt(tr.querySelector('.i-sl').value) || 0; const gia = parseCurrency(tr.querySelector('.i-gia').value);
+        tr.querySelector('.i-tt').value = formatCurrency(sl * gia); calculateTotal();
     }
 
     function calculateTotal() {
@@ -453,56 +351,52 @@
     }
 
     async function submitContract() {
-        const btn = document.getElementById("btnLuu"); btn.innerHTML = "⏳ ĐANG LƯU DỮ LIỆU..."; btn.disabled = true;
+        const btn = document.getElementById("btnLuu"); 
         let items = [];
         document.querySelectorAll('#itemsBody tr').forEach(tr => {
             let ten = tr.querySelector('.i-ten').value.trim();
             if(ten) items.push({ ten: ten, sl: tr.querySelector('.i-sl').value, gia: parseCurrency(tr.querySelector('.i-gia').value), tt: parseCurrency(tr.querySelector('.i-tt').value) });
         });
         const data = {
-            maHD: document.getElementById("maHD").value, ngayTao: document.getElementById("ngayTao").value,
-            tenKH: document.getElementById("tenKH").value, sdt: document.getElementById("sdt").value,
-            diaChi: document.getElementById("diaChi").value, ngayLe: document.getElementById("ngayLe").value,
-            gioCoMat: document.getElementById("gioCoMat").value, ngayLay: document.getElementById("ngayLay").value,
-            ngayTra: document.getElementById("ngayTra").value, ghiChu: document.getElementById("ghiChu").value,
-            chiTiet: JSON.stringify(items), tongTien: parseCurrency(document.getElementById("tongTien").value), 
+            maHD: document.getElementById("maHD").value, ngayTao: document.getElementById("ngayTao").value, tenKH: document.getElementById("tenKH").value, sdt: document.getElementById("sdt").value,
+            diaChi: document.getElementById("diaChi").value, ngayLe: document.getElementById("ngayLe").value, gioCoMat: document.getElementById("gioCoMat").value, ngayLay: document.getElementById("ngayLay").value,
+            ngayTra: document.getElementById("ngayTra").value, ghiChu: document.getElementById("ghiChu").value, chiTiet: JSON.stringify(items), tongTien: parseCurrency(document.getElementById("tongTien").value), 
             tienCoc: parseCurrency(document.getElementById("tienCoc").value), conLai: parseCurrency(document.getElementById("conLai").value)
         };
-        if(!data.maHD || !data.tenKH) { alert("Mã HĐ và Tên KH là bắt buộc!"); btn.innerHTML = "LƯU HỢP ĐỒNG NÀY VÀO HỆ THỐNG"; btn.disabled = false; return; }
+        if(!data.maHD || !data.tenKH) { return Swal.fire('Cảnh báo', 'Vui lòng nhập Mã HĐ và Tên Khách Hàng!', 'warning'); }
+        
+        btn.innerHTML = "⏳ ĐANG LƯU..."; btn.disabled = true;
         const res = await reqGAS({ action: "add", contract: data });
-        if (res?.success) { document.getElementById("addResult").innerHTML = `<span class="text-success">✅ ${res.message}</span>`; document.getElementById("contractForm").reset(); document.getElementById("itemsBody").innerHTML = ""; addItemRow(); calculateTotal(); setTimeout(()=> document.getElementById("addResult").innerHTML="", 4000); loadAllContracts(); }
-        btn.innerHTML = "LƯU HỢP ĐỒNG NÀY VÀO HỆ THỐNG"; btn.disabled = false;
+        if (res?.success) { 
+            Swal.fire({ icon: 'success', title: 'Thành công!', text: res.message, timer: 2000, showConfirmButton: false });
+            document.getElementById("contractForm").reset(); document.getElementById("itemsBody").innerHTML = ""; addItemRow(); calculateTotal(); loadAllContracts(); 
+        } else { Swal.fire('Lỗi', res?.message, 'error'); }
+        btn.innerHTML = "LƯU HỢP ĐỒNG NÀY"; btn.disabled = false;
     }
 
     async function loadAllContracts() {
-        document.getElementById("loadingText").classList.remove("hidden"); document.getElementById("listBody").innerHTML = "";
+        Swal.fire({ title: 'Đang tải dữ liệu...', allowOutsideClick: false, didOpen: () => { Swal.showLoading() } });
         const res = await reqGAS({ action: "getAll" });
-        if (res?.success) { globalContracts = res.data; renderList(globalContracts); updateCount(globalContracts.length); }
-        document.getElementById("loadingText").classList.add("hidden");
+        if (res?.success) { globalContracts = res.data; renderList(globalContracts); updateCount(globalContracts.length); Swal.close(); }
+        else { Swal.fire('Lỗi', 'Không thể lấy dữ liệu', 'error'); }
     }
 
     function applyFilters() {
         const textStr = document.getElementById("searchBox").value.toLowerCase().trim();
         const field = document.getElementById("filterField").value; 
         const product = document.getElementById("filterProduct").value;
-        const dateType = document.getElementById("filterDateType").value; 
         const filterDate = document.getElementById("filterDate").value;
+        const filterMonth = document.getElementById("filterMonth").value; // Format: YYYY-MM
         
         let filtered = globalContracts.filter(r => {
-            let rMaHD = String(getSafeVal(r, ['MaHD', 'Mã HĐ', 'Mã HD', 'maHD', 'Mã Hợp Đồng']));
-            let rTenKH = String(getSafeVal(r, ['TenKhachHang', 'Tên Khách Hàng', 'Tên KH', 'Khách Hàng']));
-            let rSDT = String(getSafeVal(r, ['SoDienThoai', 'Số Điện Thoại', 'SĐT', 'SDT']));
+            let rMaHD = String(getSafeVal(r, ['MaHD', 'Mã HĐ']));
+            let rTenKH = String(getSafeVal(r, ['TenKhachHang', 'Tên Khách Hàng']));
+            let rSDT = String(getSafeVal(r, ['SoDienThoai', 'SĐT', 'SDT']));
             
-            // Lọc Text Độc lập (Xử lý chữ An không dính vào Thanh Kiên)
             let matchText = true;
             if (textStr !== "") { 
-                if (field === "all") { 
-                    matchText = rMaHD.toLowerCase().includes(textStr) || rTenKH.toLowerCase().includes(textStr) || rSDT.includes(textStr) || String(r.ChiTietDichVu||"").toLowerCase().includes(textStr); 
-                } 
-                else if (field === "TenKhachHang") {
-                    let regex = new RegExp('(^|\\s)' + textStr, 'i');
-                    matchText = regex.test(rTenKH);
-                }
+                if (field === "all") { matchText = rMaHD.toLowerCase().includes(textStr) || rTenKH.toLowerCase().includes(textStr) || rSDT.includes(textStr) || String(r.ChiTietDichVu||"").toLowerCase().includes(textStr); } 
+                else if (field === "TenKhachHang") { let regex = new RegExp('(^|\\s)' + textStr, 'i'); matchText = regex.test(rTenKH); }
                 else if (field === "MaHD") { matchText = rMaHD.toLowerCase().includes(textStr); }
                 else if (field === "SoDienThoai") { matchText = rSDT.includes(textStr); }
             }
@@ -514,125 +408,156 @@
             }
             
             let matchDate = true;
-            if (filterDate) { 
-                let rDateVal = getSafeVal(r, [dateType]);
+            let rDateVal = getSafeVal(r, ['NgayLe', 'Ngày Lễ']); // Mặc định lọc theo ngày lễ
+            if (filterDate || filterMonth) { 
                 if (!rDateVal) { matchDate = false; } else { 
                     let rDate = new Date(rDateVal);
                     if(!isNaN(rDate.getTime())) {
-                        let rDateStr = `${rDate.getFullYear()}-${String(rDate.getMonth()+1).padStart(2,'0')}-${String(rDate.getDate()).padStart(2,'0')}`;
-                        if (rDateStr !== filterDate) matchDate = false;
+                        if (filterDate) {
+                            let rDateStr = `${rDate.getFullYear()}-${String(rDate.getMonth()+1).padStart(2,'0')}-${String(rDate.getDate()).padStart(2,'0')}`;
+                            if (rDateStr !== filterDate) matchDate = false;
+                        }
+                        if (filterMonth) {
+                            let rMonthStr = `${rDate.getFullYear()}-${String(rDate.getMonth()+1).padStart(2,'0')}`;
+                            if (rMonthStr !== filterMonth) matchDate = false;
+                        }
                     } else { matchDate = false; }
                 } 
             }
             return matchText && matchProduct && matchDate;
         });
-        renderList(filtered);
-        updateCount(filtered.length);
+        renderList(filtered); updateCount(filtered.length);
     }
     
-    function resetFilters() { document.getElementById("filterField").value = "all"; document.getElementById("searchBox").value = ""; document.getElementById("filterProduct").value = "all"; document.getElementById("filterDate").value = ""; applyFilters(); }
-    
-    function updateCount(num) {
-        const badge = document.getElementById("countResult");
-        badge.innerText = `Tìm thấy: ${num} hợp đồng`;
-        badge.classList.remove("hidden");
-    }
+    function resetFilters() { document.getElementById("filterField").value = "all"; document.getElementById("searchBox").value = ""; document.getElementById("filterProduct").value = "all"; document.getElementById("filterDate").value = ""; document.getElementById("filterMonth").value = ""; applyFilters(); }
+    function updateCount(num) { const badge = document.getElementById("countResult"); badge.innerText = `${num} hợp đồng`; badge.classList.remove("hidden"); }
 
     function renderList(dataArray) {
         const tbody = document.getElementById("listBody");
-        if(dataArray.length === 0) { tbody.innerHTML = "<tr><td colspan='7' class='text-center text-muted p-4 fs-5 fw-bold'>Không tìm thấy hợp đồng nào.</td></tr>"; return; }
+        if(dataArray.length === 0) { tbody.innerHTML = "<tr><td colspan='6' class='text-center text-muted p-4'>Không tìm thấy hợp đồng.</td></tr>"; return; }
         tbody.innerHTML = "";
+        
+        let today = new Date(); today.setHours(0,0,0,0);
+
         dataArray.forEach(r => {
-            let maHD = String(getSafeVal(r, ['MaHD', 'Mã HĐ', 'Mã HD', 'maHD', 'Mã Hợp Đồng']));
-            let tenKH = String(getSafeVal(r, ['TenKhachHang', 'Tên Khách Hàng', 'Tên KH', 'Khách Hàng']));
-            let sdt = String(getSafeVal(r, ['SoDienThoai', 'Số Điện Thoại', 'SĐT', 'SDT']));
-            let ngayLe = String(getSafeVal(r, ['NgayLe', 'Ngày Lễ', 'Ngay Le']));
-            let tongTien = getSafeVal(r, ['TongTien', 'Tổng Tiền', 'Tổng Cộng']);
-            let conLai = getSafeVal(r, ['ConLai', 'Còn Lại', 'Con Lai']);
+            let maHD = String(getSafeVal(r, ['MaHD', 'Mã HĐ']));
+            let tenKH = String(getSafeVal(r, ['TenKhachHang', 'Tên Khách Hàng']));
+            let conLai = getSafeVal(r, ['ConLai', 'Còn Lại']);
+            let ngayLeVal = getSafeVal(r, ['NgayLe', 'Ngày Lễ']);
+            let trangThai = getSafeVal(r, ['TrangThai', 'Trạng Thái', 'Trang thai']);
             
-            if(sdt.length > 0 && sdt.length <= 10 && !sdt.startsWith('0')) sdt = '0' + sdt;
+            // LOGIC XÁC ĐỊNH TRẠNG THÁI QUÁ HẠN
+            let isCompleted = (trangThai === "Hoàn thành");
+            let isOverdue = false;
+            let canComplete = false;
+
+            if (ngayLeVal) {
+                let dLe = new Date(ngayLeVal); dLe.setHours(0,0,0,0);
+                if (!isCompleted && today > dLe) isOverdue = true; // Ngày hôm sau của Ngày lễ
+                if (today >= dLe) canComplete = true; // Từ đúng ngày lễ trở đi mới cho phép bấm
+            } else { canComplete = true; } // Không có ngày lễ thì cho bấm luôn
+
+            let badgeHtml = "";
+            if (isCompleted) badgeHtml = `<span class="status-badge text-success bg-success bg-opacity-10 border border-success">Đã hoàn thành</span>`;
+            else if (isOverdue) badgeHtml = `<span class="status-badge text-danger bg-danger bg-opacity-10 border border-danger">Quá hạn</span>`;
+            else badgeHtml = `<span class="status-badge text-warning bg-warning bg-opacity-10 border border-warning" style="color:#b45309!important;">Đang xử lý</span>`;
+
+            // NÚT BẤM (Responsive)
+            let btnComplete = !isCompleted ? `<button class="btn btn-sm btn-success fw-bold px-2 py-1 mb-1 me-1" ${!canComplete ? 'disabled title="Chưa đến ngày lễ"' : ''} onclick="confirmComplete('${maHD}', '${tenKH}')">✅ Xong</button>` : '';
 
             const tr = document.createElement("tr");
-            tr.innerHTML = `<td><strong style="color: var(--primary);">${maHD}</strong></td><td class="fw-bold">${tenKH}</td><td class="fw-bold text-secondary">${sdt}</td><td class="text-secondary fw-bold">${formatDateView(ngayLe)}</td><td class="text-end fw-bold" style="color: var(--text-main);">${formatCurrency(tongTien||0)}đ</td><td class="text-end text-danger fw-bold">${formatCurrency(conLai||0)}đ</td><td class="text-center"><button class="btn btn-sm btn-primary me-1 px-3 fw-bold print-btn">🖨️ In HĐ</button><button class="btn btn-sm btn-outline-danger fw-bold delete-btn">🗑️ Xóa</button></td>`;
+            tr.innerHTML = `
+                <td><strong style="color: var(--primary);">${maHD}</strong></td>
+                <td class="fw-bold">${tenKH}</td>
+                <td class="text-secondary fw-bold">${formatDateView(ngayLeVal)}</td>
+                <td class="text-center">${badgeHtml}</td>
+                <td class="text-end text-danger fw-bold">${formatCurrency(conLai||0)}đ</td>
+                <td class="text-center">
+                    ${btnComplete}
+                    <button class="btn btn-sm btn-dark fw-bold px-2 py-1 mb-1 me-1 print-btn">🖨️ In</button>
+                    <button class="btn btn-sm btn-outline-danger fw-bold px-2 py-1 mb-1 delete-btn">🗑️ Xóa</button>
+                </td>`;
+            
             tr.querySelector('.print-btn').onclick = () => triggerPrint(r);
             tr.querySelector('.delete-btn').onclick = () => confirmDelete(maHD, tenKH);
             tbody.appendChild(tr);
         });
     }
 
-    async function confirmDelete(maHD, tenKH) {
-        if (!confirm(`CẢNH BÁO NGUY HIỂM ⚠️\n\nXóa vĩnh viễn hợp đồng của:\n👤 Khách hàng: ${tenKH}\n🏷️ Mã: ${maHD}\n\nDữ liệu sẽ KHÔNG THỂ KHÔI PHỤC. Có chắc chắn xóa?`)) return; 
-        document.getElementById("loadingText").classList.remove("hidden");
-        const res = await reqGAS({ action: "delete", maHD: maHD });
-        if (res?.success) { alert("✅ Đã xóa thành công!"); loadAllContracts(); } else { alert("❌ Lỗi: " + res?.message); }
-        document.getElementById("loadingText").classList.add("hidden");
+    // XÁC NHẬN HOÀN THÀNH (DÙNG SWEETALERT)
+    async function confirmComplete(maHD, tenKH) {
+        const result = await Swal.fire({
+            title: 'Xác nhận hoàn thành?',
+            html: `Hợp đồng của khách hàng <b>${tenKH}</b> (${maHD}) sẽ được chuyển sang trạng thái Hoàn Thành.`,
+            icon: 'question', showCancelButton: true, confirmButtonColor: '#16a34a', cancelButtonColor: '#64748b', confirmButtonText: 'Đồng ý xác nhận', cancelButtonText: 'Hủy'
+        });
+        
+        if (result.isConfirmed) {
+            Swal.fire({ title: 'Đang xử lý...', allowOutsideClick: false, didOpen: () => { Swal.showLoading() } });
+            const res = await reqGAS({ action: "complete", maHD: maHD });
+            if (res?.success) { Swal.fire('Thành công', 'Đã lưu trạng thái!', 'success'); loadAllContracts(); } 
+            else { Swal.fire('Lỗi', res?.message, 'error'); }
+        }
     }
 
-    // ÁNH XẠ DỮ LIỆU SANG BẢN IN PDF
+    // XÓA HỢP ĐỒNG (DÙNG SWEETALERT)
+    async function confirmDelete(maHD, tenKH) {
+        const result = await Swal.fire({
+            title: 'Xóa vĩnh viễn?', html: `Bạn đang xóa HĐ <b>${maHD}</b> của <b>${tenKH}</b>.<br>Hành động này không thể hoàn tác!`, icon: 'warning',
+            showCancelButton: true, confirmButtonColor: '#dc2626', cancelButtonColor: '#64748b', confirmButtonText: 'Xóa ngay', cancelButtonText: 'Hủy'
+        });
+        
+        if (result.isConfirmed) {
+            Swal.fire({ title: 'Đang xóa...', allowOutsideClick: false, didOpen: () => { Swal.showLoading() } });
+            const res = await reqGAS({ action: "delete", maHD: maHD });
+            if (res?.success) { Swal.fire('Đã xóa', 'Hợp đồng đã bị xóa!', 'success'); loadAllContracts(); } 
+            else { Swal.fire('Lỗi', res?.message, 'error'); }
+        }
+    }
+
     function triggerPrint(r) {
-        // Trích xuất an toàn mọi trường dữ liệu (Chống lỗi Crash web)
-        let maHD = String(getSafeVal(r, ['MaHD', 'Mã HĐ', 'Mã HD', 'maHD', 'Mã Hợp Đồng']));
-        let tenKH = String(getSafeVal(r, ['TenKhachHang', 'Tên Khách Hàng', 'Tên KH', 'Khách Hàng']));
-        let sdt = String(getSafeVal(r, ['SoDienThoai', 'Số Điện Thoại', 'SĐT', 'SDT']));
+        let maHD = String(getSafeVal(r, ['MaHD', 'Mã HĐ']));
+        let tenKH = String(getSafeVal(r, ['TenKhachHang', 'Tên Khách Hàng']));
+        let sdt = String(getSafeVal(r, ['SoDienThoai', 'SĐT', 'SDT']));
         if(sdt.length > 0 && sdt.length <= 10 && !sdt.startsWith('0')) sdt = '0' + sdt;
         
-        let diaChi = String(getSafeVal(r, ['DiaChi', 'Địa chỉ', 'Dia Chi']));
-        let gioCoMat = String(getSafeVal(r, ['GioCoMat', 'Giờ Có Mặt', 'Thời gian lễ']));
-        let ngayLe = String(getSafeVal(r, ['NgayLe', 'Ngày Lễ', 'Ngay Le']));
-        let ngayLay = String(getSafeVal(r, ['NgayLay', 'Ngày Lấy Đồ', 'Ngày Lấy']));
-        let ngayTra = String(getSafeVal(r, ['NgayTra', 'Ngày Trả Đồ', 'Ngày Trả']));
-        let ngayTao = String(getSafeVal(r, ['NgayTao', 'Ngày Lập HĐ', 'Ngày tạo', 'Ngày Tạo']));
-        let gc = String(getSafeVal(r, ['GhiChu', 'Ghi chú', 'Lưu ý', 'Ghi chu']));
+        let diaChi = String(getSafeVal(r, ['DiaChi', 'Địa chỉ']));
+        let gioCoMat = String(getSafeVal(r, ['GioCoMat', 'Giờ Có Mặt']));
+        let ngayLe = String(getSafeVal(r, ['NgayLe', 'Ngày Lễ']));
+        let ngayLay = String(getSafeVal(r, ['NgayLay', 'Ngày Lấy Đồ']));
+        let ngayTra = String(getSafeVal(r, ['NgayTra', 'Ngày Trả Đồ']));
+        let ngayTao = String(getSafeVal(r, ['NgayTao', 'Ngày Lập HĐ']));
+        let gc = String(getSafeVal(r, ['GhiChu', 'Ghi chú']));
+        let chiTiet = String(getSafeVal(r, ['ChiTietDichVu', 'Sản phẩm', 'Chi tiết']));
         
-        let chiTiet = String(getSafeVal(r, ['ChiTietDichVu', 'Chi Tiết Dịch Vụ', 'Sản phẩm', 'Chi tiết']));
-        let tongTien = getSafeVal(r, ['TongTien', 'Tổng Tiền', 'Tổng Cộng']);
-        let tienCoc = getSafeVal(r, ['TienCoc', 'Tiền Cọc', 'Cọc trước', 'Cọc']);
-        let conLai = getSafeVal(r, ['ConLai', 'Còn Lại', 'Con Lai']);
-
-        document.getElementById("p-mahd").innerText = maHD || ".........";
-        
+        setPText("p-mahd", maHD || ".........");
         let dTao = new Date(ngayTao);
-        if(!isNaN(dTao.getTime())) {
-            document.getElementById("p-d").innerText = String(dTao.getDate()).padStart(2, '0');
-            document.getElementById("p-m").innerText = String(dTao.getMonth() + 1).padStart(2, '0');
-            document.getElementById("p-y").innerText = dTao.getFullYear();
-        } else { document.getElementById("p-d").innerText = ".."; document.getElementById("p-m").innerText = ".."; document.getElementById("p-y").innerText = "...."; }
+        if(!isNaN(dTao.getTime())) { setPText("p-d", String(dTao.getDate()).padStart(2, '0')); setPText("p-m", String(dTao.getMonth() + 1).padStart(2, '0')); setPText("p-y", dTao.getFullYear()); } 
+        else { setPText("p-d", ".."); setPText("p-m", ".."); setPText("p-y", "...."); }
 
-        document.getElementById("p-tenkh").innerText = tenKH;
-        document.getElementById("p-diachi").innerText = diaChi;
-        document.getElementById("p-sdt").innerText = sdt;
-        document.getElementById("p-thoigianle").innerText = ""; 
-        document.getElementById("p-giocomat").innerText = gioCoMat;
-        
-        document.getElementById("p-ngayle").innerText = formatDateView(ngayLe);
-        document.getElementById("p-ngaylay").innerText = formatDateView(ngayLay);
-        document.getElementById("p-ngaytra").innerText = formatDateView(ngayTra);
+        setPText("p-tenkh", tenKH); setPText("p-diachi", diaChi); setPText("p-sdt", sdt); setPText("p-thoigianle", ""); setPText("p-giocomat", gioCoMat);
+        setPText("p-ngayle", formatDateView(ngayLe)); setPText("p-ngaylay", formatDateView(ngayLay)); setPText("p-ngaytra", formatDateView(ngayTra));
 
-        if (gc.length > 50) { document.getElementById("p-ghichu1").innerText = gc.substring(0, 50); document.getElementById("p-ghichu2").innerText = gc.substring(50); } 
-        else { document.getElementById("p-ghichu1").innerText = gc; document.getElementById("p-ghichu2").innerText = ""; }
+        if (gc === "undefined") gc = "";
+        if (gc.length > 50) { setPText("p-ghichu1", gc.substring(0, 50)); setPText("p-ghichu2", gc.substring(50)); } else { setPText("p-ghichu1", gc); setPText("p-ghichu2", ""); }
 
-        const pItems = document.getElementById("p-items"); pItems.innerHTML = "";
-        let itemsArr = [];
-        try { itemsArr = JSON.parse(chiTiet); } catch(e) { itemsArr = [{ ten: chiTiet, sl: "", gia: "", tt: "" }]; }
+        const pItems = document.getElementById("p-items"); if(pItems) pItems.innerHTML = "";
+        let itemsArr = []; try { itemsArr = JSON.parse(chiTiet); } catch(e) { itemsArr = [{ ten: chiTiet, sl: "", gia: "", tt: "" }]; }
         
         let rowCount = 0;
-        if(Array.isArray(itemsArr)) {
+        if(Array.isArray(itemsArr) && pItems) {
             itemsArr.forEach((item, idx) => {
                 pItems.innerHTML += `<tr><td class="center">${idx + 1}</td><td>${item.ten || ""}</td><td class="center">${item.sl || ""}</td><td class="center">${item.gia ? formatCurrency(item.gia) + "đ" : ""}</td><td class="center">${item.tt ? formatCurrency(item.tt) + "đ" : ""}</td></tr>`;
                 rowCount++;
             });
         }
-        // Giảm số dòng trống xuống 4 để tránh tràn trang tách chữ ký
-        for(let i = rowCount; i < 4; i++){ pItems.innerHTML += `<tr><td>&nbsp;</td><td></td><td></td><td></td><td></td></tr>`; }
+        if (pItems) { for(let i = rowCount; i < 4; i++){ pItems.innerHTML += `<tr><td>&nbsp;</td><td></td><td></td><td></td><td></td></tr>`; } }
 
-        document.getElementById("p-tongtien").innerText = formatCurrency(tongTien||0) + "đ";
-        document.getElementById("p-tiencoc").innerText = formatCurrency(tienCoc||0) + "đ";
-        document.getElementById("p-conlai").innerText = formatCurrency(conLai||0) + "đ";
+        setPText("p-tongtien", formatCurrency(getSafeVal(r, ['TongTien', 'Tổng Tiền'])||0) + "đ");
+        setPText("p-tiencoc", formatCurrency(getSafeVal(r, ['TienCoc', 'Tiền Cọc'])||0) + "đ");
+        setPText("p-conlai", formatCurrency(getSafeVal(r, ['ConLai', 'Còn Lại'])||0) + "đ");
 
-        // Bật cửa sổ nhắc nhở cách in
-        setTimeout(() => { 
-            window.print(); 
-        }, 300);
+        setTimeout(() => { window.print(); }, 300);
     }
 </script>
 </body>
