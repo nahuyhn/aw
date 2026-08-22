@@ -471,26 +471,28 @@
 
         // =========================================
         // THUẬT TOÁN NHẢY SỐ ẢO (FOMO)
-        // =========================================
         function initFakeStats() {
-            let visitors = parseInt(localStorage.getItem('fakeVisitors')) || Math.floor(Math.random() * (2800 - 2300) + 2300);
-            let spins = parseInt(localStorage.getItem('fakeSpins')) || Math.floor(visitors * 0.45);
+            // Đã đổi tên bộ nhớ thành _v2 để reset lại toàn bộ số cũ bị kẹt trên máy khách hàng
+            // Mức mới: 300 đến 500 lượt truy cập
+            let visitors = parseInt(localStorage.getItem('fakeVisitors_v2')) || Math.floor(Math.random() * (500 - 300) + 300);
+            let spins = parseInt(localStorage.getItem('fakeSpins_v2')) || Math.floor(visitors * 0.45);
 
             const formatNum = (num) => num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 
             const updateDOM = () => {
                 document.getElementById('fakeVisitors').innerText = formatNum(visitors);
                 document.getElementById('fakeSpins').innerText = formatNum(spins);
-                localStorage.setItem('fakeVisitors', visitors);
-                localStorage.setItem('fakeSpins', spins);
+                // Lưu vào bộ nhớ với tên mới
+                localStorage.setItem('fakeVisitors_v2', visitors);
+                localStorage.setItem('fakeSpins_v2', spins);
             };
 
             updateDOM(); 
 
             setInterval(() => {
                 if (Math.random() > 0.4) { 
-                    visitors += Math.floor(Math.random() * 3) + 1; 
-                    if (Math.random() > 0.7) spins += 1;
+                    visitors += Math.floor(Math.random() * 3) + 1; // Nhảy thêm 1-3 người
+                    if (Math.random() > 0.7) spins += 1; // Xác suất có thêm người quay
                     updateDOM();
                 }
             }, 5000); 
